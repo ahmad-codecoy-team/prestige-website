@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables */
+:root {
+  --color-primary1: #fef618;
+  --color-primary2: #fed85d;
+  --color-accent: #f6a408;
+  --color-bg: #000000;
+  --color-card: #ffffff;
+  --color-text: #575757;
+  --color-text-dark: #000000;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: white;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: white;
+}
+
+/* Optional dark theme */
+[data-theme="dark"] {
+  --color-primary: #ffffff;
+  --color-accent: #ff9800;
+  --color-bg: #1e293b;
+  --color-card: #334155;
+  --color-text: #f1f5f9;
+}
+
+/* Utility classes (optional) */
+.bg-screen {
+  background-image: radial-gradient(
+    var(--color-primary1) 5%,
+    var(--color-primary2)
+  );
+}
+
+.bg-stepper-circle {
+  background-image: radial-gradient(#eec516 5%, #f6a408);
+}
+
+.text-primary {
+  color: var(--color-text);
+}
+
+.text-secondary {
+  color: var(--color-text-dark);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.card {
+  background-color: var(--color-card);
+  color: var(--color-text);
+}
+.btn-primary {
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+  font-size: large;
+}
