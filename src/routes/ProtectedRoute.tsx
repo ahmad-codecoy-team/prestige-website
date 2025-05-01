@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const isAuthenticated = () => {
   // Replace with real auth check
-  return !!localStorage.getItem("token");
+  return !!localStorage.getItem("prestige-website");
 };
 
 const ProtectedRoute = () => {

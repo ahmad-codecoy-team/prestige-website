@@ -9,11 +9,11 @@ import OTP from "@/pages/forgot/otp";
 import ChangePassword from "@/pages/forgot/changePassword";
 import SignUp from "@/pages/signup";
 // import SignUp from "../pages/SignUp";
-// import Dashboard from "../pages/Dashboard";
+import Home from "../pages/home";
+import Chat from "../pages/chat";
+import Bid from "@/components/job/bid";
+import Settings from "@/pages/settings";
 // import NotFound from "../pages/NotFound";
-// import ProtectedRoute from "./ProtectedRoute";
-// import MainLayout from "../layouts/MainLayout";
-// import AuthLayout from "../layouts/AuthLayout";
 
 const AppRoutes = () => {
   return (
@@ -30,7 +30,10 @@ const AppRoutes = () => {
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/bid" element={<Bid />} />
+          <Route path="/settings" element={<Settings  />} />
         </Route>
       </Route>
 
