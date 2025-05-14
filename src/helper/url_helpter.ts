@@ -1,0 +1,22 @@
+export const POST_LOGIN = "/auth/login";
+
+export const UPLOAD_FILE = "/upload";
+
+// Users
+export const GET_USERS = "/users";
+export const SEARCH_USERS = "/users/search";
+export const CHANGE_PASSWORD = "/user/change-password";
+export const GET_USER_JOB_HISTORY = "/jobs/userJobsHistory";
+
+// Quotes
+export const CREATE_QUOTE = "/quotes";
+export const GET_QUOTES = "/quotes";
+
+// Available Jobs
+export const GET_AVAILABLE_JOBS = "/bids/applied";
+
+// Schedule Jobs
+export const GET_SCHEDULE_JOBS = "/jobs/user";
+
+// Completed Jobs
+export const GET_COMPLETED_JOBS = "/quotes/user";

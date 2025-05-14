@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { handleApiCall } from "@/helper/call_api_helper";
+import { postJwtLogin } from "@/helper/backend_helper";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,11 +24,26 @@ const SignIn = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log("Form Values:", values);
-      localStorage.setItem("prestige-website", "true");
+    onSubmit: async (values) => {
+      const headers = { headers: { "Content-Type": "application/json" } };
+      await handleApiCall(
+        () => postJwtLogin(values, headers),
+        "",
+        (response) => {
+          console.log(response.data.data.user.Role.name);
+          if (response.data.data.user.Role.name === "USER") {
+            localStorage.setItem(
+              "prestige-website",
+              JSON.stringify(response.data.data)
+            );
+            navigate("/home");
+          } else
+            toast.error(
+              "You have entered an invalid email address or password"
+            );
+        }
+      );
       // Simulate login and navigate
-      navigate("/home");
     },
   });
 

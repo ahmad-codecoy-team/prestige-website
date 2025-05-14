@@ -12,7 +12,11 @@ import SignUp from "@/pages/signup";
 import Home from "../pages/home";
 import Chat from "../pages/chat";
 import Bid from "@/components/job/bid";
+import ScheduledJobDetails from "@/components/job/scheduledDetails";
 import Settings from "@/pages/settings";
+import Attendance from "@/components/job/attendance";
+import CompletedJobDetails from "@/components/job/completedDetails";
+import EditInvoice from "@/components/job/editInvoice";
 // import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
@@ -33,7 +37,11 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/bid" element={<Bid />} />
-          <Route path="/settings" element={<Settings  />} />
+          <Route path="/job-details" element={<ScheduledJobDetails />} />
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/invoice" element={<CompletedJobDetails />} />
+          <Route path="/edit-invoice" element={<EditInvoice />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Route>
 

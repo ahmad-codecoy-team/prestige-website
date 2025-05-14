@@ -1,42 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@/components/job/card";
+import { handleApiCall } from "@/helper/call_api_helper";
+import { getAvailableJobs } from "@/helper/backend_helper";
+import moment from "moment";
+import Loading from "@/components/loading";
 
-const dummyShifts = [
-  {
-    id: 1,
-    dateRange: "May 1, 2025 - May 4, 2025",
-    venue: "Codecoy",
-    shiftCount: 4,
-  },
-  {
-    id: 2,
-    dateRange: "May 10, 2025 - May 12, 2025",
-    venue: "DevHub",
-    shiftCount: 2,
-  },
-  {
-    id: 3,
-    dateRange: "May 15, 2025 - May 18, 2025",
-    venue: "TechSquare",
-    shiftCount: 5,
-  },
-  {
-    id: 4,
-    dateRange: "May 20, 2025 - May 22, 2025",
-    venue: "InnovateX",
-    shiftCount: 3,
-  },
-];
+const formatDateRange = (startDate: string, endDate: string) => {
+  const start = moment(startDate);
+  const end = moment(endDate);
+
+  if (start.isSame(end, "day")) {
+    return start.format("MMMM D, YYYY"); // e.g., May 1, 2025
+  }
+
+  return `${start.format("MMMM D, YYYY")} - ${end.format("MMMM D, YYYY")}`; // e.g., May 1, 2025 - May 4, 2025
+};
 
 function AvailableShifts() {
+  const [loading, setLoading] = useState(false);
+  const [shifts, setShifts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await handleApiCall(
+        () => getAvailableJobs(),
+        "",
+        (response: any) => {
+          setShifts(response.data.data);
+        }
+      );
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {dummyShifts.map((shift) => (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+      {loading && [1, 2, 3, 4].map(() => <Loading />)}
+      {shifts.map((shift) => (
         <Card
           key={shift.id}
-          dateRange={shift.dateRange}
+          dateRange={formatDateRange(shift.startDate, shift.endDate)}
           venue={shift.venue}
-          shiftCount={shift.shiftCount}
+          shiftCount={shift.availableShifts}
+          link={`/bid`}
         />
       ))}
     </div>

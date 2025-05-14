@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { RiPictureInPictureExitFill } from "react-icons/ri";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Header() {
   const location = useLocation();
@@ -41,8 +42,11 @@ function Header() {
 
   return (
     <header className="flex justify-between items-center p-4 relative">
-      <div className="text-lg font-semibold text-gray-700 ml-5">
-        {formattedPath}
+      <div
+        className="text-lg font-semibold text-gray-700 ml-5 flex items-center gap-2"
+        onClick={() => navigate(-1)}
+      >
+        <IoIosArrowBack /> {formattedPath}
       </div>
       <div className="relative" ref={dropdownRef}>
         <img
