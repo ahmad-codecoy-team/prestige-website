@@ -20,6 +20,8 @@ export const getUserJobHistory = (userId) =>
 export const getAvailableJobs = () => api.get(url.GET_AVAILABLE_JOBS, {});
 
 export const getScheduleJobs = () => api.get(url.GET_SCHEDULE_JOBS, {});
+export const getScheduleDetails = (id) =>
+  api.get(`${url.GET_SCHEDULE_DETAILS}/${id}`, {});
 
 export const getCompletedJobs = (id) =>
   api.get(`${url.GET_COMPLETED_JOBS}/${id}`, {});

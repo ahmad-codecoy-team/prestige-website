@@ -31,6 +31,7 @@ function CompletedShifts() {
         () => getCompletedJobs(userId),
         "",
         (response: any) => {
+          console.log(response.data.data);
           setShifts(response.data.data);
         }
       );
@@ -40,7 +41,7 @@ function CompletedShifts() {
   }, []);
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
       {loading && [1, 2, 3, 4].map(() => <Loading />)}
 
       {shifts.map((shift) => (

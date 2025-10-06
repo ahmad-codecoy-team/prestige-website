@@ -39,16 +39,22 @@ function ScheduledShifts() {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
       {loading && [1, 2, 3, 4].map(() => <Loading />)}
 
-      {shifts.map((shift) => (
-        <Card
-          key={shift.id}
-          dateRange={formatDateRange(shift.startDate, shift.endDate)}
-          venue={shift.shift?.Event.venue}
-          shiftCount={shift.availableShifts}
-          link={`/job-details`}
-          isLead={shift.isLead}
-        />
-      ))}
+      {shifts.map((shift) => {
+        return (
+          <Card
+            key={shift.id}
+            dateRange={formatDateRange(
+              shift?.shift?.startDate,
+              shift?.shift?.endDate
+            )}
+            venue={shift.shift?.Event.venue}
+            shiftCount={shift.availableShifts}
+            link={`/job-details`}
+            isLead={shift.isLead}
+            shift={shift}
+          />
+        );
+      })}
     </div>
   );
 }

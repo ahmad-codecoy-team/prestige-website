@@ -17,6 +17,13 @@ export const GET_AVAILABLE_JOBS = "/bids/applied";
 
 // Schedule Jobs
 export const GET_SCHEDULE_JOBS = "/jobs/user";
+export const GET_SCHEDULE_DETAILS = "/jobs/myEvent";
 
 // Completed Jobs
 export const GET_COMPLETED_JOBS = "/quotes/user";
+export const GET_COMPLETED_DETAILS = "/jobs/eventAndUser";
+
+export const GET_WORK_HISTORY = "quotes/user/completed";
+
+// GROUP CHAT SHIFT
+export const GROUP_CHAT = "/chats/user";

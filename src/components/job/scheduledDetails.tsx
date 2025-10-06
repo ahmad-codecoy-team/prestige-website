@@ -1,4 +1,7 @@
 import PLS from "@/assets/PLS.png";
+import { getScheduleDetails } from "@/helper/backend_helper";
+import { handleApiCall } from "@/helper/call_api_helper";
+import { useEffect } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { RiGroup2Fill, RiGroupFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
@@ -6,6 +9,23 @@ import { Link, useLocation } from "react-router-dom";
 const JobDetails = () => {
   const location = useLocation();
   const { isLead } = location.state || { isLead: false };
+  const shift = location.state?.shift;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // setLoading(true);
+      await handleApiCall(
+        () => getScheduleDetails(shift?.shift?.id),
+        "",
+        (response: any) => {
+          console.log(response);
+          // setShifts(response.data.data);
+        }
+      );
+      // setLoading(false);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="flex flex-col items-center mb-20">
