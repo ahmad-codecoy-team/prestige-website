@@ -1,10 +1,8 @@
-import Logo from "@/components/ui/Logo";
 import { Outlet } from "react-router-dom";
 
 const AuthLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col gap-10 items-center justify-center bg-gradient-to-br bg-screen">
-      <Logo />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br bg-screen p-4">
       <Outlet />
     </div>
   );
