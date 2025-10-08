@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 
 function Terms() {
@@ -6,7 +6,7 @@ function Terms() {
 
   const [isMobile, setIsMobile] = useState(false);
 
-  const sigCanvas: any = useRef(null);
+  const sigCanvas = useRef<SignatureCanvas>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -24,7 +24,7 @@ function Terms() {
   }, []);
 
   const clearSignature = () => {
-    sigCanvas.current.clear();
+    sigCanvas.current?.clear();
   };
 
   return (

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,6 +11,7 @@ import { AuthButton } from "@/components/auth/AuthButton";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -18,6 +20,7 @@ const SignIn = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
+        .trim()
         .email("Invalid email address")
         .required("Email is required"),
       password: Yup.string()
@@ -25,23 +28,38 @@ const SignIn = () => {
         .required("Password is required"),
     }),
     onSubmit: async (values) => {
+      // Trim whitespace from email and password
+      const trimmedValues = {
+        email: values.email.trim(),
+        password: values.password.trim(),
+      };
+
+      setIsLoading(true);
+      console.log("Submitting login with values:", trimmedValues);
       const headers = { headers: { "Content-Type": "application/json" } };
-      await handleApiCall(
-        () => postJwtLogin(values, headers),
-        "",
-        (response) => {
-          console.log(response.data.data.user.Role.name);
-          if (response.data.data.user.Role.name === "USER") {
-            localStorage.setItem(
-              "prestige-website",
-              JSON.stringify(response.data.data)
-            );
-            navigate("/home");
-          } else {
-            toast.error("You have entered an invalid email address or password");
+      try {
+        await handleApiCall(
+          () => postJwtLogin(trimmedValues, headers),
+          "",
+          (response) => {
+            console.log("Login response:", response);
+            console.log(response.data.data.user.Role.name);
+            if (response.data.data.user.Role.name === "USER") {
+              localStorage.setItem(
+                "prestige-website",
+                JSON.stringify(response.data.data)
+              );
+              navigate("/home");
+            } else {
+              toast.error(
+                "You have entered an invalid email address or password"
+              );
+            }
           }
-        }
-      );
+        );
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -58,7 +76,11 @@ const SignIn = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
-          error={formik.touched.email && formik.errors.email ? formik.errors.email : undefined}
+          error={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : undefined
+          }
         />
 
         <AuthInput
@@ -69,15 +91,22 @@ const SignIn = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          error={formik.touched.password && formik.errors.password ? formik.errors.password : undefined}
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : undefined
+          }
         />
 
-        <AuthButton type="submit" className="mt-2">
-          Log In
+        <AuthButton type="submit" className="mt-2" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Log In"}
         </AuthButton>
 
         <div className="text-center mt-2">
-          <Link to="/forgot" className="text-black text-base font-medium hover:underline">
+          <Link
+            to="/forgot"
+            className="text-black text-base font-medium hover:underline"
+          >
             Forgotten Password?
           </Link>
         </div>

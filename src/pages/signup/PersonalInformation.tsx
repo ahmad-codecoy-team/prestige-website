@@ -1,4 +1,3 @@
-import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { BsFillCameraFill } from "react-icons/bs";
 

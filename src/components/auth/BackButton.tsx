@@ -1,12 +1,13 @@
 import { FiArrowLeft } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 
-export const BackButton = () => {
-  const navigate = useNavigate();
+interface BackButtonProps {
+  onClick?: () => void;
+}
 
+export const BackButton = ({ onClick }: BackButtonProps) => {
   return (
     <button
-      onClick={() => navigate(-1)}
+      onClick={onClick}
       className="text-black hover:opacity-70 transition-opacity"
       aria-label="Go back"
     >
