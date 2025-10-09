@@ -5,13 +5,14 @@ import * as Yup from "yup";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { postJwtLogin } from "@/helper/backend_helper";
 import toast from "react-hot-toast";
-import { AuthLogo } from "@/components/auth/AuthLogo";
+import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { AuthButton } from "@/components/auth/AuthButton";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -64,66 +65,86 @@ const SignIn = () => {
   });
 
   return (
-    <div className="w-full max-w-md px-6 pb-8 flex flex-col gap-6 md:max-w-xl lg:max-w-2xl">
-      <AuthLogo />
+    <div className="min-h-screen bg-black flex flex-col px-6 py-8">
+      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        {/* Logo */}
+        <div className="flex justify-center mt-4 mb-8">
+          <img src="/logo.svg" alt="AV Workforce" className="h-20 md:h-24 w-auto" />
+        </div>
 
-      <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-        <AuthInput
-          id="email"
-          name="email"
-          type="text"
-          placeholder="Mobile number or email address"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          error={
-            formik.touched.email && formik.errors.email
-              ? formik.errors.email
-              : undefined
-          }
-        />
+        <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+          <AuthInput
+            id="email"
+            name="email"
+            type="text"
+            placeholder="Email*"
+            icon={<FiMail className="w-5 h-5 text-gray-400" />}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            error={
+              formik.touched.email && formik.errors.email
+                ? formik.errors.email
+                : undefined
+            }
+          />
 
-        <AuthInput
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-          error={
-            formik.touched.password && formik.errors.password
-              ? formik.errors.password
-              : undefined
-          }
-        />
+          <AuthInput
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Password*"
+            icon={<FiLock className="w-5 h-5 text-gray-400" />}
+            rightIcon={
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="cursor-pointer"
+              >
+                {showPassword ? (
+                  <FiEyeOff className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <FiEye className="w-5 h-5 text-gray-400" />
+                )}
+              </button>
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            error={
+              formik.touched.password && formik.errors.password
+                ? formik.errors.password
+                : undefined
+            }
+          />
 
-        <AuthButton type="submit" className="mt-2" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Log In"}
-        </AuthButton>
+          <AuthButton type="submit" className="mt-2" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Log In"}
+          </AuthButton>
 
-        <div className="text-center mt-2">
+          <div className="text-center mt-2">
+            <Link
+              to="/forgot"
+              className="text-white text-sm font-normal hover:underline"
+            >
+              Forgot Password?
+            </Link>
+          </div>
+        </form>
+
+        <div className="flex flex-col gap-4 mt-auto pb-4">
+          <AuthButton variant="primary" onClick={() => navigate("/signup")}>
+            Create new account
+          </AuthButton>
+
           <Link
-            to="/forgot"
-            className="text-black text-base font-medium hover:underline"
+            to="/home"
+            className="text-center text-white text-sm font-normal hover:underline flex items-center justify-center gap-2"
           >
-            Forgotten Password?
+            <span className="underline">Continue as Guest</span>
+            <span>→</span>
           </Link>
         </div>
-      </form>
-
-      <div className="flex flex-col gap-4 mt-auto pt-8">
-        <AuthButton variant="secondary" onClick={() => navigate("/signup")}>
-          Create new account
-        </AuthButton>
-
-        <Link
-          to="/home"
-          className="text-center text-black text-base font-medium hover:underline flex items-center justify-center gap-2"
-        >
-          <span className="border-b-2 border-black">Continue as Guest</span>
-          <span>→</span>
-        </Link>
       </div>
     </div>
   );

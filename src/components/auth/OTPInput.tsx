@@ -40,7 +40,7 @@ export const OTPInput = ({ length = 6, onComplete }: OTPInputProps) => {
           type="text"
           maxLength={1}
           value={otpValues[i]}
-          className="w-12 h-14 md:w-14 md:h-16 text-center text-2xl font-semibold border-0 bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-black/20 text-black"
+          className="w-10 h-12 md:w-14 md:h-16 text-center text-xl md:text-2xl font-semibold border-0 bg-white rounded-lg md:rounded-xl focus:outline-none focus:ring-2 focus:ring-black/20 text-black"
           onChange={(e) => handleChange(e, i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
           ref={(el) => {

@@ -31,9 +31,9 @@ export const AuthInput = ({
         )}
         <input
           className={cn(
-            "w-full py-4 rounded-2xl text-base bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black/20",
-            icon ? "pl-12" : "pl-4",
-            rightIcon ? "pr-12" : "pr-4",
+            "w-full py-3 md:py-4 rounded-lg text-sm md:text-base bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black/20",
+            icon ? "pl-11 md:pl-12" : "pl-4",
+            rightIcon ? "pr-11 md:pr-12" : "pr-4",
             error ? "border-2 border-red-500" : "border-0",
             className
           )}

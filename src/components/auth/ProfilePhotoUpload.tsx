@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiCamera } from "react-icons/fi";
+import { FiCamera, FiUser } from "react-icons/fi";
 
 interface ProfilePhotoUploadProps {
   onChange?: (file: File | null) => void;
@@ -22,30 +22,26 @@ export const ProfilePhotoUpload = ({ onChange, value }: ProfilePhotoUploadProps)
   };
 
   return (
-    <div className="flex justify-center mb-3">
-      <div className="relative">
-        <label htmlFor="profile-photo" className="cursor-pointer group">
-          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white overflow-hidden border-4 border-white shadow-lg transition-transform group-hover:scale-105">
-            {preview ? (
-              <img src={preview} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-400 text-xs">Add Photo</span>
-              </div>
-            )}
-          </div>
-          <div className="absolute bottom-0 right-0 w-7 h-7 md:w-8 md:h-8 bg-black rounded-full flex items-center justify-center shadow-lg transition-all group-hover:scale-110">
-            <FiCamera className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
-          </div>
-        </label>
-        <input
-          id="profile-photo"
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={handleFileChange}
-        />
-      </div>
+    <div className="relative inline-block">
+      <label htmlFor="profile-photo" className="cursor-pointer group">
+        <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-black overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105">
+          {preview ? (
+            <img src={preview} alt="Profile" className="w-full h-full object-cover" />
+          ) : (
+            <FiUser className="w-16 h-16 md:w-20 md:h-20 text-[#FCC40B]" />
+          )}
+        </div>
+        <div className="absolute bottom-1 right-1 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-all group-hover:scale-110 border-2 border-black">
+          <FiCamera className="w-5 h-5 text-black" />
+        </div>
+      </label>
+      <input
+        id="profile-photo"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+      />
     </div>
   );
 };

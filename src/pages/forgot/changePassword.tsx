@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
 import { FiEye, FiEyeOff, FiLock } from "react-icons/fi";
 import { BackButton } from "@/components/auth/BackButton";
 import { PageHeader } from "@/components/auth/PageHeader";
@@ -27,14 +28,17 @@ function ChangePassword() {
         .required("Confirm password is required"),
     }),
     onSubmit: () => {
-      navigate("/");
+      toast.success("Password Updated Successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     },
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-8 px-6">
-      <div className="w-full max-w-md flex flex-col gap-6 md:max-w-xl">
-        <div className="flex items-center">
+    <div className="min-h-screen bg-[#FCC40B] flex flex-col px-6 py-8">
+      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        <div className="flex items-center mb-6">
           <BackButton />
         </div>
 
@@ -43,20 +47,18 @@ function ChangePassword() {
           description="Please, enter your new password"
         />
 
-        <div className="flex justify-center py-4">
+        <div className="flex justify-center py-6">
           <img
             src="/change-pass.svg"
             alt="Change Password"
-            className="w-28 h-28 md:w-32 md:h-32"
+            className="w-32 h-32 md:w-40 md:h-40"
           />
         </div>
 
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
         <AuthInput
           id="password"
           name="password"
           type={showPassword ? "text" : "password"}
-          label="Password"
           placeholder="Password"
           icon={<FiLock className="w-5 h-5 text-gray-400" />}
           rightIcon={
@@ -78,36 +80,38 @@ function ChangePassword() {
           error={formik.touched.password && formik.errors.password ? formik.errors.password : undefined}
         />
 
-        <AuthInput
-          id="confirmPassword"
-          name="confirmPassword"
-          type={showConfirmPassword ? "text" : "password"}
-          label="Confirm Password"
-          placeholder="Confirm Password"
-          icon={<FiLock className="w-5 h-5 text-gray-400" />}
-          rightIcon={
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="cursor-pointer"
-            >
-              {showConfirmPassword ? (
-                <FiEyeOff className="w-5 h-5 text-gray-400" />
-              ) : (
-                <FiEye className="w-5 h-5 text-gray-400" />
-              )}
-            </button>
-          }
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.confirmPassword}
-          error={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : undefined}
-        />
+        <div className="mt-4">
+          <AuthInput
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            icon={<FiLock className="w-5 h-5 text-gray-400" />}
+            rightIcon={
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="cursor-pointer"
+              >
+                {showConfirmPassword ? (
+                  <FiEyeOff className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <FiEye className="w-5 h-5 text-gray-400" />
+                )}
+              </button>
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.confirmPassword}
+            error={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : undefined}
+          />
+        </div>
 
-        <AuthButton type="submit" className="mt-2">
-          Continue
-        </AuthButton>
-      </form>
+        <div className="mt-auto pb-4">
+          <AuthButton type="submit" onClick={formik.handleSubmit} variant="secondary">
+            Continue
+          </AuthButton>
+        </div>
       </div>
     </div>
   );

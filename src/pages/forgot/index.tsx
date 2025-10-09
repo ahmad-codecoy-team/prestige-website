@@ -25,9 +25,9 @@ function ForgotPassword() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-8 px-6">
-      <div className="w-full max-w-md flex flex-col gap-6 md:max-w-xl">
-        <div className="flex items-center">
+    <div className="min-h-screen bg-[#FCC40B] flex flex-col px-6 py-8">
+      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        <div className="flex items-center mb-6">
           <BackButton />
         </div>
 
@@ -36,20 +36,18 @@ function ForgotPassword() {
           description="Please, enter your email address. You will receive a link to create a new password via email."
         />
 
-        <div className="flex justify-center py-4">
+        <div className="flex justify-center py-6">
           <img
             src="/forgot-pass-icon.svg"
             alt="Forgot Password"
-            className="w-28 h-28 md:w-32 md:h-32"
+            className="w-32 h-32 md:w-40 md:h-40"
           />
         </div>
 
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-5">
         <AuthInput
           id="email"
           name="email"
           type="email"
-          label="Email"
           placeholder="Email"
           icon={<FiMail className="w-5 h-5 text-gray-400" />}
           onChange={formik.handleChange}
@@ -58,10 +56,11 @@ function ForgotPassword() {
           error={formik.touched.email && formik.errors.email ? formik.errors.email : undefined}
         />
 
-        <AuthButton type="submit" className="mt-2">
-          Continue
-        </AuthButton>
-      </form>
+        <div className="mt-auto pb-4">
+          <AuthButton type="submit" onClick={formik.handleSubmit} variant="secondary">
+            Continue
+          </AuthButton>
+        </div>
       </div>
     </div>
   );

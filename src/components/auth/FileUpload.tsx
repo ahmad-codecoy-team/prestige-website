@@ -43,26 +43,24 @@ export const FileUpload = ({
   });
 
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg md:text-xl font-bold text-black">{label}</h3>
-
+    <div className="space-y-4">
       <div
         {...getRootProps()}
         className={cn(
-          "bg-black rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center gap-4 cursor-pointer transition-all hover:bg-black/90",
+          "bg-black rounded-2xl p-6 md:p-8 flex flex-row items-center justify-center gap-4 cursor-pointer transition-all hover:bg-black/90",
           isDragActive && "bg-black/80 scale-[0.98]"
         )}
       >
         <input {...getInputProps()} />
-        <FiFile className="w-12 h-12 md:w-16 md:h-16 text-[#FFD700]" />
-        <span className="text-[#FFD700] text-lg md:text-xl font-bold text-center">
-          I9 From
+        <FiFile className="w-10 h-10 md:w-12 md:h-12 text-[#FCC40B]" />
+        <span className="text-[#FCC40B] text-lg md:text-xl font-bold text-center">
+          I9 Form
         </span>
       </div>
 
       <div className="flex justify-between items-center text-xs md:text-sm text-black">
         <span>{helpText}</span>
-        <span>maximum up load size 10MB</span>
+        <span>maximum upload size 10MB</span>
       </div>
     </div>
   );
