@@ -1,74 +1,9 @@
-// import React, { useEffect, useState } from "react";
-// import Card from "@/components/job/card";
-// import { handleApiCall } from "@/helper/call_api_helper";
-// import { getAvailableJobs } from "@/helper/backend_helper";
-// import moment from "moment";
-// import Loading from "@/components/loading";
-
-// const formatDateRange = (startDate: string, endDate: string) => {
-//   const start = moment(startDate);
-//   const end = moment(endDate);
-
-//   if (start.isSame(end, "day")) {
-//     return start.format("MMMM D, YYYY"); // e.g., May 1, 2025
-//   }
-
-//   return `${start.format("MMMM D, YYYY")} - ${end.format("MMMM D, YYYY")}`; // e.g., May 1, 2025 - May 4, 2025
-// };
-
-// function AvailableShifts() {
-//   const [loading, setLoading] = useState(false);
-//   const [shifts, setShifts] = useState([]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       setLoading(true);
-//       await handleApiCall(
-//         () => getAvailableJobs(),
-//         "",
-//         (response: any) => {
-//           setShifts(response.data.data);
-//         }
-//       );
-//       setLoading(false);
-//     };
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-//       {loading && [1, 2, 3, 4].map(() => <Loading />)}
-//       {shifts.map((shift) => (
-//         <Card
-//           key={shift.id}
-//           dateRange={formatDateRange(shift.startDate, shift.endDate)}
-//           venue={shift.venue}
-//           shiftCount={shift.availableShifts}
-//           link={`/bid`}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default AvailableShifts;
-
 import { useEffect, useState } from "react";
 import Card from "@/components/job/card";
+import Loading from "@/components/loading";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getAvailableJobs } from "@/helper/backend_helper";
-import moment from "moment";
-import Loading from "@/components/loading";
-
-const formatDateRange = (startDate: string, endDate: string) => {
-  const start = moment(startDate);
-  const end = moment(endDate);
-
-  if (start.isSame(end, "day")) {
-    return start.format("M/D"); // matches screenshot compact format
-  }
-  return `${start.format("M/D")} - ${end.format("M/D")}`;
-};
+import { dummyShifts } from "@/constants/dummyShifts";
 
 function AvailableShifts() {
   const [loading, setLoading] = useState(false);
@@ -81,7 +16,13 @@ function AvailableShifts() {
         () => getAvailableJobs(),
         "",
         (response: any) => {
-          setShifts(response.data.data || []);
+          const data = response?.data?.data || [];
+          if (data.length === 0) {
+            console.warn("No available shifts found — showing dummy data.");
+            setShifts(dummyShifts);
+          } else {
+            setShifts(data);
+          }
         }
       );
       setLoading(false);
@@ -102,15 +43,7 @@ function AvailableShifts() {
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
       {shifts.map((shift) => (
-        <Card
-          key={shift.id}
-          // card should already support these props (reusing your component)
-          dateRange={formatDateRange(shift.startDate, shift.endDate)}
-          venue={shift.venue}
-          shiftCount={shift.availableShifts}
-          link={`/bid`} // per your new flow
-          // spacing/styling hint: card handles its own padding & radius
-        />
+        <Card key={shift.id} shift={shift} link="/bid" />
       ))}
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ContactUs from "@/components/settings/contactUs";
+import ContactUs from "@/components/settings/ContactUs";
 import WorkHistory from "@/components/settings/WorkHistory";
 import EditProfile from "@/components/settings/EditProfile";
 import ChangePassword from "@/components/settings/ChangePassword";
