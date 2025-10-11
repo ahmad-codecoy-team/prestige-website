@@ -11,14 +11,14 @@ import SignUp from "@/pages/signup";
 
 import Home from "@/pages/home";
 import Chat from "@/pages/chat";
-import Bid from "@/components/job/bid";
-import ScheduledJobDetails from "@/components/job/scheduledDetails";
+import Bid from "@/pages/bid";
+import JobDetailsPage from "@/pages/job/JobDetails";
 import Attendance from "@/components/job/attendance";
 import CompletedJobDetails from "@/components/job/completedDetails";
 import EditInvoice from "@/components/job/editInvoice";
 
 // ===== Settings Pages =====
-import ContactUs from "@/components/settings/contactUs";
+import ContactUs from "@/components/settings/ContactUs";
 import WorkHistory from "@/components/settings/WorkHistory";
 import EditProfile from "@/components/settings/EditProfile";
 import SettingsChangePassword from "@/components/settings/ChangePassword";
@@ -27,7 +27,7 @@ import PrivacyPolicy from "@/components/settings/PrivacyPolicy";
 import About from "@/components/settings/About";
 
 // ===== Auth Utility Pages =====
-// import Logout from "@/components/auth/Logout";
+import Logout from "@/components/auth/Logout";
 
 const AppRoutes = () => {
   return (
@@ -48,7 +48,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/bid" element={<Bid />} />
-          <Route path="/job-details" element={<ScheduledJobDetails />} />
+          <Route path="/job-details" element={<JobDetailsPage />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/invoice" element={<CompletedJobDetails />} />
           <Route path="/edit-invoice" element={<EditInvoice />} />
@@ -70,7 +70,7 @@ const AppRoutes = () => {
           <Route path="/settings/about" element={<About />} />
 
           {/* ===== Logout Handler ===== */}
-          {/* <Route path="/logout" element={<Logout />} /> */}
+          <Route path="/logout" element={<Logout />} />
         </Route>
       </Route>
 
