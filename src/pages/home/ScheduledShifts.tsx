@@ -1,19 +1,8 @@
-// import Card from "@/components/job/card";
+// import { useEffect, useState } from "react";
+// import Card from "@/components/job/JobScheduleCard";
 // import Loading from "@/components/loading";
 // import { getScheduleJobs } from "@/helper/backend_helper";
 // import { handleApiCall } from "@/helper/call_api_helper";
-// import moment from "moment";
-// import { useEffect, useState } from "react";
-
-// const formatDateRange = (startDate: string, endDate: string) => {
-//   const start = moment(startDate);
-//   const end = moment(endDate);
-
-//   if (start.isSame(end, "day")) {
-//     return start.format("M/D");
-//   }
-//   return `${start.format("M/D")} - ${end.format("M/D")}`;
-// };
 
 // function ScheduledShifts() {
 //   const [loading, setLoading] = useState(false);
@@ -27,6 +16,10 @@
 //         "",
 //         (response: any) => {
 //           setShifts(response.data.data || []);
+//           console.log(
+//             "here is the scheduled shifts data---->",
+//             response.data.data
+//           );
 //         }
 //       );
 //       setLoading(false);
@@ -47,18 +40,7 @@
 //   return (
 //     <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
 //       {shifts.map((shift) => (
-//         <Card
-//           key={shift.id}
-//           dateRange={formatDateRange(
-//             shift?.shift?.startDate,
-//             shift?.shift?.endDate
-//           )}
-//           venue={shift.shift?.Event?.venue}
-//           shiftCount={shift.availableShifts}
-//           link={`/job-details`}
-//           isLead={shift.isLead}
-//           shift={shift}
-//         />
+//         <Card key={shift.id} shift={shift} link="/job-details" />
 //       ))}
 //     </div>
 //   );
@@ -66,11 +48,13 @@
 
 // export default ScheduledShifts;
 
-import { useEffect, useState } from "react";
-import Card from "@/components/job/card";
+// src/pages/home/ScheduledShifts.tsx
+import { useState, useEffect } from "react";
+import Card from "@/components/job/JobScheduleCard";
 import Loading from "@/components/loading";
-import { getScheduleJobs } from "@/helper/backend_helper";
-import { handleApiCall } from "@/helper/call_api_helper";
+// import { getScheduleJobs } from "@/helper/backend_helper";
+// import { handleApiCall } from "@/helper/call_api_helper";
+import { SCHEDULED_SHIFTS_MOCK } from "@/constants/scheduledShiftsMock";
 
 function ScheduledShifts() {
   const [loading, setLoading] = useState(false);
@@ -79,13 +63,18 @@ function ScheduledShifts() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await handleApiCall(
-        () => getScheduleJobs(),
-        "",
-        (response: any) => {
-          setShifts(response.data.data || []);
-        }
-      );
+
+      // Temporary: use mock data instead of API
+      // await handleApiCall(
+      //   () => getScheduleJobs(),
+      //   "",
+      //   (response: any) => {
+      //     setShifts(response.data.data || []);
+      //     console.log("Scheduled shifts data:", response.data.data);
+      //   }
+      // );
+
+      setShifts(SCHEDULED_SHIFTS_MOCK);
       setLoading(false);
     };
     fetchData();

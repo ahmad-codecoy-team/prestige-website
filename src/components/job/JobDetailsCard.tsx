@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-// import { MessageCircleMore } from "lucide-react"; // closer visual match
+// import { MessageSquareText } from "lucide-react"; // closest match to screenshot
 // import { JobDetailsData } from "@/constants/jobDetailsMock";
 
 // type Props = {
@@ -32,9 +32,9 @@
 //           <Link
 //             to="/chat"
 //             aria-label="Open chat"
-//             className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 active:scale-95 transition"
+//             className="active:scale-95 transition"
 //           >
-//             <MessageCircleMore className="w-5 h-5 text-white" />
+//             <MessageSquareText className="w-6 h-6 text-gray-700" />
 //           </Link>
 //         </div>
 
@@ -76,8 +76,9 @@
 //   );
 // }
 
+// src/components/job/JobDetailsCard.tsx
 import { Link } from "react-router-dom";
-import { MessageSquareText } from "lucide-react"; // closest match to screenshot
+import { MessageSquareText } from "lucide-react";
 import { JobDetailsData } from "@/constants/jobDetailsMock";
 
 type Props = {
@@ -104,9 +105,11 @@ export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
 
       {/* Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-400 mx-2 mb-4 overflow-hidden">
-        {/* Card header row */}
+        {/* Header */}
         <div className="px-4 py-3 flex items-center justify-between">
-          <span className="font-semibold text-[15px]">You are a Worker</span>
+          <span className="font-semibold text-[15px]">
+            {isLead ? "You are the Shift Lead" : "You are a Worker"}
+          </span>
           <Link
             to="/chat"
             aria-label="Open chat"
@@ -127,19 +130,23 @@ export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
           <Row label="Per Diem:" value={`$${data.perDiem.toFixed(0)}`} />
           <Row label="Reminder Notes:" value={data.reminderNotes || ""} />
           <Row label="Shift Note:" value={data.shiftNote || ""} />
+          {isLead && (
+            <Row
+              label="Point of Contact:"
+              value={data?.pointOfContact || "N/A"}
+            />
+          )}
         </div>
 
-        {/* In-card primary button */}
-        {!isLead && (
-          <div className="px-4 pb-4 pt-3">
-            <button
-              onClick={onCallLead}
-              className="w-full h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition"
-            >
-              Call Lead
-            </button>
-          </div>
-        )}
+        {/* In-card button */}
+        <div className="px-4 pb-4 pt-3">
+          <button
+            onClick={onCallLead}
+            className="w-full h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition"
+          >
+            {isLead ? "Call POC" : "Call Lead"}
+          </button>
+        </div>
       </div>
     </section>
   );

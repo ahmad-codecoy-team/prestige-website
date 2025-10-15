@@ -1,3 +1,4 @@
+// src/components/job/JobScheduleCard.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import PLS from "@/assets/PLS.png";
@@ -8,20 +9,31 @@ interface JobCardProps {
   link: string;
 }
 
-const Card: React.FC<JobCardProps> = ({ shift, link }) => {
+const JobScheduleCard: React.FC<JobCardProps> = ({ shift, link }) => {
   const event = shift?.shift?.Event;
   const start = shift?.startDate ? moment(shift.startDate).format("M/D") : "";
   const end = shift?.endDate ? moment(shift.endDate).format("M/D") : "";
-  const dateRange = start && end ? `${start} - ${end}` : "";
+  const dateRange = start && end ? `${start} - ${end}` : start || "";
 
-  const venue = event?.venue || "";
-  const address = event?.address || "";
+  // Prefer real venue/address, fallback to city (mock data) or a dash
+  const venue =
+    event?.venue ||
+    shift?.nameOfVenue ||
+    shift?.venue ||
+    "" ||
+    shift?.city ||
+    "";
+  const address =
+    event?.address || shift?.addressOfVenue || shift?.address || "";
+
   const location =
-    venue && address ? `${venue}, ${address}` : venue || address || "—";
+    venue && address
+      ? `${venue}, ${address}`
+      : venue || address || shift?.city || "—";
 
   return (
     <div className="relative w-full flex items-center gap-3">
-      {/* Left P logo (outside card, vertically centered) */}
+      {/* Left P logo */}
       <div className="flex items-center h-full">
         <img
           src={PLS}
@@ -36,17 +48,17 @@ const Card: React.FC<JobCardProps> = ({ shift, link }) => {
         state={{ shift }}
         className="flex-1 bg-white rounded-xl shadow-md px-4 py-3 border border-gray-200 flex flex-col justify-center"
       >
-        {/* === Row 1: Title + Date === */}
+        {/* Row 1: Title + Date */}
         <div className="flex justify-between items-center gap-3">
           <p className="font-semibold text-[15px] text-black leading-snug flex-1 break-words">
-            {event?.title || "Untitled Event"}
+            {event?.title || shift?.position || "Untitled Event"}
           </p>
           <p className="font-semibold text-[14px] text-black whitespace-nowrap self-center">
             {dateRange}
           </p>
         </div>
 
-        {/* === Row 2: Address + Shifts === */}
+        {/* Row 2: Location + Shifts */}
         <div className="flex justify-between items-center mt-1 gap-3">
           <p
             className="text-gray-500 text-[12px] flex-1 break-words leading-tight self-center"
@@ -71,4 +83,4 @@ const Card: React.FC<JobCardProps> = ({ shift, link }) => {
   );
 };
 
-export default Card;
+export default JobScheduleCard;

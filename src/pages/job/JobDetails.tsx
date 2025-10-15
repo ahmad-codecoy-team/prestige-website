@@ -1,7 +1,7 @@
 // src/pages/job/JobDetails.tsx
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import BidHeader from "@/components/bid/BidHeader"; // reuse animated header
+import BidHeader from "@/components/bid/BidHeader";
 import JobDetailsCard from "@/components/job/JobDetailsCard";
 import JobActionBar from "@/components/job/JobActionBar";
 import { JOB_DETAILS_MOCK } from "@/constants/jobDetailsMock";
@@ -10,31 +10,40 @@ import { getScheduleDetails } from "@/helper/backend_helper";
 
 export default function JobDetailsPage() {
   const location = useLocation();
-  const { isLead } = location.state || { isLead: false };
   const shift = location.state?.shift;
+  const isLead = shift?.isLead || false;
 
-  // keep your existing data call (non-blocking UI)
   useEffect(() => {
     const fetchData = async () => {
       await handleApiCall(
         () => getScheduleDetails(shift?.shift?.id),
         "",
         (response: any) => {
-          // hook up when backend is ready
-          // console.log(response);
+          // Future: hook up API data here
+          // console.log("Schedule details:", response);
         }
       );
     };
     if (shift?.shift?.id) fetchData();
   }, [shift]);
 
-  // dynamic header title/venue like in the screenshots
-  const headerTitle = JOB_DETAILS_MOCK.venue
-    ? `${JOB_DETAILS_MOCK.eventName}\n${JOB_DETAILS_MOCK.venue}`
-    : JOB_DETAILS_MOCK.eventName;
+  // Use mock job details for now
+  const mockData = {
+    ...JOB_DETAILS_MOCK,
+    position: shift?.position || JOB_DETAILS_MOCK.position,
+    rateType: shift?.rateType || JOB_DETAILS_MOCK.rateType,
+    bid: shift?.desiredRate || JOB_DETAILS_MOCK.bid,
+    perDiem: shift?.diemCost || JOB_DETAILS_MOCK.perDiem,
+    reminderNotes: shift?.reminderNotes || JOB_DETAILS_MOCK.reminderNotes,
+    shiftNote: shift?.shiftNote || JOB_DETAILS_MOCK.shiftNote,
+    dateISO: shift?.startDate || JOB_DETAILS_MOCK.dateISO,
+    callTimeStart: shift?.startTime || JOB_DETAILS_MOCK.callTimeStart,
+    callTimeEnd: shift?.endTime || JOB_DETAILS_MOCK.callTimeEnd,
+    pointOfContact: shift?.pointOfContact || "N/A",
+  };
 
-  const callLead = () => {
-    // same link behavior as your current page
+  const callLeadOrPOC = () => {
+    // simple placeholder
     window.location.href = "tel:5551234567";
   };
 
@@ -44,24 +53,24 @@ export default function JobDetailsPage() {
 
   return (
     <div className="relative min-h-screen bg-[#FCC40B]">
-      {/* Reusable animated header (top bar sticky, lower part fades on scroll) */}
+      {/* Animated Header */}
       <BidHeader
         title={JOB_DETAILS_MOCK.eventName}
-        location={JOB_DETAILS_MOCK.location}
+        location={shift?.city || JOB_DETAILS_MOCK.location}
       />
 
-      {/* Content */}
+      {/* Main Content */}
       <main className="pt-4 pb-40">
         <div className="max-w-screen-sm mx-auto px-0">
           <JobDetailsCard
-            data={JOB_DETAILS_MOCK}
+            data={mockData}
             isLead={isLead}
-            onCallLead={callLead}
+            onCallLead={callLeadOrPOC}
           />
         </div>
       </main>
 
-      {/* Bottom fixed action bar */}
+      {/* Fixed bottom bar */}
       <JobActionBar
         isLead={isLead}
         onCallOffice={callOffice}

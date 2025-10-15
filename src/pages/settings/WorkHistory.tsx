@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "@/components/job/card";
+import Card from "@/components/job/JobScheduleCard";
 
 function WorkHistory() {
   const dummyShifts = [

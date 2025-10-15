@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 type Props = {
   isLead?: boolean;
-  onCallOffice: () => void; // same tel link trigger used before
-  signInTo: string; // route ("/attendance")
-  signInState?: any; // state to pass (e.g., { isLead })
+  onCallOffice: () => void;
+  signInTo: string;
+  signInState?: any;
 };
 
 export default function JobActionBar({
@@ -26,10 +26,10 @@ export default function JobActionBar({
             Call Office
           </button>
 
-          {/* Sign in */}
+          {/* Sign In / Scan Attendance */}
           <Link to={signInTo} state={signInState} className="block">
             <button className="w-full h-12 rounded-[28px] bg-[#4CB050] text-white font-semibold active:scale-[0.98] transition">
-              Sign in
+              {isLead ? "Scan Attendance" : "Sign in"}
             </button>
           </Link>
         </div>

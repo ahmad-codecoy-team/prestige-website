@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "@/components/job/card";
+import Card from "@/components/job/JobScheduleCard";
 import Loading from "@/components/loading";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getAvailableJobs } from "@/helper/backend_helper";

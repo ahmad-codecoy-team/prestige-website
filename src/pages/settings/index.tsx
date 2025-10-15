@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ContactUs from "@/components/settings/ContactUs";
-import WorkHistory from "@/components/settings/WorkHistory";
-import EditProfile from "@/components/settings/EditProfile";
-import ChangePassword from "@/components/settings/ChangePassword";
-import PrivacyPolicy from "@/components/settings/PrivacyPolicy";
-import About from "@/components/settings/About";
+import ContactUs from "@/pages/settings/ContactUs";
+import WorkHistory from "@/pages/settings/WorkHistory";
+import EditProfile from "@/pages/settings/EditProfile";
+import ChangePassword from "@/pages/settings/ChangePassword";
+import PrivacyPolicy from "@/pages/settings/PrivacyPolicy";
+import About from "@/pages/settings/About";
 // import other components when needed
 
 function Index() {

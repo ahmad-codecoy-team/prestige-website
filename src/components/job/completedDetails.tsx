@@ -1,6 +1,5 @@
 import PLS from "@/assets/PLS.png";
 import { FaLocationArrow } from "react-icons/fa";
-import { RiGroup2Fill, RiGroupFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 
 const JobDetails = () => {

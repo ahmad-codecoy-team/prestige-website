@@ -15,7 +15,7 @@ export default function BidPage() {
       >
   );
 
-  const headerHeight = 260;
+  // const headerHeight = 260;
 
   const sortedShifts = useMemo(
     () =>

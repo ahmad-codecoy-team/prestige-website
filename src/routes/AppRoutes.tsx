@@ -13,18 +13,18 @@ import Home from "@/pages/home";
 import Chat from "@/pages/chat";
 import Bid from "@/pages/bid";
 import JobDetailsPage from "@/pages/job/JobDetails";
-import Attendance from "@/components/job/attendance";
+import Attendance from "@/pages/attendence/attendance";
 import CompletedJobDetails from "@/components/job/completedDetails";
 import EditInvoice from "@/components/job/editInvoice";
 
 // ===== Settings Pages =====
-import ContactUs from "@/components/settings/ContactUs";
-import WorkHistory from "@/components/settings/WorkHistory";
-import EditProfile from "@/components/settings/EditProfile";
-import SettingsChangePassword from "@/components/settings/ChangePassword";
-import PrivacyPolicy from "@/components/settings/PrivacyPolicy";
+import ContactUs from "@/pages/settings/ContactUs";
+import WorkHistory from "@/pages/settings/WorkHistory";
+import EditProfile from "@/pages/settings/EditProfile";
+import SettingsChangePassword from "@/pages/settings/ChangePassword";
+import PrivacyPolicy from "@/pages/settings/PrivacyPolicy";
 // import Terms from "@/components/settings/Terms";
-import About from "@/components/settings/About";
+import About from "@/pages/settings/About";
 
 // ===== Auth Utility Pages =====
 import Logout from "@/components/auth/Logout";
