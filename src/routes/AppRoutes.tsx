@@ -11,11 +11,13 @@ import SignUp from "@/pages/signup";
 
 import Home from "@/pages/home";
 import Chat from "@/pages/chat";
+import ChatRoom from "@/pages/chat/ChatRoom";
 import Bid from "@/pages/bid";
 import JobDetailsPage from "@/pages/job/JobDetails";
 import Attendance from "@/pages/attendence/attendance";
 import CompletedJobDetails from "@/components/job/completedDetails";
 import EditInvoice from "@/components/job/editInvoice";
+import LeadQR from "@/components/job/LeadQR"; // Add this import
 
 // ===== Settings Pages =====
 import ContactUs from "@/pages/settings/ContactUs";
@@ -23,7 +25,6 @@ import WorkHistory from "@/pages/settings/WorkHistory";
 import EditProfile from "@/pages/settings/EditProfile";
 import SettingsChangePassword from "@/pages/settings/ChangePassword";
 import PrivacyPolicy from "@/pages/settings/PrivacyPolicy";
-// import Terms from "@/components/settings/Terms";
 import About from "@/pages/settings/About";
 
 // ===== Auth Utility Pages =====
@@ -47,12 +48,13 @@ const AppRoutes = () => {
           {/* ===== Home & Core Pages ===== */}
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/chat/:groupId" element={<ChatRoom />} />
           <Route path="/bid" element={<Bid />} />
           <Route path="/job-details" element={<JobDetailsPage />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/lead-qr" element={<LeadQR />} /> {/* Add this route */}
           <Route path="/invoice" element={<CompletedJobDetails />} />
           <Route path="/edit-invoice" element={<EditInvoice />} />
-
           {/* ===== Individual Settings Pages ===== */}
           <Route
             path="/settings"
@@ -68,7 +70,6 @@ const AppRoutes = () => {
           <Route path="/settings/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/settings/terms" element={<PrivacyPolicy />} />
           <Route path="/settings/about" element={<About />} />
-
           {/* ===== Logout Handler ===== */}
           <Route path="/logout" element={<Logout />} />
         </Route>

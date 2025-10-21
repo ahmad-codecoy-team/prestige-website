@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "@/components/job/JobScheduleCard";
+import Card from "@/components/job/JobCard";
 import Loading from "@/components/loading";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getAvailableJobs } from "@/helper/backend_helper";
@@ -43,7 +43,7 @@ function AvailableShifts() {
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
       {shifts.map((shift) => (
-        <Card key={shift.id} shift={shift} link="/bid" />
+        <Card key={shift.id} shift={shift} link="/bid" variant="available" />
       ))}
     </div>
   );

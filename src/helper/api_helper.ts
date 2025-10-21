@@ -38,7 +38,7 @@ class APIClient {
   get = (url, params) => {
     let response;
 
-    let paramKeys = [];
+    const paramKeys = [];
 
     if (params) {
       Object.keys(params).map((key) => {

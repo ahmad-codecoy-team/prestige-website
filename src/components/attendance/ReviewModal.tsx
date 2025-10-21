@@ -7,7 +7,11 @@ interface ReviewModalProps {
   onSubmit: (rating: number, comment: string) => void;
 }
 
-const ReviewModal = ({ workerName, onClose, onSubmit }: ReviewModalProps) => {
+export default function ReviewModal({
+  workerName,
+  onClose,
+  onSubmit,
+}: ReviewModalProps) {
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -68,6 +72,4 @@ const ReviewModal = ({ workerName, onClose, onSubmit }: ReviewModalProps) => {
       </div>
     </div>
   );
-};
-
-export default ReviewModal;
+}

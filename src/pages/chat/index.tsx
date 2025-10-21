@@ -1,44 +1,70 @@
-import React from "react";
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
-import ChatMessage from "@/components/chat/Message";
-import ChatHeader from "@/components/chat/Header";
-import ChatInput from "@/components/chat/input";
+import { ChevronLeft } from "lucide-react";
+import ChatGroupCard from "@/components/chat/ChatGroupCard";
+
+// Mock data for chat groups
+const chatGroups = [
+  {
+    id: "1",
+    name: "Strike 2",
+    lastMessage: "Start conversation.",
+    unreadCount: 0,
+    timestamp: "2024-01-15T10:30:00Z",
+  },
+  {
+    id: "2",
+    name: "Strike-group",
+    lastMessage: "hi",
+    unreadCount: 3,
+    timestamp: "2024-01-15T09:15:00Z",
+  },
+  {
+    id: "3",
+    name: "Production Team",
+    lastMessage: "Meeting at 2 PM tomorrow",
+    unreadCount: 1,
+    timestamp: "2024-01-14T16:45:00Z",
+  },
+  {
+    id: "4",
+    name: "Crew Chat",
+    lastMessage: "Lunch break in 30 mins",
+    unreadCount: 0,
+    timestamp: "2024-01-14T12:20:00Z",
+  },
+];
 
 const ChatPage = () => {
   return (
-    <div
-      className="w-full flex flex-col mb-20 overflow-auto"
-      style={{ height: "80vh" }}
-    >
-      <ChatHeader />
-      <div className="flex-1 overflow-y-auto bg-white px-1 py-2 mt-4 rounded-t-2xl">
-        <ChatMessage
-          text="Lorem ipsum dolor sit amet"
-          time="16:11"
-          isSender={false}
-        />
-        <ChatMessage
-          text="Lorem ipsum dolor sit amet consectetur. Tellus at risus dolor in nisi amet quis morbi ut."
-          time="16:11"
-          isSender={false}
-        />
-
-        <ChatMessage
-          text="Lorem ipsum dolor sit amet consectetur"
-          time="16:08"
-          isSender={true}
-        />
-        <ChatMessage
-          text={"Lorem ipsum dolor sit amet"}
-          time="16:08"
-          isSender={true}
-          reply={{
-            title: "Lorem ipsum dolor sit amet consectetur.",
-            text: "Convallis odio et integer amet dignissim nec.",
-          }}
-        />
+    <div className="min-h-screen bg-[#fbbf24]">
+      {/* Header */}
+      <div className="bg-transparent text-white px-4 py-4">
+        <div className="flex items-center justify-center relative">
+          <button className="absolute left-0">
+            <ChevronLeft size={28} />
+          </button>
+          <div className="text-center text-xl font-semibold tracking-wide">
+            Chat
+          </div>
+        </div>
       </div>
-      <ChatInput />
+
+      {/* Chat Groups List */}
+      <div className="p-4 space-y-2">
+        {chatGroups.map((group) => (
+          <ChatGroupCard
+            key={group.id}
+            id={group.id}
+            name={group.name}
+            lastMessage={group.lastMessage}
+            unreadCount={group.unreadCount}
+            timestamp={group.timestamp}
+          />
+        ))}
+      </div>
     </div>
   );
 };

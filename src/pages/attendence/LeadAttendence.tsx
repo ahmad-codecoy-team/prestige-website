@@ -1,10 +1,14 @@
 import { ChevronLeft, QrCode, Users, Calendar, UserPlus } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import ReviewModal from "@/components/attendance/ReviewModal";
 import DefaultView from "@/components/attendance/DefaultView";
 import ClockInView from "@/components/attendance/ClockInView";
 import ClockOutView from "@/components/attendance/ClockOutView";
 import MealBreakView from "@/components/attendance/MealBreakView";
+import AttendanceDetails from "@/components/attendance/AttendenceDetails";
+import AddContractorModal from "@/components/attendance/AddContractorModal";
+import CreateGroup from "@/components/attendance/CreateGroup";
 
 interface Worker {
   name: string;
@@ -15,10 +19,13 @@ interface Worker {
 }
 
 const LeadAttendance = () => {
+  const navigate = useNavigate(); // Add this
   const [activeView, setActiveView] = useState<
-    "default" | "clockIn" | "mealBreak" | "clockOut"
+    "default" | "clockIn" | "mealBreak" | "clockOut" | "attendanceDetails"
   >("default");
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [showAddContractorModal, setShowAddContractorModal] = useState(false);
+  const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [selectedWorkerIndex, setSelectedWorkerIndex] = useState<number | null>(
     null
   );
@@ -32,6 +39,7 @@ const LeadAttendance = () => {
     setShowReviewModal(true);
   };
 
+  // eslint-disable-next-line
   const handleReviewSubmit = (rating: number, comment: string) => {
     if (selectedWorkerIndex !== null) {
       const updatedWorkers = [...workers];
@@ -63,9 +71,24 @@ const LeadAttendance = () => {
       const user = JSON.parse(result);
       console.log("Scanned user:", user);
       // Handle scanned user data
+
+      //eslint-disable-next-line
     } catch (e) {
       console.error("Invalid QR code data");
     }
+  };
+
+  const handleAddContractor = (contractor: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    rate: string;
+  }) => {
+    const newWorker: Worker = {
+      name: `${contractor.firstName} ${contractor.lastName}`,
+      review: 0,
+    };
+    setWorkers([...workers, newWorker]);
   };
 
   const getButtonStyle = (view: string) => {
@@ -77,6 +100,16 @@ const LeadAttendance = () => {
     }`;
   };
 
+  // Show Attendance Details view
+  if (activeView === "attendanceDetails") {
+    return (
+      <AttendanceDetails
+        workers={workers}
+        onBack={() => setActiveView("default")}
+      />
+    );
+  }
+
   return (
     <>
       {showReviewModal && selectedWorkerIndex !== null && (
@@ -84,6 +117,20 @@ const LeadAttendance = () => {
           workerName={workers[selectedWorkerIndex].name}
           onClose={() => setShowReviewModal(false)}
           onSubmit={handleReviewSubmit}
+        />
+      )}
+
+      {showAddContractorModal && (
+        <AddContractorModal
+          onClose={() => setShowAddContractorModal(false)}
+          onSubmit={handleAddContractor}
+        />
+      )}
+
+      {showCreateGroup && (
+        <CreateGroup
+          workers={workers}
+          onClose={() => setShowCreateGroup(false)}
         />
       )}
 
@@ -97,8 +144,16 @@ const LeadAttendance = () => {
               SIGN IN
             </div>
             <div className="flex gap-4">
-              <QrCode className="cursor-pointer" size={28} />
-              <Users className="cursor-pointer" size={28} />
+              <QrCode
+                className="cursor-pointer"
+                size={28}
+                onClick={() => navigate("/lead-qr")} // Add this onClick
+              />
+              <Users
+                className="cursor-pointer"
+                size={28}
+                onClick={() => setShowCreateGroup(true)}
+              />
             </div>
           </div>
 
@@ -161,11 +216,17 @@ const LeadAttendance = () => {
 
         {/* Fixed Bottom Buttons */}
         <div className="fixed bottom-0 left-0 right-0 bg-white py-6 flex justify-center gap-4 px-4">
-          <button className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium">
+          <button
+            onClick={() => setActiveView("attendanceDetails")}
+            className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"
+          >
             <Calendar size={20} />
             Attendance
           </button>
-          <button className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium">
+          <button
+            onClick={() => setShowAddContractorModal(true)}
+            className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"
+          >
             <UserPlus size={20} />
             Add Contractor
           </button>

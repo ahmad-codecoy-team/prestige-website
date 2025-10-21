@@ -29,7 +29,7 @@ export default function JobActionBar({
           {/* Sign In / Scan Attendance */}
           <Link to={signInTo} state={signInState} className="block">
             <button className="w-full h-12 rounded-[28px] bg-[#4CB050] text-white font-semibold active:scale-[0.98] transition">
-              {isLead ? "Scan Attendance" : "Sign in"}
+              {isLead ? "Sign in" : "Sign in"}
             </button>
           </Link>
         </div>

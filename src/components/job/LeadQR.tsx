@@ -2,7 +2,7 @@
 import QRCode from "react-qr-code";
 import { FaUserAlt } from "react-icons/fa";
 
-const WorkerAttendance = () => {
+const LeadQR = () => {
   return (
     <div className="min-h-screen bg-[#FCC40B] px-4">
       {/* Header */}
@@ -40,4 +40,4 @@ const WorkerAttendance = () => {
   );
 };
 
-export default WorkerAttendance;
+export default LeadQR;
