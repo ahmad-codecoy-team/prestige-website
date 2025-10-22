@@ -1,4 +1,4 @@
-import { ChevronLeft, QrCode, Users, Calendar, UserPlus } from "lucide-react";
+import { ArrowLeft, QrCode, Users, Calendar, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Add this import
 import ReviewModal from "@/components/attendance/ReviewModal";
@@ -16,6 +16,7 @@ interface Worker {
   clockIn?: string;
   clockOut?: string;
   mealBreak?: string;
+  phone?: string;
 }
 
 const LeadAttendance = () => {
@@ -30,10 +31,10 @@ const LeadAttendance = () => {
     null
   );
   const [workers, setWorkers] = useState<Worker[]>([
-    { name: "muniba anwar", review: 0 },
-    { name: "Nimra Razzaq", review: 0 },
-    { name: "Muhammad Ahmad", review: 0 },
-    { name: "Hamza Tanveer", review: 0 },
+    { name: "muniba anwar", review: 0, phone: "+1234567890" },
+    { name: "Nimra Razzaq", review: 0, phone: "+1234567891" },
+    { name: "Muhammad Ahmad", review: 0, phone: "+1234567892" },
+    { name: "Hamza Tanveer", review: 0, phone: "+1234567893" },
   ]);
 
   const handleReviewClick = (index: number) => {
@@ -102,14 +103,7 @@ const LeadAttendance = () => {
   };
 
   // Show Attendance Details view
-  if (activeView === "attendanceDetails") {
-    return (
-      <AttendanceDetails
-        workers={workers}
-        onBack={() => setActiveView("default")}
-      />
-    );
-  }
+  // Component rendering logic - no early returns
 
   return (
     <>
@@ -121,12 +115,6 @@ const LeadAttendance = () => {
         />
       )}
 
-      {showAddContractorModal && (
-        <AddContractorModal
-          onClose={() => setShowAddContractorModal(false)}
-          onSubmit={handleAddContractor}
-        />
-      )}
 
       {showCreateGroup && (
         <CreateGroup
@@ -140,7 +128,11 @@ const LeadAttendance = () => {
         <div className="bg-black text-white px-4 pt-4 pb-6">
           {/* Top Navigation Bar */}
           <div className="flex justify-between items-center mb-6">
-            <ChevronLeft className="cursor-pointer" size={28} />
+            <ArrowLeft 
+              className="cursor-pointer" 
+              size={28} 
+              onClick={() => navigate(-1)}
+            />
             <div className="text-center text-xl font-semibold tracking-wide">
               SIGN IN
             </div>
@@ -216,7 +208,7 @@ const LeadAttendance = () => {
         )}
 
         {/* Fixed Bottom Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white py-6 flex justify-center gap-4 px-4">
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl bg-white py-6 flex justify-center gap-4 px-4 sm:px-6">
           <button
             onClick={() => setActiveView("attendanceDetails")}
             className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"
@@ -233,6 +225,28 @@ const LeadAttendance = () => {
           </button>
         </div>
       </div>
+
+      {/* Attendance Details - Full Screen */}
+      {activeView === "attendanceDetails" && (
+        <div className="fixed inset-0 bg-black/50 z-50">
+          <AttendanceDetails
+            workers={workers}
+            onBack={() => setActiveView("default")}
+          />
+        </div>
+      )}
+
+      {/* Add Contractor Bottom Sheet with Animation - Smaller height */}
+      {showAddContractorModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
+          <div className="w-full max-w-4xl bg-white rounded-t-3xl animate-slide-up">
+            <AddContractorModal
+              onClose={() => setShowAddContractorModal(false)}
+              onSubmit={handleAddContractor}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -32,18 +32,20 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         aria-hidden={!open}
       >
         {/* ===== Header: Profile Section ===== */}
-        <div className="flex flex-col items-center justify-center text-center mt-8 mb-6 px-4">
-          <div className="w-20 h-20 rounded-full ring-2 ring-[#FCC40B] overflow-hidden mb-3">
+        <div className="flex flex-col items-center justify-center text-center mt-6 sm:mt-8 mb-4 sm:mb-6 px-4">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full ring-2 ring-[#FCC40B] overflow-hidden mb-3">
             <img
               alt="Profile"
               src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=256&auto=format&fit=crop"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="font-bold text-lg text-black leading-tight">
+          <div className="font-bold text-base sm:text-lg text-black leading-tight">
             M. Ahmad
           </div>
-          <div className="text-sm text-gray-600">ahmadhafeez1118@gmail.com</div>
+          <div className="text-xs sm:text-sm text-gray-600 truncate max-w-full px-2">
+            ahmadhafeez1118@gmail.com
+          </div>
         </div>
 
         {/* ===== Divider ===== */}
@@ -54,17 +56,17 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
           {navItems.map((item) => (
             <Link key={item.path} to={item.path} onClick={onClose}>
               <div
-                className={`flex items-center justify-between px-4 py-4 border-b-2 border-black/10 transition-colors ${
+                className={`flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4 border-b-2 border-black/10 transition-colors ${
                   currentPath === item.path
                     ? "bg-[#FCC40B]/50 font-semibold"
                     : "hover:bg-black/5"
                 }`}
               >
-                <span className="flex items-center gap-3 text-gray-900">
-                  <span className="text-gray-800">{item.icon}</span>
-                  <span className="font-medium">{item.label}</span>
+                <span className="flex items-center gap-2 sm:gap-3 text-gray-900">
+                  <span className="text-gray-800 text-sm sm:text-base">{item.icon}</span>
+                  <span className="font-medium text-sm sm:text-base">{item.label}</span>
                 </span>
-                <ChevronRight className="w-5 h-5 text-gray-500" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
               </div>
             </Link>
           ))}

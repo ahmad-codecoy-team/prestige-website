@@ -20,27 +20,32 @@ function Index() {
   const [activeTab, setActiveTab] = useState("contactus");
 
   return (
-    <>
-      <div className="text-xs md:text-lg text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="text-xs sm:text-sm md:text-base text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <ul className="flex flex-wrap">
           {tabs.map((tab) => (
             <li key={tab.key} className="flex-1">
               <button
                 onClick={() => setActiveTab(tab.key)}
-                className={`w-full text-center font-bold py-4 rounded-t-lg border-b-2 transition-colors duration-200 ${
+                className={`w-full text-center font-bold py-3 sm:py-4 rounded-t-lg border-b-2 transition-colors duration-200 ${
                   activeTab === tab.key
                     ? "text-black border-black"
                     : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                 }`}
               >
-                {tab.label}
+                <span className="block sm:hidden text-xs">
+                  {tab.label.split(' ')[0]}
+                </span>
+                <span className="hidden sm:block">
+                  {tab.label}
+                </span>
               </button>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 sm:mt-6">
         {activeTab === "contactus" && <ContactUs />}
         {activeTab === "workhistory" && <WorkHistory />}
         {activeTab === "editprofile" && <EditProfile />}
@@ -48,7 +53,7 @@ function Index() {
         {activeTab === "privacypolicy" && <PrivacyPolicy />}
         {activeTab === "about" && <About />}
       </div>
-    </>
+    </div>
   );
 }
 

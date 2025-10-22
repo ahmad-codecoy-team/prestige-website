@@ -43,21 +43,21 @@ const ChatGroupCard: React.FC<ChatGroupCardProps> = ({
 
   return (
     <Link to={`/chat/${id}`} className="block">
-      <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+      <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
         <div className="flex items-center gap-3">
           {/* Logo with black background and fully rounded */}
-          <div className="flex-shrink-0 w-12 h-12 rounded-full bg-black flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black flex items-center justify-center">
             <img
               src="/src/assets/logo-white.svg"
               alt={name}
-              className="w-8 h-8 object-contain"
+              className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
             />
           </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
-              <h3 className="font-semibold text-gray-900 text-base truncate">
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base truncate">
                 {name}
               </h3>
               <span className="text-xs text-gray-500 flex-shrink-0 ml-2">
@@ -66,13 +66,13 @@ const ChatGroupCard: React.FC<ChatGroupCardProps> = ({
             </div>
 
             <div className="flex items-center justify-between">
-              <p className="text-sm text-gray-600 truncate flex-1">
+              <p className="text-xs sm:text-sm text-gray-600 truncate flex-1">
                 {lastMessage}
               </p>
 
               {unreadCount > 0 && (
                 <div className="flex-shrink-0 ml-2">
-                  <div className="bg-[#fbbf24] text-black text-xs font-semibold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1">
+                  <div className="bg-[#fbbf24] text-black text-xs font-semibold rounded-full min-w-[18px] h-4 sm:min-w-[20px] sm:h-5 flex items-center justify-center px-1">
                     {unreadCount}
                   </div>
                 </div>

@@ -72,7 +72,7 @@ function Home() {
               >
                 {t.label}
                 {isActive && (
-                  <span className="absolute left-0 -bottom-[2px] h-[2px] w-full bg-white rounded-full" />
+                  <span className="absolute left-0 -bottom-[-3px] h-[2px] w-full bg-white rounded-full" />
                 )}
               </button>
             );
@@ -82,7 +82,7 @@ function Home() {
 
       {/* ===== Tab Content ===== */}
       <main className="flex-1 w-full">
-        <div className="max-w-5xl mx-auto px-3 py-4 md:px-8">
+        <div className="w-full px-4 py-4 md:px-6 lg:px-8">
           {activeTab === "bid" && <AvailableShifts />}
           {activeTab === "schedule" && <ScheduledShifts />}
           {activeTab === "invoice" && <CompletedShifts />}

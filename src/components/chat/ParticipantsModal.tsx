@@ -35,18 +35,14 @@ const ParticipantsModal: React.FC<ParticipantsModalProps> = ({
   }));
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex flex-col">
-      {/* Only the main page's header remains visible behind this modal */}
+    <div className="h-full flex flex-col">
+      {/* Top Handle Bar */}
+      <div className="flex justify-center py-3">
+        <div className="w-12 h-1 bg-gray-900 rounded-full"></div>
+      </div>
 
-      {/* Modal Content - Covers everything except the main header */}
-      <div className="flex-1 bg-white mt-16 rounded-t-3xl overflow-hidden flex flex-col">
-        {/* Top Handle Bar */}
-        <div className="flex justify-center py-3">
-          <div className="w-12 h-1 bg-gray-900 rounded-full"></div>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 overflow-y-auto px-6 pb-4">
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto px-6 pb-4">
           {/* Header with Title and Close Button */}
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-semibold">Participant</h2>
@@ -93,7 +89,6 @@ const ParticipantsModal: React.FC<ParticipantsModalProps> = ({
                 )}
               </div>
             ))}
-          </div>
         </div>
       </div>
     </div>

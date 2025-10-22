@@ -3,6 +3,7 @@ import { Phone } from "lucide-react";
 interface Worker {
   name: string;
   review: number;
+  phone?: string;
 }
 
 interface DefaultViewProps {
@@ -34,7 +35,12 @@ const DefaultView = ({ workers, onReviewClick }: DefaultViewProps) => {
               }`}
             >
               <div className="flex items-center gap-3">
-                <Phone className="text-green-600" size={24} />
+                <button 
+                  onClick={() => window.location.href = `tel:${worker.phone || '+1234567890'}`}
+                  className="text-green-600 hover:text-green-800"
+                >
+                  <Phone size={24} />
+                </button>
                 <span className="text-base">{worker.name}</span>
               </div>
               <div

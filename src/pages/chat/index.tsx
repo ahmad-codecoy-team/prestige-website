@@ -2,7 +2,8 @@
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import ChatGroupCard from "@/components/chat/ChatGroupCard";
 
 // Mock data for chat groups
@@ -38,13 +39,15 @@ const chatGroups = [
 ];
 
 const ChatPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#fbbf24]">
       {/* Header */}
-      <div className="bg-transparent text-white px-4 py-4">
+      <div className="bg-transparent text-white px-4 py-4 sm:px-6">
         <div className="flex items-center justify-center relative">
-          <button className="absolute left-0">
-            <ChevronLeft size={28} />
+          <button onClick={() => navigate(-1)} className="absolute left-0">
+            <ArrowLeft size={28} />
           </button>
           <div className="text-center text-xl font-semibold tracking-wide">
             Chat
@@ -52,18 +55,20 @@ const ChatPage = () => {
         </div>
       </div>
 
-      {/* Chat Groups List */}
-      <div className="p-4 space-y-2">
-        {chatGroups.map((group) => (
-          <ChatGroupCard
-            key={group.id}
-            id={group.id}
-            name={group.name}
-            lastMessage={group.lastMessage}
-            unreadCount={group.unreadCount}
-            timestamp={group.timestamp}
-          />
-        ))}
+      {/* Chat Groups List with responsive container */}
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="space-y-2">
+          {chatGroups.map((group) => (
+            <ChatGroupCard
+              key={group.id}
+              id={group.id}
+              name={group.name}
+              lastMessage={group.lastMessage}
+              unreadCount={group.unreadCount}
+              timestamp={group.timestamp}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

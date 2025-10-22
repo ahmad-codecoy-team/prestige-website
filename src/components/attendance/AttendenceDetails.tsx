@@ -1,4 +1,4 @@
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 interface Worker {
   name: string;
@@ -18,7 +18,7 @@ const AttendanceDetails = ({ workers, onBack }: AttendanceDetailsViewProps) => {
       {/* Header */}
       <div className="bg-[#fbbf24] px-4 pt-4 pb-6">
         <div className="flex items-center mb-6">
-          <ChevronLeft
+          <ArrowLeft
             className="cursor-pointer text-black"
             size={28}
             onClick={onBack}

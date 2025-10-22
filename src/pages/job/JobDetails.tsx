@@ -43,12 +43,20 @@ export default function JobDetailsPage() {
   };
 
   const callLeadOrPOC = () => {
-    // simple placeholder
-    window.location.href = "tel:5551234567";
+    if (isLead) {
+      // Call POC - replace with actual POC phone number
+      window.location.href = 'tel:+1234567890';
+      console.log("Calling POC...");
+    } else {
+      // Call Lead - replace with actual Lead phone number
+      window.location.href = 'tel:+0987654321';
+      console.log("Calling Lead...");
+    }
   };
 
   const callOffice = () => {
-    window.location.href = "tel:5551234567";
+    // Call Office - replace with actual office number
+    window.location.href = 'tel:+1555123456';
   };
 
   return (
@@ -57,17 +65,16 @@ export default function JobDetailsPage() {
       <BidHeader
         title={JOB_DETAILS_MOCK.eventName}
         location={shift?.city || JOB_DETAILS_MOCK.location}
+        onBack={() => window.history.back()}
       />
 
       {/* Main Content */}
-      <main className="pt-4 pb-40">
-        <div className="max-w-screen-sm mx-auto px-0">
-          <JobDetailsCard
-            data={mockData}
-            isLead={isLead}
-            onCallLead={callLeadOrPOC}
-          />
-        </div>
+      <main className="pt-4 pb-40 w-full px-4 sm:px-6 lg:px-8">
+        <JobDetailsCard
+          data={mockData}
+          isLead={isLead}
+          onCallLead={callLeadOrPOC}
+        />
       </main>
 
       {/* Fixed bottom bar */}

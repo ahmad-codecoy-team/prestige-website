@@ -19,9 +19,9 @@ const formatHumanDate = (iso: string) =>
 export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
   console.log(data);
   return (
-    <section className="w-full max-w-screen-sm mx-auto">
+    <section className="w-full">
       {/* Yellow date bar */}
-      <div className="bg-[#FCC40B] text-black px-4 py-2 text-sm font-semibold flex items-center justify-between">
+      <div className="bg-[#FCC40B] text-black px-4 py-2 text-sm sm:text-base font-semibold flex items-center justify-between">
         <span>Date:</span>
         <span>{formatHumanDate(data.dateISO || Date.now().toString())}</span>
       </div>
@@ -30,7 +30,7 @@ export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-400 mx-2 mb-4 overflow-hidden">
         {/* Header */}
         <div className="px-4 py-3 flex items-center justify-between">
-          <span className="font-semibold text-[15px]">
+          <span className="font-semibold text-sm sm:text-base">
             {isLead ? "You are the Shift Lead" : "You are a Worker"}
           </span>
           <Link
@@ -38,11 +38,11 @@ export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
             aria-label="Open chat"
             className="active:scale-95 transition"
           >
-            <MessageSquareText className="w-6 h-6 text-gray-700" />
+            <MessageSquareText className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
           </Link>
         </div>
 
-        <div className="px-4 divide-y divide-gray-200 text-[15px]">
+        <div className="px-4 divide-y divide-gray-200 text-sm sm:text-base">
           <Row label="Position:" value={data.position} />
           <Row
             label="Call Time:"

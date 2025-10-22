@@ -1,7 +1,7 @@
 
 function PrivacyPolicy() {
   return (
-    <div className="text-gray-500 dark:text-gray-400 text-sm md:text-lg mt-10">
+    <div className="text-gray-500 dark:text-gray-400 text-sm sm:text-base md:text-lg mt-6 sm:mt-10 leading-relaxed">
       Lorem ipsum dolor sit amet consectetur. Est varius elit purus nulla in
       lectus pharetra sodales malesuada. Consectetur at ac at quis elit eget
       urna. Ut in turpis enim tellus sollicitudin nisl. Nec posuere orci leo

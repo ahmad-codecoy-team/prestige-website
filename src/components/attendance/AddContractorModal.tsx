@@ -25,18 +25,22 @@ const AddContractorModal = ({ onClose, onSubmit }: AddContractorModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-end justify-center z-50 bg-black/50">
-      <div className="bg-white rounded-t-3xl w-full max-w-2xl pb-8 px-6 pt-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-semibold text-black">Enter Details</h2>
-          <button
-            onClick={onClose}
-            className="text-black hover:text-gray-600 focus:outline-none"
-          >
-            <X size={28} />
-          </button>
-        </div>
+    <div className="w-full h-auto bg-white rounded-t-3xl pb-8 px-4 sm:px-6 pt-6">
+      {/* Handle bar */}
+      <div className="flex justify-center mb-6">
+        <div className="w-12 h-1 bg-gray-900 rounded-full"></div>
+      </div>
+
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl sm:text-2xl font-semibold text-black">Enter Details</h2>
+        <button
+          onClick={onClose}
+          className="text-black hover:text-gray-600 focus:outline-none"
+        >
+          <X size={24} />
+        </button>
+      </div>
 
         {/* Form Fields */}
         <div className="space-y-4">
@@ -50,7 +54,7 @@ const AddContractorModal = ({ onClose, onSubmit }: AddContractorModalProps) => {
               placeholder="First Name*"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full border-2 border-gray-300 rounded-xl pl-14 pr-4 py-4 text-base focus:outline-none focus:border-gray-400 placeholder:text-gray-400"
+              className="w-full border-2 border-gray-300 rounded-xl pl-12 sm:pl-14 pr-4 py-3 sm:py-4 text-sm sm:text-base focus:outline-none focus:border-gray-400 placeholder:text-gray-400"
             />
           </div>
 
@@ -100,12 +104,11 @@ const AddContractorModal = ({ onClose, onSubmit }: AddContractorModalProps) => {
         {/* Submit Button */}
         <button
           onClick={handleSubmit}
-          className="w-full bg-black text-[#fbbf24] py-4 rounded-full text-xl font-semibold mt-12"
+          className="w-full bg-black text-[#fbbf24] py-3 sm:py-4 rounded-full text-lg sm:text-xl font-semibold mt-8 sm:mt-12"
         >
           Save
         </button>
       </div>
-    </div>
   );
 };
 

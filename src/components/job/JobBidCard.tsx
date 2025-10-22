@@ -18,16 +18,16 @@ export default function JobBidCard({ shift, bidValue, onChange }: Props) {
   const [focused, setFocused] = useState(false);
 
   return (
-    <section className="w-full max-w-screen-sm mx-auto">
+    <section className="w-full">
       {/* Yellow date bar */}
-      <div className="bg-[#FCC40B] text-black px-4 py-2 text-sm font-semibold flex items-center justify-between">
+      <div className="bg-[#FCC40B] text-black px-4 py-2 text-sm sm:text-base font-semibold flex items-center justify-between">
         <span>Date:</span>
         <span>{formatHumanDate(shift.dateISO)}</span>
       </div>
 
       {/* Card */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-400 mx-2 mb-4">
-        <div className="px-4 py-3 divide-y divide-gray-200 text-[15px]">
+        <div className="px-4 py-3 divide-y divide-gray-200 text-sm sm:text-base">
           <Row label="Position:" value={shift.position} />
           <Row
             label="Call Time:"

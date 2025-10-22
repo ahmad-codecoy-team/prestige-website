@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  ChevronLeft,
+  ArrowLeft,
   MoreVertical,
   Send,
   Image,
@@ -82,7 +82,7 @@ const ChatRoom = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button onClick={() => navigate(-1)} className="text-black">
-              <ChevronLeft size={28} />
+              <ArrowLeft size={28} />
             </button>
             {/* Chat logo + Group name */}
             <div className="flex items-center gap-2">
@@ -147,8 +147,8 @@ const ChatRoom = () => {
         />
       )}
 
-      {/* Chat Room - White background with border radius */}
-      <div className="flex-1 bg-white rounded-t-3xl flex flex-col">
+      {/* Chat Room - White background with border radius and shadow */}
+      <div className="flex-1 bg-white rounded-t-3xl flex flex-col shadow-lg lg:shadow-2xl lg:mx-4">
         {/* Chat Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {currentChat.messages.map((msg) => (
@@ -205,26 +205,35 @@ const ChatRoom = () => {
       </div>
 
       {/* Participants Modal */}
+      {/* Participants Bottom Sheet */}
       {showParticipantsModal && (
-        <ParticipantsModal
-          groupName={currentChat.name}
-          participants={participants}
-          onClose={() => setShowParticipantsModal(false)}
-          currentUserIsLead={currentUserIsLead}
-        />
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
+          <div className="w-full max-w-4xl h-[90vh] bg-white rounded-t-3xl animate-slide-up">
+            <ParticipantsModal
+              groupName={currentChat.name}
+              participants={participants}
+              onClose={() => setShowParticipantsModal(false)}
+              currentUserIsLead={currentUserIsLead}
+            />
+          </div>
+        </div>
       )}
 
-      {/* Add Participant Modal - Only show if current user is lead */}
+      {/* Add Participant Bottom Sheet - Only show if current user is lead */}
       {showAddParticipantModal && currentUserIsLead && (
-        <AddParticipantModal
-          onClose={() => setShowAddParticipantModal(false)}
-          onAddParticipant={(workerId) => {
-            // Handle adding the participant to the group
-            console.log("Adding worker to group:", workerId);
-            // In a real app, you would update the participants state here
-            // and make an API call to add the participant to the group
-          }}
-        />
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
+          <div className="w-full max-w-4xl h-[90vh] bg-white rounded-t-3xl animate-slide-up">
+            <AddParticipantModal
+              onClose={() => setShowAddParticipantModal(false)}
+              onAddParticipant={(workerId) => {
+                // Handle adding the participant to the group
+                console.log("Adding worker to group:", workerId);
+                // In a real app, you would update the participants state here
+                // and make an API call to add the participant to the group
+              }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

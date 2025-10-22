@@ -48,19 +48,21 @@ export default function BidPage() {
       />
 
       {/* Scrollable content */}
-      <main className="pt-4 pb-20">
-        {sortedShifts.map((shift) => (
-          <JobBidCard
-            key={shift.id}
-            shift={shift}
-            bidValue={bids[shift.id] || ""}
-            onChange={(v) => handleChange(shift.id, v)}
-          />
-        ))}
+      <main className="pt-4 pb-20 w-full px-4 sm:px-6 lg:px-8">
+        <div className="space-y-4">
+          {sortedShifts.map((shift) => (
+            <JobBidCard
+              key={shift.id}
+              shift={shift}
+              bidValue={bids[shift.id] || ""}
+              onChange={(v) => handleChange(shift.id, v)}
+            />
+          ))}
+        </div>
 
         {/* Submit button only if user entered a bid */}
         {hasAnyBid && (
-          <div className="max-w-screen-sm mx-auto mt-6 px-4">
+          <div className="mt-6">
             <button
               onClick={handleSubmit}
               className="w-full h-11 rounded-full bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition"

@@ -2,7 +2,7 @@
 function ChangePassword() {
   return (
     <>
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
       <div className="relative mb-1">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
           <svg
@@ -58,9 +58,8 @@ function ChangePassword() {
         />
       </div>
     </div>
-<div className="flex justify-center">
-
-<button className="btn-primary self-auto py-2 px-10 rounded mt-4">Update</button>
+<div className="flex justify-center mt-6">
+<button className="btn-primary self-auto py-2 px-6 sm:px-10 rounded text-sm sm:text-base">Update</button>
 </div>
     </>
 

@@ -15,9 +15,12 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCC40B]">
-      {/* Main content */}
-      <Outlet />
+    // <div className="min-h-screen flex flex-col bg-[#FCC40B]">
+    <div className="min-h-screen flex flex-col">
+      {/* Main content with responsive container and background */}
+      <div className="w-full max-w-4xl mx-auto min-h-screen flex flex-col bg-[#FCC40B]">
+        <Outlet />
+      </div>
     </div>
   );
 };
