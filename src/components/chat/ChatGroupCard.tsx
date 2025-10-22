@@ -5,6 +5,7 @@
 // src/components/chat/ChatGroupCard.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import logoWhite from "../../assets/logo-white.svg";
 
 interface ChatGroupCardProps {
   id: string;
@@ -48,7 +49,7 @@ const ChatGroupCard: React.FC<ChatGroupCardProps> = ({
           {/* Logo with black background and fully rounded */}
           <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black flex items-center justify-center">
             <img
-              src="/src/assets/logo-white.svg"
+              src={logoWhite}
               alt={name}
               className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
             />
