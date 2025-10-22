@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ContactUs from "@/pages/settings/ContactUs";
 import WorkHistory from "@/pages/settings/WorkHistory";
 import EditProfile from "@/pages/settings/EditProfile";

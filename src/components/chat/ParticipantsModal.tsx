@@ -17,7 +17,6 @@ interface ParticipantsModalProps {
 }
 
 const ParticipantsModal: React.FC<ParticipantsModalProps> = ({
-  groupName,
   participants,
   onClose,
   currentUserIsLead = true, // Mock data - in real app, this would come from props

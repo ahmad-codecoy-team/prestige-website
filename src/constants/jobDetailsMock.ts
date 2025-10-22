@@ -12,6 +12,7 @@ export type JobDetailsData = {
   perDiem: number;
   reminderNotes?: string;
   shiftNote?: string;
+  pointOfContact?: string; // Added missing property
 };
 
 export const JOB_DETAILS_MOCK: JobDetailsData = {

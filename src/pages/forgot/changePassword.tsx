@@ -108,7 +108,7 @@ function ChangePassword() {
         </div>
 
         <div className="mt-auto pb-4">
-          <AuthButton type="submit" onClick={formik.handleSubmit} variant="secondary">
+          <AuthButton type="submit" onClick={() => formik.handleSubmit()} variant="secondary">
             Continue
           </AuthButton>
         </div>

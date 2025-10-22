@@ -8,7 +8,7 @@ interface ReviewModalProps {
 }
 
 export default function ReviewModal({
-  workerName,
+  workerName: _workerName,
   onClose,
   onSubmit,
 }: ReviewModalProps) {

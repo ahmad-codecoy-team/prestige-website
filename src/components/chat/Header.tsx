@@ -1,5 +1,4 @@
 import PLS from "@/assets/PLS.png";
-import { BsArrowBarLeft } from "react-icons/bs";
 import { FaArrowLeft } from "react-icons/fa";
 
 const ChatHeader = () => (

@@ -18,7 +18,7 @@ export default function JobDetailsPage() {
       await handleApiCall(
         () => getScheduleDetails(shift?.shift?.id),
         "",
-        (response: any) => {
+        (_response: any) => {
           // Future: hook up API data here
           // console.log("Schedule details:", response);
         }

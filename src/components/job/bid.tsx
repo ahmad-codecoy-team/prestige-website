@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PLS from "@/assets/PLS.png";
-import { BsPin } from "react-icons/bs";
 import { FaLocationArrow } from "react-icons/fa";
 const mockData = [
   { date: "02/26/25", position: "Supplier", time: "18:00 - 19:00", rate: 100 },

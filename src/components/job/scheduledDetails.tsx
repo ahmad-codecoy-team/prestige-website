@@ -3,7 +3,7 @@ import { getScheduleDetails } from "@/helper/backend_helper";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { useEffect } from "react";
 import { FaLocationArrow } from "react-icons/fa";
-import { RiGroup2Fill, RiGroupFill } from "react-icons/ri";
+import { RiGroupFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 
 const JobDetails = () => {

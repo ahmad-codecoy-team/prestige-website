@@ -32,6 +32,8 @@ const LeadAttendance = () => {
   const [workers, setWorkers] = useState<Worker[]>([
     { name: "muniba anwar", review: 0 },
     { name: "Nimra Razzaq", review: 0 },
+    { name: "Muhammad Ahmad", review: 0 },
+    { name: "Hamza Tanveer", review: 0 },
   ]);
 
   const handleReviewClick = (index: number) => {
@@ -39,8 +41,7 @@ const LeadAttendance = () => {
     setShowReviewModal(true);
   };
 
-  // eslint-disable-next-line
-  const handleReviewSubmit = (rating: number, comment: string) => {
+  const handleReviewSubmit = (rating: number, _comment: string) => {
     if (selectedWorkerIndex !== null) {
       const updatedWorkers = [...workers];
       updatedWorkers[selectedWorkerIndex].review = rating;

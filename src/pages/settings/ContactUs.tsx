@@ -1,4 +1,3 @@
-import React from "react";
 import { FiMail, FiPhoneCall } from "react-icons/fi";
 
 function ContactUs() {

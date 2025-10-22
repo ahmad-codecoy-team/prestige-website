@@ -32,6 +32,7 @@ const ChatRoom = () => {
           timestamp: "1 hour ago",
         },
       ],
+      participants: [], // Added missing participants property
     },
     "2": {
       name: "Strike-group",

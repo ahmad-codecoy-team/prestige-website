@@ -1,4 +1,3 @@
-import React from "react";
 import { BsFilePdf } from "react-icons/bs";
 
 const mockData = [
