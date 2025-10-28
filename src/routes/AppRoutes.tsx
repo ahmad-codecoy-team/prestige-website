@@ -15,9 +15,10 @@ import ChatRoom from "@/pages/chat/ChatRoom";
 import Bid from "@/pages/bid";
 import JobDetailsPage from "@/pages/job/JobDetails";
 import Attendance from "@/pages/attendence/attendance";
-import CompletedJobDetails from "@/components/job/completedDetails";
+// import CompletedJobDetails from "@/components/job/completedDetails";
+import CompletedJobDetailsPage from "@/components/job/completedDetails.page";
 import EditInvoice from "@/components/job/editInvoice";
-import LeadQR from "@/components/job/LeadQR"; // Add this import
+import LeadQR from "@/components/job/LeadQR";
 
 // ===== Settings Pages =====
 import ContactUs from "@/pages/settings/ContactUs";
@@ -53,7 +54,7 @@ const AppRoutes = () => {
           <Route path="/job-details" element={<JobDetailsPage />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/lead-qr" element={<LeadQR />} /> {/* Add this route */}
-          <Route path="/invoice" element={<CompletedJobDetails />} />
+          <Route path="/invoice" element={<CompletedJobDetailsPage />} />
           <Route path="/edit-invoice" element={<EditInvoice />} />
           {/* ===== Individual Settings Pages ===== */}
           <Route

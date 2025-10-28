@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import ParticipantsModal from "@/components/chat/ParticipantsModal";
 import AddParticipantModal from "@/components/chat/AddParticipantModal";
+import logoWhite from "../../assets/logo-white.svg";
 
 const ChatRoom = () => {
   const { groupId } = useParams();
@@ -88,7 +89,7 @@ const ChatRoom = () => {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
                 <img
-                  src="/src/assets/logo-white.svg"
+                  src={logoWhite}
                   alt="Chat"
                   className="w-5 h-5 object-contain"
                 />

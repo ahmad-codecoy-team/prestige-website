@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Bell, MessageSquare, Menu } from "lucide-react";
 import ScheduledShifts from "./ScheduledShifts";
 import CompletedShifts from "./CompletedShifts";
 import AvailableShifts from "./AvailableShifts";
-import { Bell, MessageSquare, Menu } from "lucide-react";
 import Sidebar from "@/layouts/sidebar";
 
 type TabKey = "bid" | "schedule" | "invoice";

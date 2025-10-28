@@ -9,7 +9,7 @@ interface PendingInvoiceModalProps {
 
 /**
  * Displays a centered overlay modal that informs the user their invoice
- * is still under review. It matches the design provided in the screenshot.
+ * is still under review.
  */
 const PendingInvoiceModal: React.FC<PendingInvoiceModalProps> = ({
   visible,
