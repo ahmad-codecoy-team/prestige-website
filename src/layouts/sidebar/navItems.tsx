@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import {
   PhoneCall,
   History,
@@ -8,8 +9,13 @@ import {
 } from "lucide-react";
 
 export type NavItem =
-  | { path: string; icon: JSX.Element; label: string; type?: "link" }
-  | { id: "user-settings"; icon: JSX.Element; label: string; type: "action" };
+  | { path: string; icon: ReactNode; label: string; type?: "link" }
+  | {
+      id: "user-settings" | "contact-us";
+      icon: ReactNode;
+      label: string;
+      type: "action";
+    };
 
 const navItems: NavItem[] = [
   {
