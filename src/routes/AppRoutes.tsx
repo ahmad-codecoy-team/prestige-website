@@ -63,6 +63,7 @@ const AppRoutes = () => {
           />
           <Route path="/settings/contactus" element={<ContactUs />} />
           <Route path="/settings/workhistory" element={<WorkHistory />} />
+          <Route path="/workhistory" element={<WorkHistory />} />
           <Route path="/settings/editprofile" element={<EditProfile />} />
           <Route
             path="/settings/changepassword"

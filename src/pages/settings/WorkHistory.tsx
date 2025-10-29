@@ -1,6 +1,10 @@
 import Card from "@/components/job/JobCard";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function WorkHistory() {
+  const navigate = useNavigate();
+
   const dummyShifts = [
     {
       id: 1,
@@ -9,6 +13,7 @@ function WorkHistory() {
       venue: "Codecoy",
       quantity: 4,
       position: "Worker",
+      status: "Paid",
     },
     {
       id: 2,
@@ -17,6 +22,7 @@ function WorkHistory() {
       venue: "DevHub",
       quantity: 2,
       position: "Worker",
+      status: "Paid",
     },
     {
       id: 3,
@@ -25,6 +31,7 @@ function WorkHistory() {
       venue: "TechSquare",
       quantity: 5,
       position: "Worker",
+      status: "Paid",
     },
     {
       id: 4,
@@ -33,19 +40,29 @@ function WorkHistory() {
       venue: "InnovateX",
       quantity: 3,
       position: "Worker",
+      status: "Paid",
     },
   ];
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {dummyShifts.map((shift) => (
-        <Card
-          key={shift.id}
-          shift={shift}
-          link={`/job/${shift.id}`}
-          variant="completed"
-        />
-      ))}
+    <div className="min-h-screen w-full flex flex-col">
+      {/* Top bar */}
+      <header className="sticky top-0 z-10 bg-[#FCC40B]">
+        <div className="flex items-center justify-between px-4 pt-3 pb-2">
+          <button aria-label="Back" onClick={() => navigate(-1)} className="p-1 -ml-1">
+            <ArrowLeft className="w-6 h-6" />
+          </button>
+          <h1 className="text-base font-semibold">Work History</h1>
+          <span className="w-6" />
+        </div>
+      </header>
+
+      {/* Content */}
+      <main className="flex-1 px-4 pb-6 space-y-4">
+        {dummyShifts.map((shift) => (
+          <Card key={shift.id} shift={shift} link={`/job/${shift.id}`} variant="completed" />
+        ))}
+      </main>
     </div>
   );
 }
