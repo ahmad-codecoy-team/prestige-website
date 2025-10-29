@@ -1,68 +1,158 @@
+import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import { FiEye, FiEyeOff, FiLock } from "react-icons/fi";
+import { BackButton } from "@/components/auth/BackButton";
+import { PageHeader } from "@/components/auth/PageHeader";
+import { AuthInput } from "@/components/auth/AuthInput";
+import { AuthButton } from "@/components/auth/AuthButton";
 
 function ChangePassword() {
+  const [showOld, setShowOld] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      oldPassword: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: Yup.object({
+      oldPassword: Yup.string().required("Old password is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "Passwords must match")
+        .required("Confirm password is required"),
+    }),
+    onSubmit: () => {
+      toast.success("Password Updated Successfully");
+    },
+  });
+
   return (
-    <>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-      <div className="relative mb-1">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2ZM10 6a2 2 0 1 1 4 0v2h-4Zm2 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-          </svg>
+    <div className="min-h-screen bg-[#FCC40B] flex flex-col px-4 py-6 sm:px-6 sm:py-8">
+      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        <div className="flex items-center mb-6">
+          <BackButton />
         </div>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Old Password"
-          className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
+
+        <PageHeader
+          title="Change Password"
+          description="Please, enter your new password"
         />
-      </div>
-      <div className="relative mb-1">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2ZM10 6a2 2 0 1 1 4 0v2h-4Zm2 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-          </svg>
+
+        <div className="flex justify-center py-6">
+          <img
+            src="/change-pass.svg"
+            alt="Change Password"
+            className="w-32 h-32 md:w-40 md:h-40"
+          />
         </div>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="New Password"
-          className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
-        />
-      </div>
-      <div className="relative mb-1">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2ZM10 6a2 2 0 1 1 4 0v2h-4Zm2 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-          </svg>
+
+        <div className="space-y-4">
+          <AuthInput
+            id="oldPassword"
+            name="oldPassword"
+            type={showOld ? "text" : "password"}
+            placeholder="Old Password"
+            icon={<FiLock className="w-5 h-5 text-gray-400" />}
+            rightIcon={
+              <button
+                type="button"
+                onClick={() => setShowOld(!showOld)}
+                className="cursor-pointer"
+              >
+                {showOld ? (
+                  <FiEyeOff className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <FiEye className="w-5 h-5 text-gray-400" />
+                )}
+              </button>
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.oldPassword}
+            error={
+              formik.touched.oldPassword && formik.errors.oldPassword
+                ? (formik.errors.oldPassword as string)
+                : undefined
+            }
+          />
+
+          <AuthInput
+            id="password"
+            name="password"
+            type={showNew ? "text" : "password"}
+            placeholder="New Password"
+            icon={<FiLock className="w-5 h-5 text-gray-400" />}
+            rightIcon={
+              <button
+                type="button"
+                onClick={() => setShowNew(!showNew)}
+                className="cursor-pointer"
+              >
+                {showNew ? (
+                  <FiEyeOff className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <FiEye className="w-5 h-5 text-gray-400" />
+                )}
+              </button>
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            error={
+              formik.touched.password && formik.errors.password
+                ? (formik.errors.password as string)
+                : undefined
+            }
+          />
+
+          <AuthInput
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showConfirm ? "text" : "password"}
+            placeholder="Confirm Password"
+            icon={<FiLock className="w-5 h-5 text-gray-400" />}
+            rightIcon={
+              <button
+                type="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                className="cursor-pointer"
+              >
+                {showConfirm ? (
+                  <FiEyeOff className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <FiEye className="w-5 h-5 text-gray-400" />
+                )}
+              </button>
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.confirmPassword}
+            error={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+                ? (formik.errors.confirmPassword as string)
+                : undefined
+            }
+          />
         </div>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Confirm Password"
-          className={`bg-gray-50 border  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
-        />
+
+        <div className="mt-auto pb-2 pt-4">
+          <AuthButton
+            type="submit"
+            onClick={() => formik.handleSubmit()}
+            variant="secondary"
+          >
+            Continue
+          </AuthButton>
+        </div>
       </div>
     </div>
-<div className="flex justify-center mt-6">
-<button className="btn-primary self-auto py-2 px-6 sm:px-10 rounded text-sm sm:text-base">Update</button>
-</div>
-    </>
-
   );
 }
 
