@@ -50,7 +50,7 @@ function Home() {
             >
               <MessageSquare className="w-6 h-6" />
             </button>
-            <button aria-label="Notifications" className="p-1">
+            <button aria-label="Notifications" onClick={() => navigate("/notifications")} className="p-1">
               <Bell className="w-6 h-6" />
             </button>
           </div>

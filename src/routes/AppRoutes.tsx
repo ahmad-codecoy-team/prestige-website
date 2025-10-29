@@ -27,6 +27,7 @@ import EditProfile from "@/pages/settings/EditProfile";
 import SettingsChangePassword from "@/pages/settings/ChangePassword";
 import PrivacyPolicy from "@/pages/settings/PrivacyPolicy";
 import About from "@/pages/settings/About";
+import Notifications from "@/pages/notifications";
 
 // ===== Auth Utility Pages =====
 import Logout from "@/components/auth/Logout";
@@ -53,9 +54,10 @@ const AppRoutes = () => {
           <Route path="/bid" element={<Bid />} />
           <Route path="/job-details" element={<JobDetailsPage />} />
           <Route path="/attendance" element={<Attendance />} />
-          <Route path="/lead-qr" element={<LeadQR />} /> {/* Add this route */}
+          <Route path="/lead-qr" element={<LeadQR />} />
           <Route path="/invoice" element={<CompletedJobDetailsPage />} />
           <Route path="/edit-invoice" element={<EditInvoice />} />
+          <Route path="/notifications" element={<Notifications />} />
           {/* ===== Individual Settings Pages ===== */}
           <Route
             path="/settings"
