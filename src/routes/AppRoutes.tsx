@@ -12,6 +12,7 @@ import SignUp from "@/pages/signup";
 import Home from "@/pages/home";
 import Chat from "@/pages/chat";
 import ChatRoom from "@/pages/chat/ChatRoom";
+import AssistantChat from "@/pages/assistant";
 import Bid from "@/pages/bid";
 import JobDetailsPage from "@/pages/job/JobDetails";
 import Attendance from "@/pages/attendence/attendance";
@@ -51,6 +52,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/chat/:groupId" element={<ChatRoom />} />
+          <Route path="/assistant" element={<AssistantChat />} />
           <Route path="/bid" element={<Bid />} />
           <Route path="/job-details" element={<JobDetailsPage />} />
           <Route path="/attendance" element={<Attendance />} />

@@ -42,10 +42,10 @@ function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Chat button now routes to /chat */}
+            {/* Assistant chat button routes to /assistant */}
             <button
               aria-label="Messages"
-              onClick={() => navigate("/chat")}
+              onClick={() => navigate("/assistant")}
               className="p-1"
             >
               <MessageSquare className="w-6 h-6" />

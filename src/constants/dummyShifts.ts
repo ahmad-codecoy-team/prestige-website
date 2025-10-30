@@ -1,6 +1,6 @@
 // src/constants/dummyShifts.ts
-
-export const dummyShifts = [
+import type { AvailableShifts } from "@/types";
+export const dummyShifts: AvailableShifts[] = [
   {
     id: 1,
     startDate: "2025-08-14T00:00:00.000Z",

@@ -4,10 +4,11 @@ import Loading from "@/components/loading";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getAvailableJobs } from "@/helper/backend_helper";
 import { dummyShifts } from "@/constants/dummyShifts";
+import type { AvailableShifts } from "@/types/AvailableShifts";
 
 function AvailableShifts() {
   const [loading, setLoading] = useState(false);
-  const [shifts, setShifts] = useState<any[]>([]);
+  const [shifts, setShifts] = useState<AvailableShifts[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +16,7 @@ function AvailableShifts() {
       await handleApiCall(
         () => getAvailableJobs(),
         "",
-        (response: any) => {
+        (response: unknown) => {
           const data = response?.data?.data || [];
           if (data.length === 0) {
             console.warn("No available shifts found — showing dummy data.");
