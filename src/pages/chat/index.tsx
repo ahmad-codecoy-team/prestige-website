@@ -2,9 +2,8 @@
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import ChatGroupCard from "@/components/chat/ChatGroupCard";
+import PageLayout from "@/components/layout/PageLayout";
 
 // Mock data for chat groups
 const chatGroups = [
@@ -39,24 +38,9 @@ const chatGroups = [
 ];
 
 const ChatPage = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className="min-h-screen bg-[#fbbf24]">
-      {/* Header */}
-      <div className="bg-transparent text-white px-4 py-4 sm:px-6">
-        <div className="flex items-center justify-center relative">
-          <button onClick={() => navigate(-1)} className="absolute left-0">
-            <ArrowLeft size={28} />
-          </button>
-          <div className="text-center text-xl font-semibold tracking-wide">
-            Chat
-          </div>
-        </div>
-      </div>
-
-      {/* Chat Groups List with responsive container */}
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+    <PageLayout title="Chat">
+      <div className="px-4 lg:px-6 py-6">
         <div className="space-y-2">
           {chatGroups.map((group) => (
             <ChatGroupCard
@@ -70,7 +54,7 @@ const ChatPage = () => {
           ))}
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

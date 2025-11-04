@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import DesktopSidebar from "./sidebar/DesktopSidebar";
+import styles from "./MainLayout.module.css";
 
 const MainLayout = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  console.log(isMobile);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
   return (
-    // <div className="min-h-screen flex flex-col bg-[#FCC40B]">
-    <div className="min-h-screen flex flex-col">
-      {/* Main content with responsive container and background */}
-      <div className="w-full max-w-4xl mx-auto min-h-screen flex flex-col bg-[#FCC40B]">
-        <Outlet />
+    <div className="min-h-screen bg-[#FCC40B]">
+      {/* Desktop Sidebar - Fixed on large screens */}
+      <DesktopSidebar />
+      
+      {/* Main Content Area */}
+      <div className={styles.contentArea}>
+        {/* Content wrapper with max-width for tablet constraint on desktop */}
+        <div className={styles.contentWrapper}>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

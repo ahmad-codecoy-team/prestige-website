@@ -1,9 +1,7 @@
 import Card from "@/components/job/JobCard";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import SettingsLayout from "./SettingsLayout";
 
 function WorkHistory() {
-  const navigate = useNavigate();
 
   const dummyShifts = [
     {
@@ -45,25 +43,13 @@ function WorkHistory() {
   ];
 
   return (
-    <div className="min-h-screen w-full flex flex-col">
-      {/* Top bar */}
-      <header className="sticky top-0 z-10 bg-[#FCC40B]">
-        <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <button aria-label="Back" onClick={() => navigate(-1)} className="p-1 -ml-1">
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <h1 className="text-base font-semibold">Work History</h1>
-          <span className="w-6" />
-        </div>
-      </header>
-
-      {/* Content */}
-      <main className="flex-1 px-4 pb-6 space-y-4">
+    <SettingsLayout title="Work History">
+      <main className="flex-1 px-4 lg:px-6 py-6 space-y-4">
         {dummyShifts.map((shift) => (
           <Card key={shift.id} shift={shift} link={`/home/invoices/${shift.id}`} variant="completed" />
         ))}
       </main>
-    </div>
+    </SettingsLayout>
   );
 }
 

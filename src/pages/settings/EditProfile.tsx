@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { ProfilePhotoUpload } from "@/components/auth/ProfilePhotoUpload";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { AuthButton } from "@/components/auth/AuthButton";
@@ -16,12 +14,12 @@ import { BsShieldLock } from "react-icons/bs";
 import { BiBuilding } from "react-icons/bi";
 import { EXPERIENCE_CATEGORIES } from "@/constants/experiencesData";
 import { FileUpload } from "@/components/auth/FileUpload";
+import SettingsLayout from "./SettingsLayout";
 
 
 type TabKey = "personal" | "experiences" | "i9";
 
 function EditProfile() {
-  const navigate = useNavigate();
   const [active, setActive] = useState<TabKey>("personal");
 
   // Personal form state (simplified; wire to API later)
@@ -48,55 +46,70 @@ function EditProfile() {
   // I9 upload state
   const [i9File, setI9File] = useState<File | null>(null);
 
-  const Header = (
-    <div className="fixed top-0 left-0 right-0 z-40 bg-black text-white">
-      <div className="max-w-4xl mx-auto">
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-4 pt-4 pb-3">
-          <button aria-label="Back" onClick={() => navigate(-1)} className="p-1 -ml-1 text-white">
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <h1 className="text-lg font-semibold">Profile</h1>
-          <span className="w-6" />
-        </div>
-        {/* Tabs */}
-        <div className="flex items-center justify-around border-b border-white/10">
-          {[
-            { k: "personal", label: "Personal Information" },
-            { k: "experiences", label: "Experiences" },
-            { k: "i9", label: "I9 Form" },
-          ].map((t) => {
-            const is = active === (t.k as TabKey);
-            return (
-              <button
-                key={t.k}
-                onClick={() => setActive(t.k as TabKey)}
-                className={`relative py-3 text-sm font-semibold tracking-wide ${
-                  is ? "text-white" : "text-white/70"
-                }`}
-              >
-                {t.label}
-                {is && (
-                  <span className="absolute left-0 -bottom-[1px] h-[2px] w-full bg-white rounded-full" />
-                )}
-              </button>
-            );
-          })}
-        </div>
+  const MobileTabsHeader = (
+    <div className="lg:hidden bg-black text-white sticky top-[56px] z-30">
+      <div className="flex items-center justify-around border-b border-white/10">
+        {[
+          { k: "personal", label: "Personal Information" },
+          { k: "experiences", label: "Experiences" },
+          { k: "i9", label: "I9 Form" },
+        ].map((t) => {
+          const is = active === (t.k as TabKey);
+          return (
+            <button
+              key={t.k}
+              onClick={() => setActive(t.k as TabKey)}
+              className={`relative py-3 text-xs font-semibold tracking-wide ${
+                is ? "text-white" : "text-white/70"
+              }`}
+            >
+              {t.label}
+              {is && (
+                <span className="absolute left-0 -bottom-[1px] h-[2px] w-full bg-white rounded-full" />
+              )}
+            </button>
+          );
+        })}
       </div>
+    </div>
+  );
+
+  const DesktopTabs = (
+    <div className="hidden lg:flex gap-6 border-b border-black/10 pb-4 mb-6">
+      {[
+        { k: "personal", label: "Personal Information" },
+        { k: "experiences", label: "Experiences" },
+        { k: "i9", label: "I9 Form" },
+      ].map((t) => {
+        const is = active === (t.k as TabKey);
+        return (
+          <button
+            key={t.k}
+            onClick={() => setActive(t.k as TabKey)}
+            className={`relative pb-2 text-sm font-medium tracking-wide transition-colors ${
+              is
+                ? "text-black font-semibold"
+                : "text-black/60 hover:text-black"
+            }`}
+          >
+            {t.label}
+            {is && (
+              <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black rounded-full" />
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 
   const Footer = (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#FCC40B]">
-      <div className="max-w-4xl mx-auto px-4 py-4">
-        <AuthButton variant="secondary">Update</AuthButton>
-      </div>
+    <div className="sticky bottom-0 bg-[#FCC40B] px-4 py-4 border-t border-black/10">
+      <AuthButton variant="secondary">Update</AuthButton>
     </div>
   );
 
   const PersonalTab = (
-    <div className="px-4 pt-4 pb-28 max-w-4xl mx-auto">
+    <div className="px-4 lg:px-6 pt-4">
       <div className="flex justify-center mb-6">
         <ProfilePhotoUpload />
       </div>
@@ -169,7 +182,7 @@ function EditProfile() {
   );
 
   const ExperiencesTab = (
-    <div className="px-4 pt-6 pb-28 max-w-4xl mx-auto">
+    <div className="px-4 lg:px-6 pt-4">
       <h2 className="text-center text-base font-semibold mb-4">
         Please Select Your Past Experiences
       </h2>
@@ -203,7 +216,7 @@ function EditProfile() {
   );
 
   const I9Tab = (
-    <div className="px-4 pt-6 pb-28 max-w-4xl mx-auto">
+    <div className="px-4 lg:px-6 pt-4">
       <FileUpload
         onFileSelect={(f) => setI9File(f)}
         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
@@ -214,15 +227,16 @@ function EditProfile() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FCC40B]">
-      {Header}
-      <div className="pt-[116px] pb-[84px]">
+    <SettingsLayout title="Profile">
+      {MobileTabsHeader}
+      <div className="px-4 lg:px-6 pt-4 lg:pt-6">
+        {DesktopTabs}
         {active === "personal" && PersonalTab}
         {active === "experiences" && ExperiencesTab}
         {active === "i9" && I9Tab}
       </div>
       {Footer}
-    </div>
+    </SettingsLayout>
   );
 }
 

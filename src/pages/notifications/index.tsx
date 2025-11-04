@@ -1,5 +1,4 @@
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import PageLayout from "@/components/layout/PageLayout";
 
 interface NotificationItem {
   id: number;
@@ -60,26 +59,9 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
 ];
 
 const Notifications = () => {
-  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-[#FCC40B]">
-      {/* Top bar */}
-      <header className="sticky top-0 z-10 bg-[#FCC40B]">
-        <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <button
-            aria-label="Back"
-            onClick={() => navigate(-1)}
-            className="p-1 -ml-1"
-          >
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <h1 className="text-base font-semibold">Notifications</h1>
-          <span className="w-6" />
-        </div>
-      </header>
-
-      {/* List */}
-      <main className="px-4 pb-6 space-y-3 max-w-3xl mx-auto">
+    <PageLayout title="Notifications">
+      <div className="px-4 lg:px-6 py-6 space-y-3">
         {MOCK_NOTIFICATIONS.map((n) => (
           <div
             key={n.id}
@@ -96,8 +78,8 @@ const Notifications = () => {
             )}
           </div>
         ))}
-      </main>
-    </div>
+      </div>
+    </PageLayout>
   );
 };
 

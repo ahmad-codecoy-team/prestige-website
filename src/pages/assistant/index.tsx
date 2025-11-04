@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { ArrowLeft, Send, Image } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import logoWhite from "../../assets/logo-white.svg";
+import { Send, Image } from "lucide-react";
+import PageLayout from "@/components/layout/PageLayout";
 
 const AssistantChat = () => {
-  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
     { id: "1", text: "Hi! I'm your assistant. How can I help?", isSender: false, timestamp: "just now" },
@@ -25,28 +23,9 @@ const AssistantChat = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbbf24] flex flex-col">
-      {/* Header */}
-      <div className="bg-[#fbbf24] text-black px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate(-1)} className="text-black">
-              <ArrowLeft size={28} />
-            </button>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                <img src={logoWhite} alt="Assistant" className="w-5 h-5 object-contain" />
-              </div>
-              <div className="text-xl font-semibold tracking-wide">Assistant</div>
-            </div>
-          </div>
-          {/* No menu here */}
-          <div className="w-6" />
-        </div>
-      </div>
-
+    <PageLayout title="Assistant" showBackButton={true}>
       {/* Chat container */}
-      <div className="flex-1 bg-white rounded-t-3xl flex flex-col shadow-lg lg:shadow-2xl lg:mx-4">
+      <div className="flex-1 bg-white rounded-t-3xl flex flex-col shadow-lg lg:shadow-2xl lg:mx-4 mt-4">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((m) => (
             <div key={m.id} className={`flex ${m.isSender ? "justify-end" : "justify-start"}`}>
@@ -79,7 +58,7 @@ const AssistantChat = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

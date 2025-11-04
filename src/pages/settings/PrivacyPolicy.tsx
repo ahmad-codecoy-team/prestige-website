@@ -1,7 +1,10 @@
+import SettingsLayout from "./SettingsLayout";
 
 function PrivacyPolicy() {
   return (
-    <div className="text-gray-500 dark:text-gray-400 text-sm sm:text-base md:text-lg mt-6 sm:mt-10 leading-relaxed">
+    <SettingsLayout title="Privacy Policy">
+      <div className="px-4 lg:px-6 py-6">
+        <div className="text-gray-500 dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
       Lorem ipsum dolor sit amet consectetur. Est varius elit purus nulla in
       lectus pharetra sodales malesuada. Consectetur at ac at quis elit eget
       urna. Ut in turpis enim tellus sollicitudin nisl. Nec posuere orci leo
@@ -32,7 +35,9 @@ function PrivacyPolicy() {
       dolor. Arcu enim sapien consectetur suspendisse turpis faucibus urna
       tempus. Fermentum elementum praesent tristique habitant aliquet dolor
       condimentum dictumst.{" "}
-    </div>
+        </div>
+      </div>
+    </SettingsLayout>
   );
 }
 

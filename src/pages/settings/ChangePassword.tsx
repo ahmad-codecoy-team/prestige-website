@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { FiEye, FiEyeOff, FiLock } from "react-icons/fi";
-import { BackButton } from "@/components/auth/BackButton";
 import { PageHeader } from "@/components/auth/PageHeader";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { AuthButton } from "@/components/auth/AuthButton";
+import SettingsLayout from "./SettingsLayout";
 
 function ChangePassword() {
   const [showOld, setShowOld] = useState(false);
@@ -34,11 +34,9 @@ function ChangePassword() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FCC40B] flex flex-col px-4 py-6 sm:px-6 sm:py-8">
-      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
-        <div className="flex items-center mb-6">
-          <BackButton />
-        </div>
+    <SettingsLayout title="Change Password">
+      <div className="px-4 lg:px-6 py-6">
+        <div className="w-full max-w-md mx-auto flex flex-col flex-1">
 
         <PageHeader
           title="Change Password"
@@ -151,8 +149,9 @@ function ChangePassword() {
             Continue
           </AuthButton>
         </div>
+        </div>
       </div>
-    </div>
+    </SettingsLayout>
   );
 }
 

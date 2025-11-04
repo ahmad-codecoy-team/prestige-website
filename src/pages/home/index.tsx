@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { Bell, MessageSquare, Menu } from "lucide-react";
-import ScheduledShifts from "./ScheduledShifts";
-import CompletedShifts from "./CompletedShifts";
-import AvailableShifts from "./AvailableShifts";
 import Sidebar from "@/layouts/sidebar";
+import DesktopHeader from "@/components/layout/DesktopHeader";
 
 type TabKey = "bid" | "schedule" | "invoice";
 
@@ -30,9 +28,9 @@ function Home() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCC40B]">
-      {/* ===== Header ===== */}
-      <header className="bg-black text-white sticky top-0 z-50">
+    <>
+      {/* ===== Mobile Header ===== */}
+      <header className="lg:hidden bg-black text-white sticky top-0 z-50">
         <div className="flex items-center justify-between px-4 py-3">
           <button
             aria-label="Open menu"
@@ -97,18 +95,45 @@ function Home() {
         </div>
       </header>
 
+      {/* ===== Desktop Header ===== */}
+      <DesktopHeader title="Available Shifts">
+        <div className="flex gap-8 pt-4 pb-3 border-b border-black/10">
+          {TABS.map((t) => {
+            const isActive = activeTab === t.key;
+            return (
+              <button
+                key={t.key}
+                onClick={() => {
+                  setActiveTab(t.key);
+                  navigate(`/home/${t.key}`);
+                }}
+                className={`relative pb-2 text-sm font-medium tracking-wide transition-colors ${
+                  isActive
+                    ? "text-black font-semibold"
+                    : "text-black/60 hover:text-black"
+                }`}
+              >
+                {t.label}
+                {isActive && (
+                  <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black rounded-full" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </DesktopHeader>
+
       {/* ===== Tab Content ===== */}
       <main className="flex-1 w-full">
-        <div className="w-full px-4 py-4 md:px-6 lg:px-8">
-          {activeTab === "bid" && <AvailableShifts />}
-          {activeTab === "schedule" && <ScheduledShifts />}
-          {activeTab === "invoice" && <CompletedShifts />}
+        <div className="w-full px-4 py-4 lg:px-4 lg:py-5">
+          {/* Outlet renders the nested route component (AvailableShifts, ScheduledShifts, or CompletedShifts) */}
+          <Outlet />
         </div>
       </main>
 
       {/* ===== Sidebar ===== */}
       <Sidebar open={showSidebar} onClose={() => setShowSidebar(false)} />
-    </div>
+    </>
   );
 }
 
