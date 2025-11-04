@@ -15,7 +15,6 @@ export const FileUpload = ({
   onFileSelect,
   accept = "image/*,.pdf,.doc,.docx",
   maxSize = 10485760, // 10MB
-  label: _label = "Upload File",
   helpText = "pdf, docx, jpeg, png",
 }: FileUploadProps) => {
   const onDrop = useCallback(

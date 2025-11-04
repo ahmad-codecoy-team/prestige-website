@@ -46,9 +46,9 @@ export default function LandscapeOnly({
         await document.documentElement.requestFullscreen();
       }
       // Attempt orientation lock; not available on iOS Safari
-      // @ts-ignore
+      // @ts-expect-error - screen.orientation.lock is not available in all browsers
       if (screen.orientation?.lock) {
-        // @ts-ignore
+        // @ts-expect-error - screen.orientation.lock is not available in all browsers
         await screen.orientation.lock("landscape");
       }
     } catch {
@@ -60,9 +60,9 @@ export default function LandscapeOnly({
   useEffect(() => {
     (async () => {
       try {
-        // @ts-ignore
+        // @ts-expect-error - screen.orientation.lock is not available in all browsers
         if (screen.orientation?.lock) {
-          // @ts-ignore
+          // @ts-expect-error - screen.orientation.lock is not available in all browsers
           await screen.orientation.lock("landscape");
         }
       } catch {

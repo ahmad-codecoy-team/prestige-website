@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
     type: "action",
   },
   {
-    path: "/workhistory",
+    path: "/settings/history",
     icon: <History className="w-5 h-5" />,
     label: "Work History",
     type: "link",
@@ -37,7 +37,7 @@ const navItems: NavItem[] = [
     type: "action",
   },
   {
-    path: "/settings/privacypolicy",
+    path: "/settings/privacy-policy",
     icon: <FileText className="w-5 h-5" />,
     label: "Privacy Policy",
     type: "link",

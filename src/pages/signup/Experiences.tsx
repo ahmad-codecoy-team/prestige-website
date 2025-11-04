@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Experiences() {
-  const [selectedExperiences, setSelectedExperiences] = useState<any>([]);
+  const [selectedExperiences, setSelectedExperiences] = useState<string[]>([]);
 
   const categories = [
     {
@@ -65,10 +65,10 @@ function Experiences() {
     },
   ];
 
-  const toggleExperience = (experience: any) => {
+  const toggleExperience = (experience: string) => {
     if (selectedExperiences.includes(experience)) {
       setSelectedExperiences(
-        selectedExperiences.filter((item: any) => item !== experience)
+        selectedExperiences.filter((item) => item !== experience)
       );
     } else {
       setSelectedExperiences([...selectedExperiences, experience]);

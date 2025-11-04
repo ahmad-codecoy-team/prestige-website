@@ -5,9 +5,14 @@ import Loading from "@/components/loading";
 // import { handleApiCall } from "@/helper/call_api_helper";
 import { SCHEDULED_SHIFTS_MOCK } from "@/constants/scheduledShiftsMock";
 
+interface ScheduledShift {
+  id: string | number;
+  [key: string]: unknown;
+}
+
 function ScheduledShifts() {
   const [loading, setLoading] = useState(false);
-  const [shifts, setShifts] = useState<any[]>([]);
+  const [shifts, setShifts] = useState<ScheduledShift[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +50,7 @@ function ScheduledShifts() {
         <Card
           key={shift.id}
           shift={shift}
-          link="/job-details"
+          link={`/home/schedule/${shift.id}`}
           variant="scheduled"
         />
       ))}

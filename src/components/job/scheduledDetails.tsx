@@ -17,7 +17,7 @@ const JobDetails = () => {
       await handleApiCall(
         () => getScheduleDetails(shift?.shift?.id),
         "",
-        (response: any) => {
+        (response: unknown) => {
           console.log(response);
           // setShifts(response.data.data);
         }
@@ -25,7 +25,7 @@ const JobDetails = () => {
       // setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [shift?.shift?.id]);
 
   return (
     <div className="flex flex-col items-center mb-20">
@@ -104,7 +104,11 @@ const JobDetails = () => {
           </button>
         </div>
       )}
-      <Link to="/attendance" state={{ isLead }} className="w-full max-w-lg">
+      <Link
+        to={`/home/jobs/${shift?.shift?.id ?? shift?.id ?? ""}/attendance/${isLead ? "lead" : "worker"}`}
+        state={{ isLead }}
+        className="w-full max-w-lg"
+      >
         <button className="mt-4 px-8 py-2 rounded-full w-full bg-green-500 hover:bg-green-600 text-white">
           Sign In
         </button>

@@ -166,20 +166,24 @@ const SignUp = () => {
     <div className="min-h-screen bg-[#FCC40B] flex flex-col items-center">
       {/* Header + Stepper (aligned center on all screens) */}
       <div className="sticky top-0 z-50 bg-[#FCC40B] w-full">
-        <div className="max-w-md mx-auto w-full">
-          <div className="flex items-center px-4 py-6 relative">
-            <BackButton onClick={handleBackStep} />
-            <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-black">
-              Create Account
-            </h1>
+        <div className="max-w-4xl mx-auto w-full">
+          <div className="max-w-md mx-auto w-full">
+            <div className="flex items-center px-4 py-6 relative">
+              <BackButton onClick={handleBackStep} />
+              <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-black">
+                Create Account
+              </h1>
+            </div>
+            <StepIndicator steps={SIGNUP_STEPS} currentStep={currentStep} />
           </div>
-          <StepIndicator steps={SIGNUP_STEPS} currentStep={currentStep} />
         </div>
       </div>
 
       {/* Scrollable Form Content */}
-      <div className="flex-1 w-full max-w-md mx-auto overflow-hidden">
-        {renderStepContent()}
+      <div className="flex-1 w-full max-w-4xl mx-auto overflow-hidden">
+        <div className="max-w-md mx-auto w-full">
+          {renderStepContent()}
+        </div>
       </div>
     </div>
   );

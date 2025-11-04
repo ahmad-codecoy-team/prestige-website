@@ -36,8 +36,9 @@ function ChangePassword() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FCC40B] flex flex-col px-4 py-6 sm:px-6 sm:py-8">
-      <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+    <div className="min-h-screen bg-[#FCC40B] flex flex-col">
+      <div className="w-full max-w-4xl mx-auto flex flex-col flex-1 px-4 py-6 sm:px-6 sm:py-8">
+        <div className="w-full max-w-md mx-auto flex flex-col flex-1">
         <div className="flex items-center mb-6">
           <BackButton />
         </div>
@@ -111,6 +112,7 @@ function ChangePassword() {
           <AuthButton type="submit" onClick={() => formik.handleSubmit()} variant="secondary">
             Continue
           </AuthButton>
+        </div>
         </div>
       </div>
     </div>

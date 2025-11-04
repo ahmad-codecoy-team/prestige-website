@@ -5,7 +5,7 @@ type Props = {
   isLead?: boolean;
   onCallOffice: () => void;
   signInTo: string;
-  signInState?: any;
+  signInState?: { isLead: boolean };
 };
 
 export default function JobActionBar({

@@ -1,6 +1,6 @@
 import { ArrowLeft, QrCode, Users, Calendar, UserPlus } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Add this import
+import { useNavigate } from "react-router-dom";
 import ReviewModal from "@/components/attendance/ReviewModal";
 import DefaultView from "@/components/attendance/DefaultView";
 import ClockInView from "@/components/attendance/ClockInView";
@@ -42,7 +42,8 @@ const LeadAttendance = () => {
     setShowReviewModal(true);
   };
 
-  const handleReviewSubmit = (rating: number, _comment: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleReviewSubmit = (rating: number, _comment?: string) => {
     if (selectedWorkerIndex !== null) {
       const updatedWorkers = [...workers];
       updatedWorkers[selectedWorkerIndex].review = rating;
@@ -109,12 +110,10 @@ const LeadAttendance = () => {
     <>
       {showReviewModal && selectedWorkerIndex !== null && (
         <ReviewModal
-          workerName={workers[selectedWorkerIndex].name}
           onClose={() => setShowReviewModal(false)}
           onSubmit={handleReviewSubmit}
         />
       )}
-
 
       {showCreateGroup && (
         <CreateGroup
@@ -128,9 +127,9 @@ const LeadAttendance = () => {
         <div className="bg-black text-white px-4 pt-4 pb-6">
           {/* Top Navigation Bar */}
           <div className="flex justify-between items-center mb-6">
-            <ArrowLeft 
-              className="cursor-pointer" 
-              size={28} 
+            <ArrowLeft
+              className="cursor-pointer"
+              size={28}
               onClick={() => navigate(-1)}
             />
             <div className="text-center text-xl font-semibold tracking-wide">
@@ -140,7 +139,7 @@ const LeadAttendance = () => {
               <QrCode
                 className="cursor-pointer"
                 size={28}
-                onClick={() => navigate("/lead-qr")} // Add this onClick
+                onClick={() => navigate("/home/lead-qr")}
               />
               <Users
                 className="cursor-pointer"

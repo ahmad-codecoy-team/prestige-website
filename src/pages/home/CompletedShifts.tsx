@@ -5,9 +5,16 @@ import Loading from "@/components/loading";
 import { useEffect, useState } from "react";
 import { COMPLETED_SHIFTS_MOCK } from "@/constants/CompletedShiftsMock";
 
+interface CompletedShift {
+  id?: string | number;
+  shiftId?: string | number;
+  eventId?: string | number;
+  [key: string]: unknown;
+}
+
 function CompletedShifts() {
   const [loading, setLoading] = useState(false);
-  const [shifts, setShifts] = useState<any[]>([]);
+  const [shifts, setShifts] = useState<CompletedShift[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +56,7 @@ function CompletedShifts() {
         <Card
           key={shift.id ?? `${shift?.shiftId}-${shift?.eventId}`}
           shift={shift}
-          link="/invoice"
+          link={`/home/invoice/${shift.id ?? shift?.shiftId ?? shift?.eventId}`}
           variant="completed"
         />
       ))}

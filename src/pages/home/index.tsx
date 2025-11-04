@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Bell, MessageSquare, Menu } from "lucide-react";
 import ScheduledShifts from "./ScheduledShifts";
 import CompletedShifts from "./CompletedShifts";
@@ -15,9 +15,19 @@ const TABS: { key: TabKey; label: string }[] = [
 ];
 
 function Home() {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<TabKey>("bid");
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
+
+  // Sync tab with URL
+  useEffect(() => {
+    if (location.pathname.startsWith("/home/schedule"))
+      setActiveTab("schedule");
+    else if (location.pathname.startsWith("/home/invoice"))
+      setActiveTab("invoice");
+    else setActiveTab("bid");
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FCC40B]">
@@ -50,7 +60,11 @@ function Home() {
             >
               <MessageSquare className="w-6 h-6" />
             </button>
-            <button aria-label="Notifications" onClick={() => navigate("/notifications")} className="p-1">
+            <button
+              aria-label="Notifications"
+              onClick={() => navigate("/notifications")}
+              className="p-1"
+            >
               <Bell className="w-6 h-6" />
             </button>
           </div>
@@ -63,7 +77,10 @@ function Home() {
             return (
               <button
                 key={t.key}
-                onClick={() => setActiveTab(t.key)}
+                onClick={() => {
+                  setActiveTab(t.key);
+                  navigate(`/home/${t.key}`);
+                }}
                 className={`relative py-3 text-sm font-medium tracking-wide transition-colors ${
                   isActive
                     ? "text-white font-semibold"

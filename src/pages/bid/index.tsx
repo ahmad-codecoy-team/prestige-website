@@ -29,7 +29,7 @@ export default function BidPage() {
     setBids((prev) => ({ ...prev, [id]: val }));
 
   const handleSubmit = () => {
-    const filtered = Object.entries(bids).filter(([_, val]) => val.trim());
+    const filtered = Object.entries(bids).filter(([, val]) => val.trim());
     console.log(
       "Submitted Bids:",
       filtered.map(([id, val]) => ({ shiftId: id, bid: val }))

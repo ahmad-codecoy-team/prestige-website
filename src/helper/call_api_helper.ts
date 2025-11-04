@@ -12,19 +12,21 @@ export const handleApiCall = async <T>(
     if (successMsg) toast.success(successMsg);
     if (onSuccess) onSuccess(response);
     return response;
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as { response?: { status?: number; data?: { message?: string } }; message?: string };
     console.error(
       "API call failed:",
-      error?.response?.data?.message || error.message
+      err?.response?.data?.message || err.message
     );
     if (
-      error.response &&
-      error.response.status >= 400 &&
-      error.response.status < 500
+      err.response &&
+      err.response.status &&
+      err.response.status >= 400 &&
+      err.response.status < 500
     ) {
-      return toast.error(error.response.data.message);
+      return toast.error(err.response.data?.message || "An error occurred.");
     } else {
-      toast.error(error.message || "An error occurred.");
+      toast.error(err.message || "An error occurred.");
     }
     throw error;
   }

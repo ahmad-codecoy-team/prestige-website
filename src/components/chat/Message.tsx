@@ -1,4 +1,14 @@
-const ChatMessage = ({ text, time, isSender, reply }: any) => (
+interface ChatMessageProps {
+  text: string;
+  time: string;
+  isSender: boolean;
+  reply?: {
+    title: string;
+    text: string;
+  };
+}
+
+const ChatMessage = ({ text, time, isSender, reply }: ChatMessageProps) => (
   <div
     className={`flex ${isSender ? "justify-end" : "justify-start"} mb-2 px-2`}
   >

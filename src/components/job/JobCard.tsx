@@ -6,8 +6,11 @@ import PendingInvoiceModal from "@/components/job/PendingInvoiceModal";
 
 type CardVariant = "available" | "scheduled" | "completed";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Shift = Record<string, any>;
+
 interface JobCardProps {
-  shift: any;
+  shift: Shift;
   link: string;
   variant?: CardVariant;
 }
@@ -24,7 +27,7 @@ const formatDateRange = (start?: string, end?: string) => {
   return "";
 };
 
-const extractStatusForCompleted = (shift: any): string => {
+const extractStatusForCompleted = (shift: Shift): string => {
   let raw =
     shift?.status ??
     shift?.shiftStatus ??
@@ -50,7 +53,7 @@ const extractStatusForCompleted = (shift: any): string => {
   return "Submitted";
 };
 
-const timeRange = (shift: any): string => {
+const timeRange = (shift: Shift): string => {
   const start =
     shift?.startTime ||
     shift?.shift?.startTime ||

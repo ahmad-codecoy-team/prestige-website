@@ -12,13 +12,14 @@ export default function JobDetailsPage() {
   const location = useLocation();
   const shift = location.state?.shift;
   const isLead = shift?.isLead || false;
+  const jobId = shift?.shift?.id ?? shift?.id ?? "";
 
   useEffect(() => {
     const fetchData = async () => {
       await handleApiCall(
         () => getScheduleDetails(shift?.shift?.id),
         "",
-        (_response: any) => {
+        () => {
           // Future: hook up API data here
           // console.log("Schedule details:", response);
         }
@@ -81,7 +82,7 @@ export default function JobDetailsPage() {
       <JobActionBar
         isLead={isLead}
         onCallOffice={callOffice}
-        signInTo="/attendance"
+        signInTo={`/home/schedule/${jobId}/attendance/${isLead ? "lead" : "worker"}`}
         signInState={{ isLead }}
       />
     </div>

@@ -16,7 +16,7 @@ function AvailableShifts() {
       await handleApiCall(
         () => getAvailableJobs(),
         "",
-        (response: unknown) => {
+        (response: { data?: { data?: AvailableShifts[] } }) => {
           const data = response?.data?.data || [];
           if (data.length === 0) {
             console.warn("No available shifts found — showing dummy data.");
@@ -44,7 +44,7 @@ function AvailableShifts() {
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
       {shifts.map((shift) => (
-        <Card key={shift.id} shift={shift} link="/bid" variant="available" />
+        <Card key={shift.id} shift={shift} link={`/home/bid/${shift.id}`} variant="available" />
       ))}
     </div>
   );

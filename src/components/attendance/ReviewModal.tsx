@@ -2,13 +2,11 @@ import { Star } from "lucide-react";
 import { useState } from "react";
 
 interface ReviewModalProps {
-  workerName: string;
   onClose: () => void;
   onSubmit: (rating: number, comment: string) => void;
 }
 
 export default function ReviewModal({
-  workerName: _workerName,
   onClose,
   onSubmit,
 }: ReviewModalProps) {

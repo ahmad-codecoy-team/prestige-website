@@ -60,7 +60,7 @@ function WorkHistory() {
       {/* Content */}
       <main className="flex-1 px-4 pb-6 space-y-4">
         {dummyShifts.map((shift) => (
-          <Card key={shift.id} shift={shift} link={`/job/${shift.id}`} variant="completed" />
+          <Card key={shift.id} shift={shift} link={`/home/invoices/${shift.id}`} variant="completed" />
         ))}
       </main>
     </div>
