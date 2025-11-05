@@ -91,7 +91,7 @@ const CompletedJobDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* Fixed Yellow Header */}
-      <div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 px-4 py-4 flex items-center justify-between shadow-md">
+      <div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 px-4 py-4 flex items-center justify-between shadow-md lg:left-20">
         <button
           onClick={() => navigate("/home")}
           className="p-2 hover:bg-black/10 rounded-full transition-colors"

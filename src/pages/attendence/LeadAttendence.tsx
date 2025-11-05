@@ -124,7 +124,7 @@ const LeadAttendance = () => {
 
       <div className="min-h-screen bg-[#fbbf24] flex flex-col">
         {/* Header */}
-        <div className="bg-black text-white px-4 pt-4 pb-6">
+        <div className="fixed top-0 left-0 right-0 bg-black text-white px-4 pt-4 pb-6 z-50 lg:left-20">
           {/* Top Navigation Bar */}
           <div className="flex justify-between items-center mb-6">
             <ArrowLeft
@@ -176,9 +176,10 @@ const LeadAttendance = () => {
         </div>
 
         {/* Content Area - Conditionally Rendered Views */}
-        {activeView === "default" && (
-          <DefaultView workers={workers} onReviewClick={handleReviewClick} />
-        )}
+        <div className="pt-40">
+          {activeView === "default" && (
+            <DefaultView workers={workers} onReviewClick={handleReviewClick} />
+          )}
 
         {activeView === "clockIn" && (
           <ClockInView
@@ -197,17 +198,18 @@ const LeadAttendance = () => {
           />
         )}
 
-        {activeView === "clockOut" && (
-          <ClockOutView
-            workers={workers}
-            onReviewClick={handleReviewClick}
-            onClockOutChange={handleClockOutChange}
-            onScanResult={handleScanResult}
-          />
-        )}
+          {activeView === "clockOut" && (
+            <ClockOutView
+              workers={workers}
+              onReviewClick={handleReviewClick}
+              onClockOutChange={handleClockOutChange}
+              onScanResult={handleScanResult}
+            />
+          )}
+        </div>
 
         {/* Fixed Bottom Buttons */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl bg-white py-6 flex justify-center gap-4 px-4 sm:px-6">
+        <div className="fixed bottom-0 left-0 right-0 bg-white py-6 flex justify-center gap-4 px-4 sm:px-6 lg:left-20">
           <button
             onClick={() => setActiveView("attendanceDetails")}
             className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"

@@ -7,7 +7,7 @@ const WorkerAttendance = () => {
   return (
     <div className="min-h-screen bg-[#FCC40B]">
       {/* Header */}
-      <div className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl bg-black py-4 text-center text-white flex items-center justify-start px-4 sm:px-6 z-50">
+      <div className="fixed top-0 left-0 right-0 bg-black py-4 text-center text-white flex items-center justify-start px-4 sm:px-6 z-50 lg:left-20">
         <button onClick={() => window.history.back()} className="text-white">
           <ArrowLeft size={24} />
         </button>

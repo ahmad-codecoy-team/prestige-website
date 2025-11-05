@@ -21,8 +21,8 @@ export default function JobActionBar({
   };
 
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-40">
-      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 pt-1 bg-[#FCC40B]">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#FCC40B] lg:left-20">
+      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 pt-1">
         <div className="w-full space-y-3">
           {/* Call Office - always visible */}
           <button

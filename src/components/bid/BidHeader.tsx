@@ -32,7 +32,7 @@ export default function BidHeader({ title, location, onBack, logoSrc }: Props) {
   return (
     <header className="relative w-full">
       {/* Sticky Top Bar */}
-      <div className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-50 bg-black text-white">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white lg:left-20">
         <div className="w-full px-4 sm:px-6 pt-4 pb-2 flex items-center">
           <button
             onClick={onBack}
@@ -51,7 +51,7 @@ export default function BidHeader({ title, location, onBack, logoSrc }: Props) {
 
       {/* Animated lower section (scrolls away) */}
       <motion.div
-        className="bg-black text-white relative z-40 w-full max-w-4xl mx-auto"
+        className="bg-black text-white relative z-40 w-full"
         style={{
           opacity,
           transform: `translateY(-${translateY}px)`,
@@ -85,9 +85,6 @@ export default function BidHeader({ title, location, onBack, logoSrc }: Props) {
           </div>
         </div>
       </motion.div>
-
-      {/* Spacer to keep layout consistent when lower section scrolls away */}
-      {/* <div className="h-[60px]" /> */}
     </header>
   );
 }
