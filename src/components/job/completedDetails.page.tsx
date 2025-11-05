@@ -7,11 +7,11 @@ export default function CompletedJobDetailsPage() {
   return (
     <LandscapeOnly>
       {/* Full-bleed landscape canvas that scales to device */}
-      <div className="w-screen h-dvh flex items-start justify-center bg-gray-100 ">
+      <div className="w-full h-dvh flex items-start justify-center bg-gray-100 ">
         <div
           className="
            bg-white shadow w-full min-h-full
-       max-w-full
+       max-w-[100dvw]
           "
         >
           {/* Your original component unchanged */}

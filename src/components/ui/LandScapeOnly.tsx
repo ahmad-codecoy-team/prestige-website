@@ -73,7 +73,7 @@ export default function LandscapeOnly({
 
   return (
     // <div className="relative w-screen h-screen overflow-hidden bg-gray-100">
-    <div className="relative w-screen h-dvh overflow-y-auto bg-gray-100">
+    <div className="relative w-full h-dvh overflow-y-auto overflow-x-hidden bg-gray-100">
       {/* App content */}
       <div
         aria-hidden={isPortrait}

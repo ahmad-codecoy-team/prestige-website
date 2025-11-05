@@ -156,10 +156,10 @@ const CompletedJobDetails = () => {
         </div>
 
         {/* Invoice Table - Fitted Width */}
-        <div className="mb-2 max-w-7xl mx-auto">
-          <div className="w-full">
+        <div className="mb-2 max-w-7xl mx-auto overflow-x-hidden">
+          <div className="w-full max-w-full overflow-x-hidden">
             {/* Table Header */}
-            <div className="grid grid-cols-9 bg-[#FDE99E] border-1 border-[#E5C05B]">
+            <div className="grid grid-cols-9 bg-[#FDE99E] border-1 border-[#E5C05B] w-full max-width-full">
               {[
                 "Clock In",
                 "Meal Break",
@@ -181,7 +181,7 @@ const CompletedJobDetails = () => {
             </div>
 
             {/* Table Row */}
-            <div className="grid grid-cols-9 bg-white border-1 border-t-0 border-[#E5C05B]">
+            <div className="grid grid-cols-9 bg-white border-1 border-t-0 border-[#E5C05B] w-full max-width-full">
               {/* Clock In */}
               <div className="p-1 border-r border-[#E5C05B]">
                 <input
@@ -343,14 +343,34 @@ const CompletedJobDetails = () => {
           </div>
 
           {/* Next Button */}
-          <div className="flex justify-center mt-6">
+          {/* <div className="flex justify-center mt-6">
             <button
               onClick={() => setShowPaymentModal(true)}
               className="bg-[#FCC40B] text-black font-bold text-base md:text-lg py-4 px-16 rounded-full hover:bg-[#e5b00a] transition-colors"
             >
               Next
             </button>
-          </div>
+          </div> */}
+          <div className="flex justify-center mt-6">
+  <button
+    onClick={() => setShowPaymentModal(true)}
+    className="
+      w-full               /* Full width on small screens */
+      max-w-xs             /* Limit width on desktops (adjust as needed) */
+      md:max-w-sm
+      bg-[#FCC40B] text-black font-bold
+      text-base md:text-lg
+      py-4
+      rounded-full
+      hover:bg-[#e5b00a]
+      transition-colors
+    "
+  >
+    Next
+  </button>
+</div>
+
+
         </div>
       </div>
 
