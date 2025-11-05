@@ -5,10 +5,10 @@ import logo from "@/assets/logo.svg";
 
 const DesktopSidebar = () => {
   const location = useLocation();
-  
+
   const navItems = [
     { path: "/home", icon: Home, label: "Home" },
-    { path: "/chat", icon: MessageSquare, label: "Chat" },
+    { path: "/assistant", icon: MessageSquare, label: "Chat" },
     { path: "/notifications", icon: Bell, label: "Notifications" },
     { path: "/settings/profile", icon: Settings, label: "Settings" },
   ];
@@ -35,7 +35,7 @@ const DesktopSidebar = () => {
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = isActive(item.path);
-          
+
           return (
             <Link
               key={item.path}

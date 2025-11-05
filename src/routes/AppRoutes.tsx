@@ -57,17 +57,17 @@ const AppRoutes = () => {
             <Route path="schedule" element={<ScheduledShifts />} />
             <Route path="invoice" element={<CompletedShifts />} />
           </Route>
-          
+
           {/* Bid details */}
           <Route path="/home/bid/:bidId" element={<BidDetailsPage />} />
-          
+
           {/* Schedule job details */}
           <Route path="/home/schedule/:jobId" element={<JobDetailsPage />} />
           <Route
             path="/home/schedule/:jobId/attendance/:role"
             element={<Attendance />}
           />
-          
+
           {/* Invoice/Completed job details */}
           <Route
             path="/home/invoice/:invoiceId"
@@ -77,7 +77,7 @@ const AppRoutes = () => {
             path="/home/invoice/:invoiceId/edit"
             element={<EditInvoice />}
           />
-          
+
           {/* Lead QR */}
           <Route path="/home/lead-qr" element={<LeadQR />} />
 
