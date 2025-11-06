@@ -26,9 +26,9 @@ const DesktopSidebar = () => {
   return (
     <aside className={styles.sidebar}>
       {/* Logo */}
-      <div className="flex items-center justify-center h-20">
+      <Link to="/home" className="flex items-center justify-center h-20">
         <img src={logo} alt="AV Workforce" className="h-10 w-auto" />
-      </div>
+      </Link>
 
       {/* Navigation Items */}
       <nav className="flex-1 flex flex-col items-center py-8 gap-6">

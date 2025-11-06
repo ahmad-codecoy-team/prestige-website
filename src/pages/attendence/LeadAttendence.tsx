@@ -1,6 +1,8 @@
+// src/pages/attendance/LeadAttendance.tsx
 import { ArrowLeft, QrCode, Users, Calendar, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import ReviewModal from "@/components/attendance/ReviewModal";
 import DefaultView from "@/components/attendance/DefaultView";
 import ClockInView from "@/components/attendance/ClockInView";
@@ -9,6 +11,7 @@ import MealBreakView from "@/components/attendance/MealBreakView";
 import AttendanceDetails from "@/components/attendance/AttendenceDetails";
 import AddContractorModal from "@/components/attendance/AddContractorModal";
 import CreateGroup from "@/components/attendance/CreateGroup";
+import ResponsiveModal from "@/components/ui/ResponsiveModal";
 
 interface Worker {
   name: string;
@@ -20,7 +23,7 @@ interface Worker {
 }
 
 const LeadAttendance = () => {
-  const navigate = useNavigate(); // Add this
+  const navigate = useNavigate();
   const [activeView, setActiveView] = useState<
     "default" | "clockIn" | "mealBreak" | "clockOut" | "attendanceDetails"
   >("default");
@@ -30,6 +33,7 @@ const LeadAttendance = () => {
   const [selectedWorkerIndex, setSelectedWorkerIndex] = useState<number | null>(
     null
   );
+
   const [workers, setWorkers] = useState<Worker[]>([
     { name: "muniba anwar", review: 0, phone: "+1234567890" },
     { name: "Nimra Razzaq", review: 0, phone: "+1234567891" },
@@ -73,9 +77,8 @@ const LeadAttendance = () => {
     try {
       const user = JSON.parse(result);
       console.log("Scanned user:", user);
-      // Handle scanned user data
-
-      //eslint-disable-next-line
+      // handle scanned user data
+      // eslint-disable-next-line
     } catch (e) {
       console.error("Invalid QR code data");
     }
@@ -96,15 +99,12 @@ const LeadAttendance = () => {
 
   const getButtonStyle = (view: string) => {
     const isActive = activeView === view;
-    return `px-6 py-2.5 rounded-full text-sm font-medium transition-colors ${
+    return `rounded-full font-medium transition-colors ${
       isActive
         ? "bg-[#fbbf24] text-black"
         : "bg-white text-black hover:bg-gray-100"
     }`;
   };
-
-  // Show Attendance Details view
-  // Component rendering logic - no early returns
 
   return (
     <>
@@ -123,51 +123,59 @@ const LeadAttendance = () => {
       )}
 
       <div className="min-h-screen bg-[#fbbf24] flex flex-col">
-        {/* Header */}
-        <div className="fixed top-0 left-0 right-0 bg-black text-white px-4 pt-4 pb-6 z-50 lg:left-20">
+        {/* Header (mobile-friendly sizes) */}
+        <div className="fixed top-0 left-0 right-0 bg-black text-white px-3 md:px-4 pt-3 md:pt-4 pb-4 md:pb-6 z-50 lg:left-20">
           {/* Top Navigation Bar */}
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-4 md:mb-6">
             <ArrowLeft
               className="cursor-pointer"
-              size={28}
+              size={24}
               onClick={() => navigate(-1)}
             />
-            <div className="text-center text-xl font-semibold tracking-wide">
+            <div className="text-center text-base md:text-xl font-semibold tracking-wide">
               SIGN IN
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 md:gap-4">
               <QrCode
                 className="cursor-pointer"
-                size={28}
+                size={24}
                 onClick={() => navigate("/home/lead-qr")}
               />
               <Users
                 className="cursor-pointer"
-                size={28}
+                size={24}
                 onClick={() => setShowCreateGroup(true)}
               />
             </div>
           </div>
 
           {/* Date */}
-          <div className="text-center text-base mb-4">October 14, 2025</div>
+          <div className="text-center text-sm md:text-base mb-3 md:mb-4">
+            October 14, 2025
+          </div>
 
-          {/* View Selection Buttons */}
-          <div className="flex justify-center gap-3">
+          {/* View Selection Buttons (compact on mobile) */}
+          <div className="flex justify-center gap-2 md:gap-3">
             <button
-              className={getButtonStyle("clockIn")}
+              className={`${getButtonStyle(
+                "clockIn"
+              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
               onClick={() => setActiveView("clockIn")}
             >
               Clock In
             </button>
             <button
-              className={getButtonStyle("mealBreak")}
+              className={`${getButtonStyle(
+                "mealBreak"
+              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
               onClick={() => setActiveView("mealBreak")}
             >
               Meal Break
             </button>
             <button
-              className={getButtonStyle("clockOut")}
+              className={`${getButtonStyle(
+                "clockOut"
+              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
               onClick={() => setActiveView("clockOut")}
             >
               Clock Out
@@ -175,28 +183,28 @@ const LeadAttendance = () => {
           </div>
         </div>
 
-        {/* Content Area - Conditionally Rendered Views */}
+        {/* Content Area */}
         <div className="pt-40">
           {activeView === "default" && (
             <DefaultView workers={workers} onReviewClick={handleReviewClick} />
           )}
 
-        {activeView === "clockIn" && (
-          <ClockInView
-            workers={workers}
-            onReviewClick={handleReviewClick}
-            onClockInChange={handleClockInChange}
-            onScanResult={handleScanResult}
-          />
-        )}
+          {activeView === "clockIn" && (
+            <ClockInView
+              workers={workers}
+              onReviewClick={handleReviewClick}
+              onClockInChange={handleClockInChange}
+              onScanResult={handleScanResult}
+            />
+          )}
 
-        {activeView === "mealBreak" && (
-          <MealBreakView
-            workers={workers}
-            onReviewClick={handleReviewClick}
-            onMealBreakChange={handleMealBreakChange}
-          />
-        )}
+          {activeView === "mealBreak" && (
+            <MealBreakView
+              workers={workers}
+              onReviewClick={handleReviewClick}
+              onMealBreakChange={handleMealBreakChange}
+            />
+          )}
 
           {activeView === "clockOut" && (
             <ClockOutView
@@ -208,20 +216,22 @@ const LeadAttendance = () => {
           )}
         </div>
 
-        {/* Fixed Bottom Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white py-6 flex justify-center gap-4 px-4 sm:px-6 lg:left-20">
+        {/* Fixed Bottom Buttons (compact on mobile) */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white py-4 md:py-6 flex justify-center gap-3 md:gap-4 px-3 md:px-6 lg:left-20">
           <button
             onClick={() => setActiveView("attendanceDetails")}
-            className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"
+            className="bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
           >
-            <Calendar size={20} />
+            <Calendar size={18} className="md:hidden" />
+            <Calendar size={20} className="hidden md:inline" />
             Attendance
           </button>
           <button
             onClick={() => setShowAddContractorModal(true)}
-            className="bg-black text-white py-3 px-8 rounded-full flex items-center justify-center gap-2 text-base font-medium"
+            className="bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
           >
-            <UserPlus size={20} />
+            <UserPlus size={18} className="md:hidden" />
+            <UserPlus size={20} className="hidden md:inline" />
             Add Contractor
           </button>
         </div>
@@ -237,16 +247,21 @@ const LeadAttendance = () => {
         </div>
       )}
 
-      {/* Add Contractor Bottom Sheet with Animation - Smaller height */}
+      {/* Add Contractor: now uses ResponsiveModal (sheet on mobile, centered modal on desktop) */}
       {showAddContractorModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
-          <div className="w-full max-w-4xl bg-white rounded-t-3xl animate-slide-up">
-            <AddContractorModal
-              onClose={() => setShowAddContractorModal(false)}
-              onSubmit={handleAddContractor}
-            />
-          </div>
-        </div>
+        <ResponsiveModal
+          open={showAddContractorModal}
+          onClose={() => setShowAddContractorModal(false)}
+          ariaLabel="Add contractor"
+          backdropClassName="bg-black/50"
+          // Add a cardClassName only if you remove the panel wrapper from AddContractorModal itself.
+          // cardClassName="bg-white rounded-t-3xl md:rounded-3xl px-4 sm:px-6 pt-6 pb-8"
+        >
+          <AddContractorModal
+            onClose={() => setShowAddContractorModal(false)}
+            onSubmit={handleAddContractor}
+          />
+        </ResponsiveModal>
       )}
     </>
   );

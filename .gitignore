@@ -13,6 +13,7 @@ dist-ssr
 *.local
 AGENTS.md
 WARP.md
+.cascade-project-overview.md
 
 # Editor directories and files
 .vscode/*

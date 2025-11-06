@@ -15,6 +15,7 @@ import { BiBuilding } from "react-icons/bi";
 import { EXPERIENCE_CATEGORIES } from "@/constants/experiencesData";
 import { FileUpload } from "@/components/auth/FileUpload";
 import SettingsLayout from "./SettingsLayout";
+import styles from "./EditProfile.module.css";
 
 
 type TabKey = "personal" | "experiences" | "i9";
@@ -71,34 +72,6 @@ function EditProfile() {
           );
         })}
       </div>
-    </div>
-  );
-
-  const DesktopTabs = (
-    <div className="hidden lg:flex gap-6 border-b border-black/10 pb-4 mb-6">
-      {[
-        { k: "personal", label: "Personal Information" },
-        { k: "experiences", label: "Experiences" },
-        { k: "i9", label: "I9 Form" },
-      ].map((t) => {
-        const is = active === (t.k as TabKey);
-        return (
-          <button
-            key={t.k}
-            onClick={() => setActive(t.k as TabKey)}
-            className={`relative pb-2 text-sm font-medium tracking-wide transition-colors ${
-              is
-                ? "text-black font-semibold"
-                : "text-black/60 hover:text-black"
-            }`}
-          >
-            {t.label}
-            {is && (
-              <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black rounded-full" />
-            )}
-          </button>
-        );
-      })}
     </div>
   );
 
@@ -229,8 +202,36 @@ function EditProfile() {
   return (
     <SettingsLayout title="Profile">
       {MobileTabsHeader}
-      <div className="px-4 lg:px-6 pt-4 lg:pt-6">
-        {DesktopTabs}
+      
+      {/* Desktop Sub-tabs for Profile - visible only on lg+ screens */}
+      <div className={styles.desktopTabs}>
+        {[
+          { k: "personal", label: "Personal Information" },
+          { k: "experiences", label: "Experiences" },
+          { k: "i9", label: "I9 Form" },
+        ].map((t) => {
+          const is = active === (t.k as TabKey);
+          return (
+            <button
+              key={t.k}
+              onClick={() => setActive(t.k as TabKey)}
+              className={`relative pb-2 text-sm font-medium tracking-wide transition-colors whitespace-nowrap ${
+                is
+                  ? "text-black font-semibold"
+                  : "text-black/60 hover:text-black"
+              }`}
+            >
+              {t.label}
+              {is && (
+                <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black rounded-full" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+      
+      {/* Content Area */}
+      <div>
         {active === "personal" && PersonalTab}
         {active === "experiences" && ExperiencesTab}
         {active === "i9" && I9Tab}

@@ -1,6 +1,8 @@
 import { Phone } from "lucide-react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useState, useEffect } from "react";
+import moment from "moment";
+import ClockModal from "@/components/attendance/ClockModal";
 
 interface Worker {
   name: string;
@@ -23,6 +25,9 @@ const ClockOutView = ({
 }: ClockOutViewProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallMobile, setIsSmallMobile] = useState(false);
+    const [clockModalOpen, setClockModalOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [initialTime, setInitialTime] = useState<moment.Moment | null>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -35,6 +40,13 @@ const ClockOutView = ({
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+   const openClockFor = (index: number) => {
+    setSelectedIndex(index);
+    const existing = workers[index]?.clockOut; // "HH:mm"
+    setInitialTime(existing ? moment(existing, "HH:mm") : moment());
+    setClockModalOpen(true);
+  };
 
   // Dynamic font sizes based on screen size
   const getFontSizes = () => {
@@ -145,20 +157,14 @@ const ClockOutView = ({
                 </button>
 
                 {/* CLOCK OUT (right column with vertical divider) */}
-                <button
-                  type="button"
-                  className={`col-span-3 px-2 py-3 ${fontSizes.clockOut} text-center border-l-2 border-gray-300 hover:text-blue-600 whitespace-nowrap`}
-                  onClick={() => {
-                    const currentTime = new Date().toLocaleTimeString("en-US", {
-                      hour12: false,
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    });
-                    onClockOutChange(index, currentTime);
-                  }}
-                >
-                  {worker.clockOut || "00:00"}
-                </button>
+                 {/* CLOCK OUT cell */}
+      <button
+        type="button"
+        className={`col-span-3 px-2 py-3 ${fontSizes.clockOut} text-center border-l-2 border-gray-300 hover:text-blue-600 whitespace-nowrap`}
+        onClick={() => openClockFor(index)}
+      >
+        {worker.clockOut || "00:00"}
+      </button>
               </div>
 
               {/* row separator (skip after last) */}
@@ -169,6 +175,21 @@ const ClockOutView = ({
           ))}
         </div>
       </div>
+      <ClockModal
+        open={clockModalOpen}
+        initialValue={initialTime || undefined}
+        title="Enter time"
+        use24h
+        minutesStep={1}
+        onCancel={() => setClockModalOpen(false)}
+        onConfirm={(val) => {
+          if (selectedIndex !== null) {
+            const formatted = val.format("HH:mm");
+            onClockOutChange(selectedIndex, formatted);
+          }
+          setClockModalOpen(false);
+        }}
+      />
     </>
   );
 };

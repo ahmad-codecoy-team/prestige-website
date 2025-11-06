@@ -71,13 +71,21 @@ const PaymentMethodModal = ({
             </span>
           </label>
         </div>
-
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-[#FCC40B] text-black font-bold text-2xl md:text-3xl py-4 rounded-full hover:bg-[#e5b00a] transition-colors"
-        >
-          Submit
-        </button>
+ <div className="flex justify-center">
+   <button
+     onClick={handleSubmit}
+     className="
+       w-full         /* Full width on small screens */
+       max-w-sm       /* Add a nice centered max width */
+       bg-[#FCC40B] text-black font-bold
+       text-xl md:text-2xl
+       py-4 rounded-full
+       hover:bg-[#e5b00a] transition-colors
+     "
+   >
+     Submit
+   </button>
+ </div>
       </div>
     </div>
   );

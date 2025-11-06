@@ -1,10 +1,8 @@
-// /////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////
-
 import { Phone } from "lucide-react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useState, useEffect } from "react";
+import moment from "moment";
+import ClockModal from "@/components/attendance/ClockModal";
 
 interface Worker {
   name: string;
@@ -27,6 +25,9 @@ const ClockInView = ({
 }: ClockInViewProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallMobile, setIsSmallMobile] = useState(false);
+  const [clockModalOpen, setClockModalOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [initialTime, setInitialTime] = useState<moment.Moment | null>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -39,6 +40,14 @@ const ClockInView = ({
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  const openClockFor = (index: number) => {
+    setSelectedIndex(index);
+    // If row already has a time, use it; else now
+    const existing = workers[index]?.clockIn; // "HH:mm" string
+    setInitialTime(existing ? moment(existing, "HH:mm") : moment());
+    setClockModalOpen(true);
+  };
 
   // Dynamic font sizes based on screen size
   const getFontSizes = () => {
@@ -149,7 +158,7 @@ const ClockInView = ({
                 </button>
 
                 {/* CLOCK IN (right column with vertical divider) */}
-                <button
+                {/* <button
                   type="button"
                   className={`col-span-3 px-2 py-3 ${fontSizes.clockIn} text-center border-l-2 border-gray-300 hover:text-blue-600 whitespace-nowrap`}
                   onClick={() => {
@@ -162,7 +171,14 @@ const ClockInView = ({
                   }}
                 >
                   {worker.clockIn || "00:00"}
-                </button>
+                </button> */}
+                <button
+        type="button"
+        className={`col-span-3 px-2 py-3 ${fontSizes.clockIn} text-center border-l-2 border-gray-300 hover:text-blue-600 whitespace-nowrap`}
+        onClick={() => openClockFor(index)}
+      >
+        {worker.clockIn || "00:00"}
+      </button>
               </div>
 
               {/* row separator (skip after last) */}
@@ -173,6 +189,21 @@ const ClockInView = ({
           ))}
         </div>
       </div>
+       <ClockModal
+        open={clockModalOpen}
+        initialValue={initialTime || undefined}
+        title="Enter time"
+        use24h
+        minutesStep={1}
+        onCancel={() => setClockModalOpen(false)}
+        onConfirm={(val) => {
+          if (selectedIndex !== null) {
+            const formatted = val.format("HH:mm");
+            onClockInChange(selectedIndex, formatted);
+          }
+          setClockModalOpen(false);
+        }}
+      />
     </>
   );
 };
