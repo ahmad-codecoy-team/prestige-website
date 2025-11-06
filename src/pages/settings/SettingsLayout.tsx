@@ -1,7 +1,9 @@
-import { ReactNode } from "react";
+// src/components/layout/SettingsLayout.tsx
+import { ReactNode, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import DesktopHeader from "@/components/layout/DesktopHeader";
+import ResponsiveModal from "@/components/ui/ResponsiveModal";
 
 interface SettingsLayoutProps {
   children: ReactNode;
@@ -16,11 +18,23 @@ const SETTINGS_TABS = [
   { path: "/settings/contact", label: "Contact" },
   { path: "/settings/privacy-policy", label: "Privacy" },
   { path: "/settings/about", label: "About" },
+  { path: "/", label: "Logout" },
 ];
 
 const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const isLogoutPath = (p: string) => p === "/";
+
+  const handleConfirmLogout = () => {
+    // TODO: add your auth cleanup here if needed
+    // localStorage.removeItem("prestige-website");
+    // any other tokens/cleanup…
+
+    setShowLogoutConfirm(false);
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen bg-[#FCC40B]">
@@ -46,15 +60,31 @@ const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayo
         <div className="flex gap-6 pt-4 pb-3 border-b border-black/10 overflow-x-auto">
           {SETTINGS_TABS.map((tab) => {
             const isActive = location.pathname === tab.path;
+            const baseClasses =
+              "relative pb-2 text-sm font-medium tracking-wide transition-colors whitespace-nowrap";
+            const activeClasses = isActive
+              ? "text-black font-semibold"
+              : "text-black/60 hover:text-black";
+
+            // Intercept Logout: open confirm modal instead of navigating
+            if (isLogoutPath(tab.path)) {
+              return (
+                <button
+                  key={tab.path}
+                  type="button"
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className={`${baseClasses} ${activeClasses}`}
+                >
+                  {tab.label}
+                </button>
+              );
+            }
+
             return (
               <Link
                 key={tab.path}
                 to={tab.path}
-                className={`relative pb-2 text-sm font-medium tracking-wide transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "text-black font-semibold"
-                    : "text-black/60 hover:text-black"
-                }`}
+                className={`${baseClasses} ${activeClasses}`}
               >
                 {tab.label}
                 {isActive && (
@@ -68,6 +98,44 @@ const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayo
 
       {/* Content */}
       <main className="flex-1">{children}</main>
+
+      {/* Logout Confirm Modal */}
+      {showLogoutConfirm && (
+        <ResponsiveModal
+          open={showLogoutConfirm}
+          onClose={() => setShowLogoutConfirm(false)}
+          ariaLabel="Confirm logout"
+          backdropClassName="bg-black/50"
+          // the card (panel) styling lives here
+          cardClassName="bg-white px-5 py-5 rounded-t-3xl md:rounded-3xl"
+        >
+          <div className="w-full ">
+            <h2 className="text-lg md:text-xl font-semibold text-black">
+              Log out?
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-gray-700">
+              Are you sure you want to log out of your account?
+            </p>
+
+            <div className="mt-5 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="px-4 py-2 rounded-full text-sm md:text-base bg-gray-100 hover:bg-gray-200 text-gray-900"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmLogout}
+                className="px-4 py-2 rounded-full text-sm md:text-base bg-black text-white hover:opacity-90"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </ResponsiveModal>
+      )}
     </div>
   );
 };
