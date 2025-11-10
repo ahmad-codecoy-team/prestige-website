@@ -36,7 +36,7 @@ function ChangePassword() {
   return (
     <SettingsLayout title="Change Password">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
-        <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        <div className="w-full max-w-lg mx-auto flex flex-col flex-1">
 
         <PageHeader
           title="Change Password"

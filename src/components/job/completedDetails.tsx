@@ -90,24 +90,29 @@ const CompletedJobDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Fixed Yellow Header */}
-      <div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 px-4 py-4 flex items-center justify-between shadow-md lg:left-20">
-        <button
-          onClick={() => navigate("/home")}
-          className="p-2 hover:bg-black/10 rounded-full transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6 text-black" />
-        </button>
+     
+<div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 shadow-md lg:left-[40px]">
+  <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
+    
+    <button
+      onClick={() => navigate("/home")}
+      className="p-2 hover:bg-black/10 rounded-full transition-colors"
+    >
+      <ArrowLeft className="w-6 h-6 text-black" />
+    </button>
 
-        <h1 className="text-lg md:text-xl font-bold text-black">Invoice</h1>
+    <h1 className="text-lg md:text-xl font-bold text-black">Invoice</h1>
 
-        <button
-          onClick={handleRefresh}
-          className="p-2 hover:bg-black/10 rounded-full transition-colors"
-        >
-          <RotateCw className="w-6 h-6 text-black" />
-        </button>
-      </div>
+    <button
+      onClick={handleRefresh}
+      className="p-2 hover:bg-black/10 rounded-full transition-colors"
+    >
+      <RotateCw className="w-6 h-6 text-black" />
+    </button>
+
+  </div>
+</div>
+
 
       {/* Content starts below fixed header */}
       <div className="pt-20 px-2 sm:px-4 md:px-6 lg:px-8 bg-gray-50">

@@ -106,10 +106,9 @@ const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayo
           onClose={() => setShowLogoutConfirm(false)}
           ariaLabel="Confirm logout"
           backdropClassName="bg-black/50"
-          // the card (panel) styling lives here
-          cardClassName="bg-white px-5 py-5 rounded-t-3xl md:rounded-3xl"
+          cardClassName="bg-white px-6 py-6 rounded-t-3xl md:rounded-3xl"
         >
-          <div className="w-full ">
+          <div className="w-full max-w-md mx-auto">
             <h2 className="text-lg md:text-xl font-semibold text-black">
               Log out?
             </h2>
@@ -117,18 +116,18 @@ const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayo
               Are you sure you want to log out of your account?
             </p>
 
-            <div className="mt-5 flex items-center justify-end gap-3">
+            <div className="mt-6 flex items-center justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setShowLogoutConfirm(false)}
-                className="px-4 py-2 rounded-full text-sm md:text-base bg-gray-100 hover:bg-gray-200 text-gray-900"
+                className="px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium bg-gray-100 hover:bg-gray-200 text-gray-900 transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleConfirmLogout}
-                className="px-4 py-2 rounded-full text-sm md:text-base bg-black text-white hover:opacity-90"
+                className="px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium bg-black text-white hover:opacity-90 transition-opacity"
               >
                 Logout
               </button>

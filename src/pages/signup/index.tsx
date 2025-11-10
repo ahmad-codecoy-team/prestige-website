@@ -167,7 +167,7 @@ const SignUp = () => {
       {/* Header + Stepper (aligned center on all screens) */}
       <div className="sticky top-0 z-50 bg-[#FCC40B] w-full">
         <div className="max-w-4xl mx-auto w-full">
-          <div className="max-w-md mx-auto w-full">
+          <div className="max-w-lg mx-auto w-full">
             <div className="flex items-center px-4 py-6 relative">
               <BackButton onClick={handleBackStep} />
               <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold text-black">
@@ -181,7 +181,7 @@ const SignUp = () => {
 
       {/* Scrollable Form Content */}
       <div className="flex-1 w-full max-w-4xl mx-auto overflow-hidden">
-        <div className="max-w-md mx-auto w-full">
+        <div className="max-w-lg mx-auto w-full">
           {renderStepContent()}
         </div>
       </div>

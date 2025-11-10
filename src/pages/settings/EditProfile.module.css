@@ -7,9 +7,9 @@
     display: flex;
     gap: 1.5rem;
     background-color: #FCC40B;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    /* no need for bottom border, don't add it */
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
   }
 }

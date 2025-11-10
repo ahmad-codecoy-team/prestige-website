@@ -67,7 +67,7 @@ const SignIn = () => {
   return (
     <div className="min-h-screen bg-black flex flex-col">
       <div className="w-full max-w-4xl mx-auto flex flex-col flex-1 px-4 py-6 sm:px-6 sm:py-8">
-        <div className="w-full max-w-md mx-auto flex flex-col flex-1">
+        <div className="w-full max-w-lg mx-auto flex flex-col flex-1">
         {/* Logo */}
         <div className="flex justify-center mt-4 mb-8">
           <img src="/logo.svg" alt="AV Workforce" className="h-20 md:h-24 w-auto" />

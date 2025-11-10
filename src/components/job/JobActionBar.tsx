@@ -28,13 +28,13 @@ export default function JobActionBar({
           {/* Call Office - left side */}
           <button
             onClick={handleCallOffice}
-            className="w-full md:w-[400px] h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition text-sm sm:text-base"
+            className="w-full md:max-w-[400px] h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition text-sm sm:text-base"
           >
             Call Office
           </button>
 
           {/* Sign In / Scan Attendance - right side */}
-          <Link to={signInTo} state={signInState} className="w-full md:w-[400px]">
+          <Link to={signInTo} state={signInState} className="w-full md:max-w-[400px]">
             <button className="w-full h-12 rounded-[28px] bg-[#4CB050] text-white font-semibold active:scale-[0.98] transition text-sm sm:text-base">
               {isLead ? "Sign in" : "Sign in"}
             </button>

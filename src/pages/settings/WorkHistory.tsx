@@ -44,10 +44,12 @@ function WorkHistory() {
 
   return (
     <SettingsLayout title="Work History">
-      <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6 space-y-4">
-        {dummyShifts.map((shift) => (
-          <Card key={shift.id} shift={shift} link={`/home/invoices/${shift.id}`} variant="completed" />
-        ))}
+      <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {dummyShifts.map((shift) => (
+            <Card key={shift.id} shift={shift} link={`/home/invoices/${shift.id}`} variant="completed" />
+          ))}
+        </div>
       </main>
     </SettingsLayout>
   );

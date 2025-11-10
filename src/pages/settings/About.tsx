@@ -4,7 +4,8 @@ function About() {
   return (
     <SettingsLayout title="About">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
-        <div className="text-gray-500 dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
+        <div className="w-full max-w-3xl mx-auto">
+          <div className="text-gray-600 text-sm md:text-base leading-relaxed space-y-4">
       Lorem ipsum dolor sit amet consectetur. Est varius elit purus nulla in
       lectus pharetra sodales malesuada. Consectetur at ac at quis elit eget
       urna. Ut in turpis enim tellus sollicitudin nisl. Nec posuere orci leo
@@ -35,6 +36,7 @@ function About() {
       dolor. Arcu enim sapien consectetur suspendisse turpis faucibus urna
       tempus. Fermentum elementum praesent tristique habitant aliquet dolor
       condimentum dictumst.{" "}
+          </div>
         </div>
       </div>
     </SettingsLayout>

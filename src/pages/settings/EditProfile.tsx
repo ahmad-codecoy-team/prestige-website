@@ -76,17 +76,20 @@ function EditProfile() {
   );
 
   const Footer = (
-    <div className="sticky bottom-0 bg-[#FCC40B] px-4 py-4 border-t border-black/10">
-      <AuthButton variant="secondary">Update</AuthButton>
+    <div className="sticky bottom-0 bg-[#FCC40B] border-t border-black/10">
+      <div className="w-full max-w-lg mx-auto px-4 py-4">
+        <AuthButton variant="secondary">Update</AuthButton>
+      </div>
     </div>
   );
 
   const PersonalTab = (
-    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
-      <div className="flex justify-center mb-6">
-        <ProfilePhotoUpload />
-      </div>
-      <div className="flex flex-col gap-3">
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4 pb-6">
+      <div className="w-full max-w-lg mx-auto">
+        <div className="flex justify-center mb-6">
+          <ProfilePhotoUpload />
+        </div>
+        <div className="flex flex-col gap-3">
         <AuthInput
           placeholder="First Name"
           value={personal.firstName}
@@ -150,13 +153,15 @@ function EditProfile() {
           onChange={(e) => setPersonal({ ...personal, zipCode: e.target.value })}
           icon={<FiMap className="w-5 h-5 text-gray-400" />}
         />
+        </div>
       </div>
     </div>
   );
 
   const ExperiencesTab = (
-    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
-      <h2 className="text-center text-base font-semibold mb-4">
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4 pb-6">
+      <div className="w-full max-w-3xl mx-auto">
+        <h2 className="text-center text-base font-semibold mb-4">
         Please Select Your Past Experiences
       </h2>
       <div className="space-y-6">
@@ -185,17 +190,20 @@ function EditProfile() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   );
 
   const I9Tab = (
-    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
-      <FileUpload
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4 pb-6">
+      <div className="w-full max-w-lg mx-auto">
+        <FileUpload
         onFileSelect={(f) => setI9File(f)}
         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
         label="Upload I9 Form"
         helpText={i9File ? i9File.name : "pdf, docx, jpeg, png"}
       />
+      </div>
     </div>
   );
 
@@ -205,11 +213,12 @@ function EditProfile() {
       
       {/* Desktop Sub-tabs for Profile - visible only on lg+ screens */}
       <div className={styles.desktopTabs}>
-        {[
-          { k: "personal", label: "Personal Information" },
-          { k: "experiences", label: "Experiences" },
-          { k: "i9", label: "I9 Form" },
-        ].map((t) => {
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 flex gap-6">
+          {[
+            { k: "personal", label: "Personal Information" },
+            { k: "experiences", label: "Experiences" },
+            { k: "i9", label: "I9 Form" },
+          ].map((t) => {
           const is = active === (t.k as TabKey);
           return (
             <button
@@ -227,7 +236,8 @@ function EditProfile() {
               )}
             </button>
           );
-        })}
+          })}
+        </div>
       </div>
       
       {/* Content Area */}
