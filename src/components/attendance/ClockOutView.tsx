@@ -80,10 +80,10 @@ const ClockOutView = ({
   const fontSizes = getFontSizes();
 
   return (
-    <>
+    <div className="w-full">
       {/* Camera Scanner - Only on mobile/tablet */}
       {isMobile && (
-        <div className="bg-[#fbbf24] px-4 py-4">
+        <div className="bg-[#fbbf24] px-4 md:px-6 py-4">
           <div className="border-4 border-white rounded-2xl overflow-hidden">
             <Scanner
               onScan={(result) => {
@@ -98,7 +98,7 @@ const ClockOutView = ({
       )}
 
       {/* Shift Information */}
-      <div className="flex justify-between items-center px-4 py-3 text-black bg-[#fbbf24]">
+      <div className="flex justify-between items-center px-4 md:px-6 py-3 text-black bg-[#fbbf24]">
         <div className={`font-semibold ${fontSizes.header}`}>
           Strike Technician
         </div>
@@ -106,8 +106,8 @@ const ClockOutView = ({
       </div>
 
       {/* Worker List - CARD */}
-      <div className="flex-1 bg-[#fbbf24] pb-24">
-        <div className="mx-4 rounded-2xl bg-white border border-gray-300 overflow-hidden">
+      <div className="flex-1 bg-[#fbbf24] pb-24 px-4 md:px-6">
+        <div className="rounded-2xl bg-white border border-gray-300 overflow-hidden">
           {/* HEADER (3 columns in one row) */}
           <div className="grid grid-cols-12 text-gray-900">
             <div
@@ -190,7 +190,7 @@ const ClockOutView = ({
           setClockModalOpen(false);
         }}
       />
-    </>
+    </div>
   );
 };
 

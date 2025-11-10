@@ -13,16 +13,16 @@ interface DefaultViewProps {
 
 const DefaultView = ({ workers, onReviewClick }: DefaultViewProps) => {
   return (
-    <>
+    <div className="w-full">
       {/* Shift Information */}
-      <div className="flex justify-between items-center px-4 py-3 text-black bg-[#fbbf24]">
+      <div className="flex justify-between items-center px-4 md:px-6 py-3 text-black bg-[#fbbf24]">
         <div className="font-semibold text-lg">Strike Technician</div>
         <div className="font-semibold text-lg">08:00-19:00</div>
       </div>
 
       {/* Worker List */}
-      <div className="flex-1 bg-[#fbbf24] pb-24">
-        <div className="bg-white rounded-2xl border-2 border-gray-300 mx-4 overflow-hidden">
+      <div className="flex-1 bg-[#fbbf24] pb-24 px-4 md:px-6">
+        <div className="bg-white rounded-2xl border-2 border-gray-300 overflow-hidden">
           <div className="flex justify-between font-semibold text-lg px-6 py-4 border-b-2 border-gray-300">
             <div>Name</div>
             <div>Review</div>
@@ -53,7 +53,7 @@ const DefaultView = ({ workers, onReviewClick }: DefaultViewProps) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

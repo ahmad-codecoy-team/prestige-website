@@ -37,17 +37,17 @@ export default function ResponsiveModal({
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel}
-      className={`fixed inset-0 z-[100] ${backdropClassName} flex justify-center items-end md:block`}
+      className={`fixed inset-0 lg:left-[80px] z-40 ${backdropClassName} flex justify-center items-end md:items-center`}
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         className={`
-          w-full                    /* mobile bottom sheet */
+          w-full max-w-[100vw] lg:max-w-[calc(100vw-80px)]  /* respect sidebar on desktop */
           rounded-t-3xl animate-slide-up
           md:animate-none md:rounded-3xl
-          md:fixed md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2
-          md:w-[520px] md:max-w-[65vw]  /* <-- fixed, professional desktop width */
+          md:w-[520px] md:max-w-[min(90vw,520px)]  /* constrain to content area */
+          lg:max-w-[min(calc(100vw-80px-4rem),520px)]  /* account for sidebar + padding on large screens */
           md:shadow-2xl
           ${cardClassName}
         `}

@@ -62,10 +62,10 @@ export default function JobDetailsCard({ data, isLead, onCallLead }: Props) {
         </div>
 
         {/* In-card button */}
-        <div className="px-4 pb-4 pt-3">
+        <div className="px-4 pb-4 pt-3 flex justify-center">
           <button
             onClick={onCallLead}
-            className="w-full h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition"
+            className="w-full max-w-[400px] h-12 rounded-[28px] bg-black text-[#FCC40B] font-semibold active:scale-[0.98] transition"
           >
             {isLead ? "Call POC" : "Call Lead"}
           </button>

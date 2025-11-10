@@ -22,6 +22,7 @@ import Attendance from "@/pages/attendence/attendance";
 import CompletedJobDetailsPage from "@/components/job/completedDetails.page";
 import EditInvoice from "@/components/job/editInvoice";
 import LeadQR from "@/components/job/LeadQR";
+import TailwindTest from "@/components/test/TailwindTest";
 
 // ===== Settings Pages =====
 import ContactUs from "@/pages/settings/ContactUs";
@@ -80,6 +81,9 @@ const AppRoutes = () => {
 
           {/* Lead QR */}
           <Route path="/home/lead-qr" element={<LeadQR />} />
+
+          {/* Tailwind Test - for debugging */}
+          <Route path="/test-tailwind" element={<TailwindTest />} />
 
           {/* Chats and assistant */}
           <Route path="/chat" element={<Chat />} />

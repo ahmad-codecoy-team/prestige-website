@@ -124,7 +124,8 @@ const LeadAttendance = () => {
 
       <div className="min-h-screen bg-[#fbbf24] flex flex-col">
         {/* Header (mobile-friendly sizes) */}
-        <div className="fixed top-0 left-0 right-0 bg-black text-white px-3 md:px-4 pt-3 md:pt-4 pb-4 md:pb-6 z-50 lg:left-20">
+        <div className="fixed top-0 left-0 right-0 lg:left-[80px] bg-black text-white z-50">
+          <div className="w-full max-w-[1440px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-4 md:pb-6">
           {/* Top Navigation Bar */}
           <div className="flex justify-between items-center mb-4 md:mb-6">
             <ArrowLeft
@@ -181,10 +182,11 @@ const LeadAttendance = () => {
               Clock Out
             </button>
           </div>
+          </div>
         </div>
 
         {/* Content Area */}
-        <div className="pt-40">
+        <div className="w-full max-w-[1440px] mx-auto pt-40">
           {activeView === "default" && (
             <DefaultView workers={workers} onReviewClick={handleReviewClick} />
           )}
@@ -217,23 +219,27 @@ const LeadAttendance = () => {
         </div>
 
         {/* Fixed Bottom Buttons (compact on mobile) */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white py-4 md:py-6 flex justify-center gap-3 md:gap-4 px-3 md:px-6 lg:left-20">
-          <button
-            onClick={() => setActiveView("attendanceDetails")}
-            className="bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
-          >
+        <div className="fixed bottom-0 left-0 right-0 lg:left-[80px] bg-white z-40">
+          <div className="w-full max-w-[1440px] mx-auto py-4 md:py-6 px-3 md:px-6">
+            <div className="flex flex-col items-center md:flex-row justify-center gap-3 md:gap-4">
+              <button
+                onClick={() => setActiveView("attendanceDetails")}
+                className="w-full md:max-w-[400px] bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
+              >
             <Calendar size={18} className="md:hidden" />
             <Calendar size={20} className="hidden md:inline" />
-            Attendance
-          </button>
-          <button
-            onClick={() => setShowAddContractorModal(true)}
-            className="bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
-          >
+                Attendance
+              </button>
+              <button
+                onClick={() => setShowAddContractorModal(true)}
+                className="w-full md:max-w-[400px] bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
+              >
             <UserPlus size={18} className="md:hidden" />
             <UserPlus size={20} className="hidden md:inline" />
-            Add Contractor
-          </button>
+                Add Contractor
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
