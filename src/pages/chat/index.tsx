@@ -40,7 +40,7 @@ const chatGroups = [
 const ChatPage = () => {
   return (
     <PageLayout title="Chat">
-      <div className="px-4 lg:px-6 py-6">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
         <div className="space-y-2">
           {chatGroups.map((group) => (
             <ChatGroupCard

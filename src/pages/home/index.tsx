@@ -125,11 +125,13 @@ function Home() {
 
       {/* ===== Tab Content ===== */}
       <main className="flex-1 w-full">
-        <div className="w-full px-4 py-4 lg:px-4 lg:py-5">
-          {/* Outlet renders the nested route component (AvailableShifts, ScheduledShifts, or CompletedShifts) */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 py-4 md:px-6 md:py-6">
           <Outlet />
         </div>
       </main>
+
+
+
 
       {/* ===== Sidebar ===== */}
       <Sidebar open={showSidebar} onClose={() => setShowSidebar(false)} />

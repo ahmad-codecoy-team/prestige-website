@@ -44,7 +44,7 @@ function WorkHistory() {
 
   return (
     <SettingsLayout title="Work History">
-      <main className="flex-1 px-4 lg:px-6 py-6 space-y-4">
+      <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6 space-y-4">
         {dummyShifts.map((shift) => (
           <Card key={shift.id} shift={shift} link={`/home/invoices/${shift.id}`} variant="completed" />
         ))}

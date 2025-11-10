@@ -36,7 +36,7 @@ function ScheduledShifts() {
 
   if (loading) {
     return (
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {[1, 2, 3, 4].map((i) => (
           <Loading key={i} />
         ))}
@@ -45,7 +45,7 @@ function ScheduledShifts() {
   }
 
   return (
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {shifts.map((shift) => (
         <Card
           key={shift.id}

@@ -2,6 +2,7 @@
   display: none;
 }
 
+/* Show on desktop - matches Tailwind lg: breakpoint */
 @media (min-width: 1024px) {
   .header {
     display: block;

@@ -19,16 +19,12 @@ export default function JobDetailsPage() {
       await handleApiCall(
         () => getScheduleDetails(shift?.shift?.id),
         "",
-        () => {
-          // Future: hook up API data here
-          // console.log("Schedule details:", response);
-        }
+        () => {}
       );
     };
     if (shift?.shift?.id) fetchData();
   }, [shift]);
 
-  // Use mock job details for now
   const mockData = {
     ...JOB_DETAILS_MOCK,
     position: shift?.position || JOB_DETAILS_MOCK.position,
@@ -44,45 +40,40 @@ export default function JobDetailsPage() {
   };
 
   const callLeadOrPOC = () => {
-    if (isLead) {
-      // Call POC - replace with actual POC phone number
-      window.location.href = 'tel:+1234567890';
-      console.log("Calling POC...");
-    } else {
-      // Call Lead - replace with actual Lead phone number
-      window.location.href = 'tel:+0987654321';
-      console.log("Calling Lead...");
-    }
+    window.location.href = isLead ? "tel:+1234567890" : "tel:+0987654321";
   };
 
   const callOffice = () => {
-    // Call Office - replace with actual office number
-    window.location.href = 'tel:+1555123456';
+    window.location.href = "tel:+1555123456";
   };
 
   return (
     <div className="relative min-h-screen bg-[#FCC40B]">
-      {/* Animated Header */}
+      {/* Header */}
       <BidHeader
         title={JOB_DETAILS_MOCK.eventName}
         location={shift?.city || JOB_DETAILS_MOCK.location}
         onBack={() => window.history.back()}
       />
 
-      {/* Main Content */}
-      <main className="pt-4 pb-40 w-full px-4 sm:px-6 lg:px-8">
-        <JobDetailsCard
-          data={mockData}
-          isLead={isLead}
-          onCallLead={callLeadOrPOC}
-        />
+      {/* Page Content */}
+      <main className="w-full pt-4 pb-40">
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6">
+          <JobDetailsCard
+            data={mockData}
+            isLead={isLead}
+            onCallLead={callLeadOrPOC}
+          />
+        </div>
       </main>
 
-      {/* Fixed bottom bar */}
+      {/* Bottom Action Bar */}
       <JobActionBar
         isLead={isLead}
         onCallOffice={callOffice}
-        signInTo={`/home/schedule/${jobId}/attendance/${isLead ? "lead" : "worker"}`}
+        signInTo={`/home/schedule/${jobId}/attendance/${
+          isLead ? "lead" : "worker"
+        }`}
         signInState={{ isLead }}
       />
     </div>

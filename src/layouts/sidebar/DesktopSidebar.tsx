@@ -30,28 +30,29 @@ const DesktopSidebar = () => {
         <img src={logo} alt="AV Workforce" className="h-10 w-auto" />
       </Link>
 
-      {/* Navigation Items */}
-      <nav className="flex-1 flex flex-col items-center py-8 gap-6">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const active = isActive(item.path);
+      
+      <nav className="flex-1 flex flex-col items-center py-10 gap-8">
+  {navItems.map((item) => {
+    const Icon = item.icon;
+    const active = isActive(item.path);
 
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all ${
-                active
-                  ? "bg-[#FCC40B] text-black"
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-              title={item.label}
-            >
-              <Icon className="w-6 h-6" />
-            </Link>
-          );
-        })}
-      </nav>
+    return (
+      <Link
+        key={item.path}
+        to={item.path}
+        className={`flex flex-col items-center justify-center w-16 h-16 rounded-xl transition-all ${
+          active
+            ? "bg-[#FCC40B] text-black shadow-sm"
+            : "text-gray-600 hover:bg-gray-100"
+        }`}
+        title={item.label}
+      >
+        <Icon className="w-7 h-7" /> {/* Was w-6 h-6 */}
+      </Link>
+    );
+  })}
+</nav>
+
     </aside>
   );
 };

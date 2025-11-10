@@ -10,10 +10,11 @@ axios.interceptors.request.use(
     const token = JSON.parse(
       localStorage.getItem("prestige-website")
     )?.accessToken;
-
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log("config--->", config);
     return config;
   },
   (error) => Promise.reject(error)

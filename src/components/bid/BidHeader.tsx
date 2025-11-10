@@ -1,3 +1,4 @@
+// src/components/bid/BidHeader.tsx
 import { useEffect, useState } from "react";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
@@ -10,79 +11,60 @@ type Props = {
   logoSrc?: string;
 };
 
-/**
- * BidHeader:
- * - Top black bar (back arrow + title) stays sticky at top.
- * - Lower section (logo + location pill + title/location) fades/slides away on scroll.
- * - On scroll back up, it reappears smoothly.
- */
 export default function BidHeader({ title, location, onBack, logoSrc }: Props) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Control opacity and vertical movement based on scroll
   const opacity = scrollY < 80 ? 1 : Math.max(1 - (scrollY - 80) / 100, 0);
-  const translateY = Math.min(scrollY / 4, 40); // max upward shift ~40px
+  const translateY = Math.min(scrollY / 4, 40);
 
   return (
     <header className="relative w-full">
-      {/* Sticky Top Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-black text-white lg:left-20">
-        <div className="w-full px-4 sm:px-6 pt-4 pb-2 flex items-center">
-          <button
-            onClick={onBack}
-            aria-label="Back"
-            className="p-2 -ml-2 rounded-full active:scale-95 transition"
-          >
-            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+      {/* Sticky top bar - full width on mobile/tablet, offset by sidebar on desktop */}
+      <div className="fixed top-0 left-0 right-0 lg:left-[80px] z-50 bg-black text-white">
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4 pb-2 flex items-center">
+          <button onClick={onBack} className="p-2 -ml-2" aria-label="Go back">
+            <ArrowLeft className="w-6 h-6" />
           </button>
-          <div className="flex-1 text-center font-semibold text-base sm:text-lg">
+          <div className="flex-1 text-center font-semibold text-lg">
             Job Details
           </div>
-          {/* Spacer to balance layout */}
           <div className="w-8 h-6" />
         </div>
       </div>
 
-      {/* Animated lower section (scrolls away) */}
+      {/* Scroll-away section */}
       <motion.div
-        className="bg-black text-white relative z-40 w-full"
+        className="bg-black text-white relative w-full pt-[72px] pb-6 text-center"
         style={{
           opacity,
           transform: `translateY(-${translateY}px)`,
           transition: "all 0.25s ease-out",
         }}
       >
-        <div className="w-full px-4 sm:px-6 pb-6 pt-[72px] text-center">
-          {/* Logo */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6">
           <div className="flex justify-center mb-3">
             <img
               src={logoSrc || PLS}
+              className="w-16 h-16 rounded-full object-cover"
               alt="Logo"
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full"
             />
           </div>
 
-          {/* Yellow location pill */}
-          <div className="inline-flex items-center gap-2 bg-[#FCC40B] text-black px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium">
-            <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="truncate max-w-[200px]">{location}</span>
+          <div className="inline-flex items-center gap-2 bg-[#FCC40B] text-black px-4 py-1.5 rounded-full text-sm font-medium">
+            <MapPin className="w-4 h-4" />
+            <span className="truncate max-w-[220px]">{location}</span>
           </div>
 
-          {/* Title + location text */}
-          <div className="mt-3">
-            <div className="font-semibold text-white text-base sm:text-lg leading-tight">
-              {title}
-            </div>
-            <div className="uppercase tracking-wide text-white/90 text-xs sm:text-sm">
-              {location}
-            </div>
-          </div>
+          <h1 className="mt-3 font-semibold text-lg leading-tight">{title}</h1>
+          <p className="uppercase tracking-wide text-white/90 text-sm">
+            {location}
+          </p>
         </div>
       </motion.div>
     </header>

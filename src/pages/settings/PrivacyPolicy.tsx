@@ -3,7 +3,7 @@ import SettingsLayout from "./SettingsLayout";
 function PrivacyPolicy() {
   return (
     <SettingsLayout title="Privacy Policy">
-      <div className="px-4 lg:px-6 py-6">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
         <div className="text-gray-500 dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed">
       Lorem ipsum dolor sit amet consectetur. Est varius elit purus nulla in
       lectus pharetra sodales malesuada. Consectetur at ac at quis elit eget

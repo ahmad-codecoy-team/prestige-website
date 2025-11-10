@@ -2,6 +2,7 @@
   min-height: 100vh;
 }
 
+/* Desktop sidebar offset - matches Tailwind lg: breakpoint */
 @media (min-width: 1024px) {
   .contentArea {
     margin-left: 80px;
@@ -10,6 +11,6 @@
 
 .contentWrapper {
   min-height: 100vh;
-  background-color: #FCC40B;
+  background-color: #fcc40b;
   width: 100%;
 }

@@ -65,8 +65,8 @@ const Notifications = () => {
   return (
     <PageLayout title="Notifications">
       {/* Match CompletedShifts layout so cards don't stretch on large screens */}
-      <div className="px-4 lg:px-6 py-6">
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {MOCK_NOTIFICATIONS.map((n) => (
             <Link
               key={n.id}

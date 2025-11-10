@@ -82,7 +82,7 @@ function EditProfile() {
   );
 
   const PersonalTab = (
-    <div className="px-4 lg:px-6 pt-4">
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
       <div className="flex justify-center mb-6">
         <ProfilePhotoUpload />
       </div>
@@ -155,7 +155,7 @@ function EditProfile() {
   );
 
   const ExperiencesTab = (
-    <div className="px-4 lg:px-6 pt-4">
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
       <h2 className="text-center text-base font-semibold mb-4">
         Please Select Your Past Experiences
       </h2>
@@ -189,7 +189,7 @@ function EditProfile() {
   );
 
   const I9Tab = (
-    <div className="px-4 lg:px-6 pt-4">
+    <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4">
       <FileUpload
         onFileSelect={(f) => setI9File(f)}
         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
