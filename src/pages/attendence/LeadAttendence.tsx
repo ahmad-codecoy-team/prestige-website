@@ -186,7 +186,7 @@ const LeadAttendance = () => {
         </div>
 
         {/* Content Area */}
-        <div className="w-full max-w-[1440px] mx-auto pt-40">
+        <div className="w-full max-w-[1440px] mx-auto pt-40 sm:pt-45 lg:pt-50">
           {activeView === "default" && (
             <DefaultView workers={workers} onReviewClick={handleReviewClick} />
           )}

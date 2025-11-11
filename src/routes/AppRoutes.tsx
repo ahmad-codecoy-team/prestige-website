@@ -83,7 +83,7 @@ const AppRoutes = () => {
           <Route path="/home/lead-qr" element={<LeadQR />} />
 
           {/* Tailwind Test - for debugging */}
-          <Route path="/test-tailwind" element={<TailwindTest />} />
+          {/* <Route path="/test-tailwind" element={<TailwindTest />} /> */}
 
           {/* Chats and assistant */}
           <Route path="/chat" element={<Chat />} />
