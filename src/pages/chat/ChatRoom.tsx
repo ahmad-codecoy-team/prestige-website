@@ -77,65 +77,67 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbbf24] flex flex-col">
-      {/* Header - Yellow background */}
-      <div className="bg-[#fbbf24] text-black px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate(-1)} className="text-black">
-              <ArrowLeft size={28} />
-            </button>
-            {/* Chat logo + Group name */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                <img
-                  src={logoWhite}
-                  alt="Chat"
-                  className="w-5 h-5 object-contain"
-                />
-              </div>
-              <div className="text-xl font-semibold tracking-wide">
-                {currentChat.name}
+    <div className="min-h-screen bg-[#fbbf24] flex flex-col overflow-hidden">
+      {/* Header - Yellow background with max-width constraint */}
+      <div className="bg-[#fbbf24] text-black">
+        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button onClick={() => navigate(-1)} className="text-black hover:opacity-70 transition-opacity">
+                <ArrowLeft size={28} />
+              </button>
+              {/* Chat logo + Group name */}
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                  <img
+                    src={logoWhite}
+                    alt="Chat"
+                    className="w-5 h-5 object-contain"
+                  />
+                </div>
+                <div className="text-xl font-semibold tracking-wide">
+                  {currentChat.name}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Three dots menu */}
-          <div className="relative">
-            <button
-              onClick={() => setShowMenu(!showMenu)}
-              className="text-black"
-            >
-              <MoreVertical size={24} />
-            </button>
+            {/* Three dots menu */}
+            <div className="relative">
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className="text-black hover:opacity-70 transition-opacity"
+              >
+                <MoreVertical size={24} />
+              </button>
 
-            {/* Dropdown Menu */}
-            {showMenu && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
-                <button
-                  onClick={() => {
-                    setShowParticipantsModal(true);
-                    setShowMenu(false);
-                  }}
-                  className="w-full px-4 py-3 text-left text-gray-900 hover:bg-gray-50 flex items-center gap-3"
-                >
-                  <Users size={18} className="text-gray-600" />
-                  <span className="text-sm font-medium">Participants</span>
-                </button>
-                {currentUserIsLead && (
+              {/* Dropdown Menu */}
+              {showMenu && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
                   <button
                     onClick={() => {
-                      setShowAddParticipantModal(true);
+                      setShowParticipantsModal(true);
                       setShowMenu(false);
                     }}
-                    className="w-full px-4 py-3 text-left text-gray-900 hover:bg-gray-50 flex items-center gap-3"
+                    className="w-full px-4 py-3 text-left text-gray-900 hover:bg-gray-50 flex items-center gap-3 transition-colors"
                   >
-                    <UserPlus size={18} className="text-gray-600" />
-                    <span className="text-sm font-medium">Add</span>
+                    <Users size={18} className="text-gray-600" />
+                    <span className="text-sm font-medium">Participants</span>
                   </button>
-                )}
-              </div>
-            )}
+                  {currentUserIsLead && (
+                    <button
+                      onClick={() => {
+                        setShowAddParticipantModal(true);
+                        setShowMenu(false);
+                      }}
+                      className="w-full px-4 py-3 text-left text-gray-900 hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                    >
+                      <UserPlus size={18} className="text-gray-600" />
+                      <span className="text-sm font-medium">Add</span>
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -148,59 +150,64 @@ const ChatRoom = () => {
         />
       )}
 
-      {/* Chat Room - White background with border radius and shadow */}
-      <div className="flex-1 bg-white rounded-t-3xl flex flex-col shadow-lg lg:shadow-2xl lg:mx-4">
-        {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {currentChat.messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${
-                msg.isSender ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`max-w-xs lg:max-w-md rounded-2xl px-4 py-3 ${
-                  msg.isSender ? "bg-[#fbbf24]" : "bg-gray-100"
-                }`}
-              >
-                <p className="text-gray-900 text-sm">{msg.text}</p>
-                <p className="text-xs text-gray-500 mt-1 text-right">
-                  {msg.timestamp}
-                </p>
+      {/* Chat Room Container - Flex container with max-width */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col w-full max-w-[1440px] mx-auto px-4 md:px-6 overflow-hidden">
+          {/* Chat Room - White background with border radius and shadow */}
+          <div className="flex-1 bg-white rounded-t-3xl flex flex-col shadow-lg lg:shadow-2xl mt-4 overflow-hidden">
+            {/* Scrollable Chat Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {currentChat.messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex ${
+                    msg.isSender ? "justify-end" : "justify-start"
+                  }`}
+                >
+                  <div
+                    className={`max-w-xs lg:max-w-md rounded-2xl px-4 py-3 ${
+                      msg.isSender ? "bg-[#fbbf24]" : "bg-gray-100"
+                    }`}
+                  >
+                    <p className="text-gray-900 text-sm">{msg.text}</p>
+                    <p className="text-xs text-gray-500 mt-1 text-right">
+                      {msg.timestamp}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Fixed Message Input at bottom */}
+            <div className="border-t border-gray-100 p-4 bg-white">
+              <div className="flex items-center gap-2">
+                {/* Image upload icon */}
+                <button className="text-black p-2 hover:bg-gray-100 rounded-full transition-colors">
+                  <Image size={24} />
+                </button>
+
+                {/* Message input field */}
+                <div className="flex-1 bg-gray-100 rounded-full px-4 py-3">
+                  <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Type a message..."
+                    className="w-full bg-transparent outline-none text-gray-900 placeholder-gray-500 text-sm"
+                  />
+                </div>
+
+                {/* Send button */}
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!message.trim()}
+                  className="text-black p-2 disabled:opacity-30 hover:bg-gray-100 rounded-full transition-colors disabled:hover:bg-transparent"
+                >
+                  <Send size={24} />
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Message Input - No separator, inside the white room */}
-        <div className="p-4">
-          <div className="flex items-center gap-2">
-            {/* Image upload icon */}
-            <button className="text-black p-2">
-              <Image size={24} />
-            </button>
-
-            {/* Message input field */}
-            <div className="flex-1 bg-gray-100 rounded-full px-4 py-3">
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Type a message..."
-                className="w-full bg-transparent outline-none text-gray-900 placeholder-gray-500 text-sm"
-              />
-            </div>
-
-            {/* Send button */}
-            <button
-              onClick={handleSendMessage}
-              disabled={!message.trim()}
-              className="text-black p-2 disabled:opacity-30"
-            >
-              <Send size={24} />
-            </button>
           </div>
         </div>
       </div>
