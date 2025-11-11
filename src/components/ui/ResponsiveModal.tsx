@@ -11,6 +11,8 @@ type ResponsiveModalProps = {
   backdropClassName?: string;
   /** Extra classes for the card (panel look lives here) */
   cardClassName?: string;
+  /** Desktop max-width class; e.g., "max-w-2xl" */
+  desktopMaxWidthClass?: string;
 };
 
 export default function ResponsiveModal({
@@ -20,6 +22,7 @@ export default function ResponsiveModal({
   ariaLabel = "modal",
   backdropClassName = "bg-black/50",
   cardClassName = "",
+  desktopMaxWidthClass = "",
 }: ResponsiveModalProps) {
   React.useEffect(() => {
     if (!open) return;
@@ -37,7 +40,7 @@ export default function ResponsiveModal({
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel}
-      className={`fixed inset-0 lg:left-[80px] z-40 ${backdropClassName} flex justify-center items-end md:items-center`}
+      className={`fixed inset-0 lg:left-[80px] z-100 ${backdropClassName} flex justify-center items-end md:items-center`}
       onClick={onClose}
     >
       <div
@@ -46,7 +49,7 @@ export default function ResponsiveModal({
           w-full max-w-[100vw] lg:max-w-[calc(100vw-80px)]  /* respect sidebar on desktop */
           rounded-t-3xl animate-slide-up
           md:animate-none md:rounded-3xl
-          md:w-[520px] md:max-w-[min(90vw,520px)]  /* constrain to content area */
+          ${desktopMaxWidthClass || "md:w-[520px] md:max-w-[min(90vw,520px)]"}  /* constrain to content area */
           lg:max-w-[min(calc(100vw-80px-4rem),520px)]  /* account for sidebar + padding on large screens */
           md:shadow-2xl
           ${cardClassName}
