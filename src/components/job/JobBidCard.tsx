@@ -1,6 +1,6 @@
 // src/components/job/JobBidCard.tsx
 import { useState } from "react";
-import { ShiftBid } from "@/constants/bidMocks";
+import type { ShiftBid } from "@/types";
 
 type Props = {
   shift: ShiftBid;

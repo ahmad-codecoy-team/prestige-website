@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Card from "@/components/job/JobCard";
-import Loading from "@/components/loading";
+import Loading from "@/components/LoadingSpinner";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getAvailableJobs } from "@/helper/backend_helper";
-import { dummyShifts } from "@/constants/dummyShifts";
-import type { AvailableShifts } from "@/types/AvailableShifts";
+import { dummyShifts } from "@/mocks/shifts.mock";
+import type { AvailableShifts } from "@/types";
 
-function AvailableShifts() {
+function AvailableShiftsPage() {
   const [loading, setLoading] = useState(false);
   const [shifts, setShifts] = useState<AvailableShifts[]>([]);
 
@@ -50,4 +50,4 @@ function AvailableShifts() {
   );
 }
 
-export default AvailableShifts;
+export default AvailableShiftsPage;

@@ -1,9 +1,9 @@
 import Card from "@/components/job/JobCard";
-import Loading from "@/components/loading";
+import Loading from "@/components/LoadingSpinner";
 // import { getCompletedJobs } from "@/helper/backend_helper";
 // import { handleApiCall } from "@/helper/call_api_helper";
 import { useEffect, useState } from "react";
-import { COMPLETED_SHIFTS_MOCK } from "@/constants/CompletedShiftsMock";
+import { COMPLETED_SHIFTS_MOCK } from "@/mocks/shifts.mock";
 
 interface CompletedShift {
   id?: string | number;

@@ -1,7 +1,7 @@
 // src/components/job/JobDetailsCard.tsx
 import { Link } from "react-router-dom";
 import { MessageSquareText } from "lucide-react";
-import { JobDetailsData } from "@/constants/jobDetailsMock";
+import type { JobDetailsData } from "@/types";
 
 type Props = {
   data: JobDetailsData;

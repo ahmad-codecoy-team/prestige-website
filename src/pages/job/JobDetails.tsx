@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import BidHeader from "@/components/bid/BidHeader";
 import JobDetailsCard from "@/components/job/JobDetailsCard";
 import JobActionBar from "@/components/job/JobActionBar";
-import { JOB_DETAILS_MOCK } from "@/constants/jobDetailsMock";
+import { JOB_DETAILS_MOCK } from "@/mocks/jobs.mock";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { getScheduleDetails } from "@/helper/backend_helper";
 

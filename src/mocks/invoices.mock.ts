@@ -1,4 +1,6 @@
-export const INVOICE_MOCK_DATA = {
+import type { InvoiceMockData } from '@/types';
+
+export const INVOICE_MOCK_DATA: InvoiceMockData = {
   user: {
     name: "Nimra Razzaq",
     location: "california",

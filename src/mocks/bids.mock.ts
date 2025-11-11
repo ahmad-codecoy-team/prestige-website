@@ -1,20 +1,4 @@
-// src/constants/bidMocks.ts
-export type BidHeaderData = {
-  title: string; // e.g., "Behind the Scenes with Evelyn"
-  location: string; // e.g., "Key West"
-  logoSrc?: string; // optional override
-};
-
-export type ShiftBid = {
-  id: string;
-  dateISO: string; // ISO date (we'll format to "October 13, 2025")
-  position: string; // e.g., "Steward Crew Chief"
-  callTimeStart: string; // "12:00"
-  callTimeEnd: string; // "17:00"
-  rateType: string; // e.g., "DR-Full"
-  desiredRate: number; // 35
-  perDiem: number; // 0
-};
+import type { BidHeaderData, ShiftBid } from '@/types';
 
 export const BID_HEADER: BidHeaderData = {
   title: "Behind the Scenes with Evelyn",

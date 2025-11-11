@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Card from "@/components/job/JobCard";
-import Loading from "@/components/loading";
+import Loading from "@/components/LoadingSpinner";
 // import { getScheduleJobs } from "@/helper/backend_helper";
 // import { handleApiCall } from "@/helper/call_api_helper";
-import { SCHEDULED_SHIFTS_MOCK } from "@/constants/scheduledShiftsMock";
+import { SCHEDULED_SHIFTS_MOCK } from "@/mocks/shifts.mock";
 
 interface ScheduledShift {
   id: string | number;

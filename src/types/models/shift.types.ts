@@ -21,3 +21,10 @@ export interface AvailableShifts {
   position: string;
   shift: Shift;
 }
+
+export enum ShiftStatus {
+  AVAILABLE = 'available',
+  SCHEDULED = 'scheduled',
+  COMPLETED = 'completed',
+  CANCELLED = 'cancelled'
+}

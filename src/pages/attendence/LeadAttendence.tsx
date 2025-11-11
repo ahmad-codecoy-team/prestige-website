@@ -10,7 +10,7 @@ import ClockOutView from "@/components/attendance/ClockOutView";
 import MealBreakView from "@/components/attendance/MealBreakView";
 import AttendanceDetails from "@/components/attendance/AttendenceDetails";
 import AddContractorModal from "@/components/attendance/AddContractorModal";
-import CreateGroup from "@/components/attendance/CreateGroup";
+import CreateGroup from "@/components/attendance/CreateGroupModal";
 import ResponsiveModal from "@/components/ui/ResponsiveModal";
 
 interface Worker {

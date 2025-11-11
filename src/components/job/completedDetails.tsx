@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, RotateCw, ChevronDown } from "lucide-react";
-import { INVOICE_MOCK_DATA, MEAL_BREAK_OPTIONS } from "@/constants/InvoiceMock";
+import { INVOICE_MOCK_DATA, MEAL_BREAK_OPTIONS } from "@/mocks/invoices.mock";
 import PaymentMethodModal from "./PaymentMethodModal";
 
 const CompletedJobDetails = () => {

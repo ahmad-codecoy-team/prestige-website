@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import BidHeader from "@/components/bid/BidHeader";
 import JobBidCard from "@/components/job/JobBidCard";
-import { BID_HEADER, MOCK_SHIFTS } from "@/constants/bidMocks";
+import { BID_HEADER, MOCK_SHIFTS } from "@/mocks/bids.mock";
 import { useNavigate } from "react-router-dom";
 
 export default function BidPage() {
