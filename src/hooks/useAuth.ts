@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authService } from '@/api';
-import type { LoginRequest } from '@/types';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { authService } from "@/api";
+import type { LoginRequest } from "@/types";
 
 interface User {
   id: string;
@@ -16,7 +16,8 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('prestige-token');
+    const token = localStorage.getItem("prestige-token");
+    console.log(token);
     if (token) {
       // TODO: Fetch user data from token or API
       // For now, just mark as loaded
@@ -27,9 +28,9 @@ export const useAuth = () => {
   const login = async (credentials: LoginRequest) => {
     try {
       const response = await authService.login(credentials);
-      localStorage.setItem('prestige-token', response.accessToken);
+      localStorage.setItem("prestige-token", response.accessToken);
       setUser(response.user);
-      navigate('/home');
+      navigate("/home");
     } catch (error) {
       throw error;
     }
@@ -38,7 +39,7 @@ export const useAuth = () => {
   const logout = async () => {
     await authService.logout();
     setUser(null);
-    navigate('/login');
+    navigate("/login");
   };
 
   return { user, loading, login, logout, isAuthenticated: !!user };
