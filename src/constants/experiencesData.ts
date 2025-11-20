@@ -1,3 +1,4 @@
+// Legacy structure for backward compatibility
 export const EXPERIENCE_CATEGORIES = [
   {
     name: "Cardio Exercises",
@@ -103,3 +104,33 @@ export const EXPERIENCE_CATEGORIES = [
     ],
   },
 ];
+
+// New structure for enhanced experience selection
+export const EXPERIENCE_OPTIONS = [
+  "Chest", "Back", "Shoulders", "Biceps", "Croe", "Triceps", "Abs (Abdominals)", 
+  "Hamstring", "Legs", "Quadriceps (Quads)", "Calves", "Neck", "Forearm", 
+  "Traps (Trapezius)", "V1 / Rec Op / PB Op", "Lats (Latsissimus Dorsi)", 
+  "Pectorals (Pecs)", "Deltoids (Delts)", "Erector Spinae"
+];
+
+// Sub-experiences for categories that have them (based on the cycling gear modal example)
+export const EXPERIENCE_SUB_OPTIONS: Record<string, string[]> = {
+  "Cycling": [
+    "Cycling Gloves", "Saddle Bag", "Water Bottle", "Spare Tube", "Helmet", 
+    "Cycling Shoes", "Cycling Jersey", "Chain Lube", "Cycling Shorts", 
+    "Bike Lights", "Sunglasses", "Repair Kit"
+  ],
+  "Back": [
+    "Lat Pulldowns", "Pull-ups", "Rows", "Deadlifts", "T-Bar Rows", "Cable Rows"
+  ],
+  "Chest": [
+    "Bench Press", "Push-ups", "Incline Press", "Decline Press", "Chest Flys", "Dips"
+  ],
+  "Legs": [
+    "Squats", "Lunges", "Leg Press", "Leg Curls", "Leg Extensions", "Calf Raises"
+  ],
+  "Shoulders": [
+    "Shoulder Press", "Lateral Raises", "Front Raises", "Rear Delts", "Upright Rows"
+  ],
+  // Add more sub-options as needed
+};

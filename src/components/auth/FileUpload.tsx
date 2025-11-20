@@ -16,6 +16,7 @@ export const FileUpload = ({
   accept = "image/*,.pdf,.doc,.docx",
   maxSize = 10485760, // 10MB
   helpText = "pdf, docx, jpeg, png",
+  label,
 }: FileUploadProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -53,7 +54,7 @@ export const FileUpload = ({
         <input {...getInputProps()} />
         <FiFile className="w-10 h-10 md:w-12 md:h-12 text-[#FCC40B]" />
         <span className="text-[#FCC40B] text-lg md:text-xl font-bold text-center">
-          I9 Form
+          {label || "Upload File"}
         </span>
       </div>
 

@@ -8,6 +8,8 @@ import Forgot from "@/pages/forgot";
 import OTP from "@/pages/forgot/otp";
 import ChangePassword from "@/pages/forgot/changePassword";
 import SignUp from "@/pages/signup";
+import CompaniesList from "@/pages/companies/CompaniesList";
+import CompanyApplication from "@/pages/companies/CompanyApplication";
 
 import Home from "@/pages/home";
 import AvailableShifts from "@/pages/home/AvailableShifts";
@@ -49,6 +51,10 @@ const AppRoutes = () => {
 
       {/* ========= Protected Routes ========= */}
       <Route element={<ProtectedRoute />}>
+        {/* Companies routes - outside MainLayout for full screen */}
+        <Route path="/companies" element={<CompaniesList />} />
+        <Route path="/company-application" element={<CompanyApplication />} />
+
         <Route element={<MainLayout />}>
           {/* ===== Home & Nested Routes ===== */}
           <Route path="/home" element={<Home />}>
@@ -80,9 +86,6 @@ const AppRoutes = () => {
 
           {/* Lead QR */}
           <Route path="/home/lead-qr" element={<LeadQR />} />
-
-          {/* Tailwind Test - for debugging */}
-          {/* <Route path="/test-tailwind" element={<TailwindTest />} /> */}
 
           {/* Chats and assistant */}
           <Route path="/chat" element={<Chat />} />

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { Bell, MessageSquare, Menu } from "lucide-react";
+import { Bell, MessageSquare, Menu, SlidersHorizontal } from "lucide-react";
 import Sidebar from "@/layouts/sidebar";
 import DesktopHeader from "@/components/layout/DesktopHeader";
+import AccountCreatedModal from "@/components/home/AccountCreatedModal";
+import ProfileUnderReviewModal from "@/components/home/ProfileUnderReviewModal";
+import FilterModal from "@/components/home/FilterModal";
+import ResponsiveModal from "@/components/ui/ResponsiveModal";
 
 type TabKey = "bid" | "schedule" | "invoice";
 
@@ -16,6 +20,16 @@ function Home() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<TabKey>("bid");
   const [showSidebar, setShowSidebar] = useState(false);
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showProfileReviewModal, setShowProfileReviewModal] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({
+    position: "",
+    minRate: "",
+    maxRate: "",
+    state: "",
+    date: "",
+  });
   const navigate = useNavigate();
 
   // Sync tab with URL
@@ -26,6 +40,23 @@ function Home() {
       setActiveTab("invoice");
     else setActiveTab("bid");
   }, [location.pathname]);
+
+  // Check if user just signed up and show modal
+  useEffect(() => {
+    const userSignupCompleted = localStorage.getItem("user-signup-completed");
+    if (userSignupCompleted === "true") {
+      setShowAccountModal(true);
+      // Remove the flag so modal doesn't show again
+      localStorage.removeItem("user-signup-completed");
+    }
+
+    const profileUnderReview = localStorage.getItem("profile-under-review");
+    if (profileUnderReview === "true") {
+      setShowProfileReviewModal(true);
+      // Remove the flag so modal doesn't show again
+      localStorage.removeItem("profile-under-review");
+    }
+  }, []);
 
   return (
     <>
@@ -50,6 +81,14 @@ function Home() {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Filter button */}
+            <button
+              aria-label="Filter"
+              onClick={() => setShowFilterModal(true)}
+              className="p-1"
+            >
+              <SlidersHorizontal className="w-6 h-6" />
+            </button>
             {/* Assistant chat button routes to /assistant */}
             <button
               aria-label="Messages"
@@ -97,6 +136,17 @@ function Home() {
 
       {/* ===== Desktop Header ===== */}
       <DesktopHeader title="Available Shifts">
+        {/* Filter Icon for Desktop - positioned before profile */}
+        <div className="absolute right-20 top-4">
+          <button
+            aria-label="Filter"
+            onClick={() => setShowFilterModal(true)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <SlidersHorizontal className="w-6 h-6 text-black" />
+          </button>
+        </div>
+
         <div className="flex gap-8 pt-4 pb-3 border-b border-black/10">
           {TABS.map((t) => {
             const isActive = activeTab === t.key;
@@ -130,11 +180,44 @@ function Home() {
         </div>
       </main>
 
-
-
-
       {/* ===== Sidebar ===== */}
       <Sidebar open={showSidebar} onClose={() => setShowSidebar(false)} />
+
+      {/* ===== Account Created Modal ===== */}
+      <AccountCreatedModal
+        isOpen={showAccountModal}
+        onClose={() => setShowAccountModal(false)}
+        onApplyToCompanies={() => {
+          setShowAccountModal(false);
+          navigate("/companies");
+        }}
+      />
+
+      {/* ===== Profile Under Review Modal ===== */}
+      <ProfileUnderReviewModal
+        isOpen={showProfileReviewModal}
+        onClose={() => setShowProfileReviewModal(false)}
+      />
+
+      {/* ===== Filter Modal ===== */}
+      {showFilterModal && (
+        <ResponsiveModal
+          open={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
+          ariaLabel="Filter jobs"
+          backdropClassName="bg-black/50"
+        >
+          <FilterModal
+            onClose={() => setShowFilterModal(false)}
+            onApply={(filters) => {
+              setCurrentFilters(filters);
+              console.log("Applied filters:", filters);
+              // Here you would typically trigger a search/filter action
+            }}
+            currentFilters={currentFilters}
+          />
+        </ResponsiveModal>
+      )}
     </>
   );
 }

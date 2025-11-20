@@ -6,6 +6,7 @@ import {
   FileText,
   Info,
   LogOut,
+  Building2,
 } from "lucide-react";
 
 export type NavItem =
@@ -35,6 +36,12 @@ const navItems: NavItem[] = [
     icon: <User2 className="w-5 h-5" />,
     label: "User Settings",
     type: "action",
+  },
+  {
+    path: "/companies",
+    icon: <Building2 className="w-5 h-5" />,
+    label: "List of Companies",
+    type: "link",
   },
   {
     path: "/settings/privacy-policy",

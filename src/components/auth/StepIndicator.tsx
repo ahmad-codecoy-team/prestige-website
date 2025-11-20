@@ -13,10 +13,16 @@ export const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => {
     <div className="pb-6 pt-4">
       <div className="flex justify-between items-start relative px-2">
         {/* Connecting Line */}
-        <div className="absolute top-[22px] left-0 right-0 h-[2px] bg-gray-400" style={{ left: '12%', right: '12%' }} />
+        <div
+          className="absolute top-[22px] left-0 right-0 h-0.5 bg-gray-400"
+          style={{ left: "12%", right: "12%" }}
+        />
 
         {steps.map((step) => (
-          <div key={step.number} className="flex flex-col items-center gap-1 relative flex-1">
+          <div
+            key={step.number}
+            className="flex flex-col items-center gap-1 relative flex-1"
+          >
             <div
               className={`w-11 h-11 rounded-full flex items-center justify-center text-lg font-bold transition-all relative z-10 ${
                 step.number === currentStep
