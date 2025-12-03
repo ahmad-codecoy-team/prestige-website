@@ -17,7 +17,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("prestige-token");
-    console.log(token);
     if (token) {
       // TODO: Fetch user data from token or API
       // For now, just mark as loaded
@@ -26,14 +25,10 @@ export const useAuth = () => {
   }, []);
 
   const login = async (credentials: LoginRequest) => {
-    try {
-      const response = await authService.login(credentials);
-      localStorage.setItem("prestige-token", response.accessToken);
-      setUser(response.user);
-      navigate("/home");
-    } catch (error) {
-      throw error;
-    }
+    const response = await authService.login(credentials);
+    localStorage.setItem("prestige-token", response.accessToken);
+    setUser(response.user);
+    navigate("/home");
   };
 
   const logout = async () => {

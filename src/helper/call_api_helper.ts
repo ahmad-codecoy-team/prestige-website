@@ -13,7 +13,10 @@ export const handleApiCall = async <T>(
     if (onSuccess) onSuccess(response);
     return response;
   } catch (error: unknown) {
-    const err = error as { response?: { status?: number; data?: { message?: string } }; message?: string };
+    const err = error as {
+      response?: { status?: number; data?: { message?: string } };
+      message?: string;
+    };
     console.error(
       "API call failed:",
       err?.response?.data?.message || err.message

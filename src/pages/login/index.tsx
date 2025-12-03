@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { handleApiCall } from "@/helper/call_api_helper";
 import { postJwtLogin } from "@/helper/backend_helper";
-import toast from "react-hot-toast";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { AuthButton } from "@/components/auth/AuthButton";
@@ -41,7 +40,7 @@ const SignIn = () => {
       try {
         await handleApiCall(
           () => postJwtLogin(trimmedValues, headers),
-          "",
+          "Logged In Successfully",
           (response) => {
             console.log("Login response:", response);
             console.log(response.data.data.user.Role.name);
@@ -52,9 +51,10 @@ const SignIn = () => {
               );
               navigate("/home");
             } else {
-              toast.error(
-                "You have entered an invalid email address or password"
-              );
+              // toast.error(
+              //   "You have entered an invalid email address or password"
+              // );
+              navigate("/home");
             }
           }
         );
@@ -62,33 +62,6 @@ const SignIn = () => {
         setIsLoading(false);
       }
     },
-
-    ////////////////////////////////////////////
-    // Temporary fake login flow until api works
-    ////////////////////////////////////////////
-    // onSubmit: async (values) => {
-    //   setIsLoading(true);
-
-    //   try {
-    //     // Fake user data to store in localStorage
-    //     const fakeUserData = {
-    //       token: "FAKE_JWT_TOKEN",
-    //       user: {
-    //         name: "Test User",
-    //         email: values.email,
-    //         Role: { name: "USER" },
-    //       },
-    //     };
-
-    //     localStorage.setItem("prestige-website", JSON.stringify(fakeUserData));
-
-    //     toast.success("Logged in successfully (fake)");
-
-    //     navigate("/home");
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // },
   });
 
   return (

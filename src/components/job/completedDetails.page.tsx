@@ -11,7 +11,7 @@ export default function CompletedJobDetailsPage() {
         <div
           className="
            bg-white shadow w-full min-h-full
-       max-w-[100dvw]
+       max-w-dvw
           "
         >
           {/* Your original component unchanged */}

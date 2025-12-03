@@ -124,64 +124,64 @@ const LeadAttendance = () => {
 
       <div className="min-h-screen bg-[#fbbf24] flex flex-col">
         {/* Header (mobile-friendly sizes) */}
-        <div className="fixed top-0 left-0 right-0 lg:left-[80px] bg-black text-white z-50">
+        <div className="fixed top-0 left-0 right-0 lg:left-20 bg-black text-white z-50">
           <div className="w-full max-w-[1440px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-4 md:pb-6">
-          {/* Top Navigation Bar */}
-          <div className="flex justify-between items-center mb-4 md:mb-6">
-            <ArrowLeft
-              className="cursor-pointer"
-              size={24}
-              onClick={() => navigate(-1)}
-            />
-            <div className="text-center text-base md:text-xl font-semibold tracking-wide">
-              SIGN IN
-            </div>
-            <div className="flex gap-3 md:gap-4">
-              <QrCode
+            {/* Top Navigation Bar */}
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+              <ArrowLeft
                 className="cursor-pointer"
                 size={24}
-                onClick={() => navigate("/home/lead-qr")}
+                onClick={() => navigate(-1)}
               />
-              <Users
-                className="cursor-pointer"
-                size={24}
-                onClick={() => setShowCreateGroup(true)}
-              />
+              <div className="text-center text-base md:text-xl font-semibold tracking-wide">
+                SIGN IN
+              </div>
+              <div className="flex gap-3 md:gap-4">
+                <QrCode
+                  className="cursor-pointer"
+                  size={24}
+                  onClick={() => navigate("/home/lead-qr")}
+                />
+                <Users
+                  className="cursor-pointer"
+                  size={24}
+                  onClick={() => setShowCreateGroup(true)}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Date */}
-          <div className="text-center text-sm md:text-base mb-3 md:mb-4">
-            October 14, 2025
-          </div>
+            {/* Date */}
+            <div className="text-center text-sm md:text-base mb-3 md:mb-4">
+              October 14, 2025
+            </div>
 
-          {/* View Selection Buttons (compact on mobile) */}
-          <div className="flex justify-center gap-2 md:gap-3">
-            <button
-              className={`${getButtonStyle(
-                "clockIn"
-              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
-              onClick={() => setActiveView("clockIn")}
-            >
-              Clock In
-            </button>
-            <button
-              className={`${getButtonStyle(
-                "mealBreak"
-              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
-              onClick={() => setActiveView("mealBreak")}
-            >
-              Meal Break
-            </button>
-            <button
-              className={`${getButtonStyle(
-                "clockOut"
-              )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
-              onClick={() => setActiveView("clockOut")}
-            >
-              Clock Out
-            </button>
-          </div>
+            {/* View Selection Buttons (compact on mobile) */}
+            <div className="flex justify-center gap-2 md:gap-3">
+              <button
+                className={`${getButtonStyle(
+                  "clockIn"
+                )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
+                onClick={() => setActiveView("clockIn")}
+              >
+                Clock In
+              </button>
+              <button
+                className={`${getButtonStyle(
+                  "mealBreak"
+                )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
+                onClick={() => setActiveView("mealBreak")}
+              >
+                Meal Break
+              </button>
+              <button
+                className={`${getButtonStyle(
+                  "clockOut"
+                )} text-sm md:text-base px-4 md:px-6 py-2 md:py-2.5`}
+                onClick={() => setActiveView("clockOut")}
+              >
+                Clock Out
+              </button>
+            </div>
           </div>
         </div>
 
@@ -219,23 +219,23 @@ const LeadAttendance = () => {
         </div>
 
         {/* Fixed Bottom Buttons (compact on mobile) */}
-        <div className="fixed bottom-0 left-0 right-0 lg:left-[80px] bg-white z-40">
+        <div className="fixed bottom-0 left-0 right-0 lg:left-20 bg-white z-40">
           <div className="w-full max-w-[1440px] mx-auto py-4 md:py-6 px-3 md:px-6">
             <div className="flex flex-col items-center md:flex-row justify-center gap-3 md:gap-4">
               <button
                 onClick={() => setActiveView("attendanceDetails")}
                 className="w-full md:max-w-[400px] bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
               >
-            <Calendar size={18} className="md:hidden" />
-            <Calendar size={20} className="hidden md:inline" />
+                <Calendar size={18} className="md:hidden" />
+                <Calendar size={20} className="hidden md:inline" />
                 Attendance
               </button>
               <button
                 onClick={() => setShowAddContractorModal(true)}
                 className="w-full md:max-w-[400px] bg-black text-white py-2.5 md:py-3 px-6 md:px-8 rounded-full flex items-center justify-center gap-2 text-sm md:text-base font-medium"
               >
-            <UserPlus size={18} className="md:hidden" />
-            <UserPlus size={20} className="hidden md:inline" />
+                <UserPlus size={18} className="md:hidden" />
+                <UserPlus size={20} className="hidden md:inline" />
                 Add Contractor
               </button>
             </div>
