@@ -8,7 +8,11 @@ interface EnhancedExperiencesFormProps {
   onDataChange?: (hasData: boolean) => void;
 }
 
-const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExperiencesFormProps) => {
+// const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExperiencesFormProps)
+const EnhancedExperiencesForm = ({
+  company,
+  onDataChange,
+}: EnhancedExperiencesFormProps) => {
   const [selectedExperiences, setSelectedExperiences] = useState<string[]>([]);
   const [modalExperience, setModalExperience] = useState<string | null>(null);
 
@@ -19,7 +23,7 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
 
   const handleExperienceClick = (experience: string) => {
     const subOptions = company.experienceSubOptions[experience];
-    
+
     if (subOptions && subOptions.length > 0) {
       // Show modal for experiences with sub-options
       setModalExperience(experience);
@@ -30,9 +34,9 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
   };
 
   const toggleExperience = (experience: string) => {
-    setSelectedExperiences(prev => 
+    setSelectedExperiences((prev) =>
       prev.includes(experience)
-        ? prev.filter(exp => exp !== experience)
+        ? prev.filter((exp) => exp !== experience)
         : [...prev, experience]
     );
   };
@@ -40,33 +44,33 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
   const handleModalSave = (subExperiences: string[]) => {
     if (modalExperience) {
       // Remove any existing selections for this main experience
-      const filteredExperiences = selectedExperiences.filter(exp => 
-        exp !== modalExperience && !exp.startsWith(`${modalExperience} - `)
+      const filteredExperiences = selectedExperiences.filter(
+        (exp) =>
+          exp !== modalExperience && !exp.startsWith(`${modalExperience} - `)
       );
-      
+
       const newExperiences = new Set(filteredExperiences);
-      
+
       if (subExperiences.length > 0) {
         // Add main experience
         newExperiences.add(modalExperience);
-        
+
         // Add selected sub-experiences
-        subExperiences.forEach(sub => {
+        subExperiences.forEach((sub) => {
           newExperiences.add(`${modalExperience} - ${sub}`);
         });
       }
-      
+
       setSelectedExperiences(Array.from(newExperiences));
     }
     setModalExperience(null);
   };
 
   const isExperienceSelected = (experience: string) => {
-    return selectedExperiences.some(exp => 
-      exp === experience || exp.startsWith(`${experience} - `)
+    return selectedExperiences.some(
+      (exp) => exp === experience || exp.startsWith(`${experience} - `)
     );
   };
-
 
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 pt-4 pb-6">
@@ -81,8 +85,9 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
               <div className="flex flex-wrap gap-2">
                 {cat.options.map((opt: string, j: number) => {
                   const isSelected = isExperienceSelected(opt);
-                  const hasSubOptions = company.experienceSubOptions[opt]?.length > 0;
-                  
+                  const hasSubOptions =
+                    company.experienceSubOptions[opt]?.length > 0;
+
                   return (
                     <button
                       key={j}
@@ -96,7 +101,7 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
                     >
                       <span>{opt}</span>
                       {hasSubOptions && <span>›</span>}
-                      
+
                       {/* Red Cross for Removing - Inside the button */}
                       {isSelected && (
                         <button
@@ -104,8 +109,11 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
                           onClick={(e) => {
                             e.stopPropagation();
                             // Remove main experience and all sub-experiences
-                            setSelectedExperiences(prev => 
-                              prev.filter(exp => exp !== opt && !exp.startsWith(`${opt} - `))
+                            setSelectedExperiences((prev) =>
+                              prev.filter(
+                                (exp) =>
+                                  exp !== opt && !exp.startsWith(`${opt} - `)
+                              )
                             );
                           }}
                           className="w-3 h-3 bg-red-500 text-white rounded-full text-[10px] font-bold hover:bg-red-600 transition-colors flex items-center justify-center ml-auto"
@@ -128,7 +136,6 @@ const EnhancedExperiencesForm = ({ onNext, company, onDataChange }: EnhancedExpe
             {selectedExperiences.length} experience(s) selected
           </div>
         )}
-
 
         {/* Experience Modal */}
         {modalExperience && (

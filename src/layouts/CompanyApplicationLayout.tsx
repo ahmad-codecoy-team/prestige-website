@@ -22,6 +22,7 @@ interface CompanyApplicationLayoutProps {
   isLastStep?: boolean;
   nextDisabled?: boolean;
   isSubmitting?: boolean;
+  isEditing?: boolean;
 }
 
 const CompanyApplicationLayout = ({
@@ -35,6 +36,7 @@ const CompanyApplicationLayout = ({
   isLastStep = false,
   nextDisabled = false,
   isSubmitting = false,
+  isEditing = false,
 }: CompanyApplicationLayoutProps) => {
   const navigate = useNavigate();
 
@@ -220,7 +222,7 @@ const CompanyApplicationLayout = ({
                 currentStep === 1 ? 'w-full' : 'flex-1'
               }`}
             >
-              {isSubmitting ? "Submitting..." : isLastStep ? "Submit" : "Next"}
+              {isSubmitting ? "Updating..." : isLastStep ? (isEditing ? "Update" : "Submit") : "Next"}
             </button>
           </div>
         </div>

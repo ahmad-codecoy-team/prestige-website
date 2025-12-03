@@ -5,7 +5,8 @@
 // };
 
 export const config = {
-  API_URL: "https://prestigeapi.codecoytechnologies.live/api/v1",
+  // API_URL: "https://prestigeapi.codecoytechnologies.live/api/v1",
+  API_URL: "https://prestigeapistaging.codecoytechnologies.live/api/v1",
   FILe_URL: "https://prestigeapi.codecoytechnologies.live/",
   PDF_URL: "https://admin.referease.co.uk/berkshire/public/pdf/",
 };

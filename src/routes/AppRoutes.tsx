@@ -29,6 +29,8 @@ import LeadQR from "@/components/job/LeadQR";
 import ContactUs from "@/pages/settings/ContactUs";
 import WorkHistory from "@/pages/settings/WorkHistory";
 import EditProfile from "@/pages/settings/EditProfile";
+import OnboardingDocuments from "@/pages/settings/OnboardingDocuments";
+import CompanyProfile from "@/pages/settings/CompanyProfile";
 import SettingsChangePassword from "@/pages/settings/ChangePassword";
 import PrivacyPolicy from "@/pages/settings/PrivacyPolicy";
 import About from "@/pages/settings/About";
@@ -54,6 +56,9 @@ const AppRoutes = () => {
         {/* Companies routes - outside MainLayout for full screen */}
         <Route path="/companies" element={<CompaniesList />} />
         <Route path="/company-application" element={<CompanyApplication />} />
+        
+        {/* Settings Company Profile Edit - outside MainLayout for full screen */}
+        <Route path="/settings/company-profile" element={<CompanyProfile />} />
 
         <Route element={<MainLayout />}>
           {/* ===== Home & Nested Routes ===== */}
@@ -101,6 +106,7 @@ const AppRoutes = () => {
             element={<Navigate to="/settings/profile" replace />}
           />
           <Route path="/settings/profile" element={<EditProfile />} />
+          <Route path="/settings/onboarding-documents" element={<OnboardingDocuments />} />
           <Route
             path="/settings/security/change-password"
             element={<SettingsChangePassword />}

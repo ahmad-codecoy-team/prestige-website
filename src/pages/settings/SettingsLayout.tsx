@@ -13,6 +13,7 @@ interface SettingsLayoutProps {
 
 const SETTINGS_TABS = [
   { path: "/settings/profile", label: "Profile" },
+  { path: "/settings/onboarding-documents", label: "Onboarding Documents" },
   { path: "/settings/security/change-password", label: "Security" },
   { path: "/settings/history", label: "Work History" },
   { path: "/settings/contact", label: "Contact" },

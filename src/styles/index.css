@@ -1,8 +1,7 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Variables */
 :root {
   --color-primary1: #fef618;
   --color-primary2: #fed85d;
@@ -28,7 +27,6 @@ body {
   background-color: white;
 }
 
-/* Optional dark theme */
 [data-theme="dark"] {
   --color-primary: #ffffff;
   --color-accent: #ff9800;
@@ -37,7 +35,6 @@ body {
   --color-text: #f1f5f9;
 }
 
-/* Utility classes (optional) */
 .bg-screen {
   background-image: radial-gradient(
     var(--color-primary1) 5%,
@@ -69,4 +66,4 @@ body {
   background-color: var(--color-bg);
   color: var(--color-accent);
   font-size: large;
-}
+} */

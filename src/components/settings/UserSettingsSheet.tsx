@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { User2, KeyRound, Trash2, X } from "lucide-react";
+import { User2, KeyRound, Trash2, X, FileText } from "lucide-react";
 
 interface Props {
   open: boolean;
@@ -59,13 +59,24 @@ const UserSettingsSheet: React.FC<Props> = ({ open, onClose }) => {
               <ul className="space-y-2">
                 <li>
                   <button
-                    onClick={() => go("/settings/editprofile")}
+                    onClick={() => go("/settings/profile")}
                     className="w-full flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-black/5 active:scale-[0.99] transition"
                   >
                     <span className="inline-flex items-center justify-center rounded-md bg-[#FCC40B]/20 text-[#FCC40B] p-2">
                       <User2 className="w-5 h-5" />
                     </span>
                     <span className="text-base font-semibold text-black">Edit profile</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => go("/settings/onboarding-documents")}
+                    className="w-full flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-black/5 active:scale-[0.99] transition"
+                  >
+                    <span className="inline-flex items-center justify-center rounded-md bg-[#FCC40B]/20 text-[#FCC40B] p-2">
+                      <FileText className="w-5 h-5" />
+                    </span>
+                    <span className="text-base font-semibold text-black">Onboarding Documents</span>
                   </button>
                 </li>
                 <li>
