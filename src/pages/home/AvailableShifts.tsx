@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "@/components/job/JobCard";
 import Loading from "@/components/LoadingSpinner";
-import { handleApiCall } from "@/helper/call_api_helper";
-import { getAvailableJobs } from "@/helper/backend_helper";
 import { dummyShifts } from "@/mocks/shifts.mock";
+import { jobService } from "@/api/services";
+
 import type { AvailableShifts } from "@/types";
+import { handleApiCall } from "@/utils/apiHandler";
 
 function AvailableShiftsPage() {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ function AvailableShiftsPage() {
     const fetchData = async () => {
       setLoading(true);
       await handleApiCall(
-        () => getAvailableJobs(),
+        () => jobService.getAvailableJobs(),
         "",
         (response: { data?: { data?: AvailableShifts[] } }) => {
           const data = response?.data?.data || [];
@@ -44,7 +45,12 @@ function AvailableShiftsPage() {
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {shifts.map((shift) => (
-        <Card key={shift.id} shift={shift} link={`/home/bid/${shift.id}`} variant="available" />
+        <Card
+          key={shift.id}
+          shift={shift}
+          link={`/home/bid/${shift.id}`}
+          variant="available"
+        />
       ))}
     </div>
   );

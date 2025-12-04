@@ -5,8 +5,8 @@ import BidHeader from "@/components/bid/BidHeader";
 import JobDetailsCard from "@/components/job/JobDetailsCard";
 import JobActionBar from "@/components/job/JobActionBar";
 import { JOB_DETAILS_MOCK } from "@/mocks/jobs.mock";
-import { handleApiCall } from "@/helper/call_api_helper";
-import { getScheduleDetails } from "@/helper/backend_helper";
+import { jobService } from "@/api/services/job.service";
+import { handleApiCall } from "@/utils/apiHandler";
 
 export default function JobDetailsPage() {
   const location = useLocation();
@@ -17,7 +17,7 @@ export default function JobDetailsPage() {
   useEffect(() => {
     const fetchData = async () => {
       await handleApiCall(
-        () => getScheduleDetails(shift?.shift?.id),
+        () => jobService.getScheduleDetails(shift?.shift?.id),
         "",
         () => {}
       );

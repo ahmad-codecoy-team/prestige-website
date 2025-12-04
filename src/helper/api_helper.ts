@@ -1,3 +1,5 @@
+// src/helper/api_helper.ts
+
 import { config } from "../config";
 import axios from "axios";
 // default
@@ -10,7 +12,7 @@ axios.interceptors.request.use(
     const token = JSON.parse(
       localStorage.getItem("prestige-website")
     )?.accessToken;
-    
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

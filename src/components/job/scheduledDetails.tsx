@@ -1,6 +1,6 @@
 import PLS from "@/assets/PLS.png";
-import { getScheduleDetails } from "@/helper/backend_helper";
-import { handleApiCall } from "@/helper/call_api_helper";
+import { handleApiCall } from "@/utils/apiHandler";
+import { jobService } from "@/api";
 import { useEffect } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { RiGroupFill } from "react-icons/ri";
@@ -15,7 +15,7 @@ const JobDetails = () => {
     const fetchData = async () => {
       // setLoading(true);
       await handleApiCall(
-        () => getScheduleDetails(shift?.shift?.id),
+        () => jobService.getScheduleDetails(shift?.shift?.id),
         "",
         (response: unknown) => {
           console.log(response);
@@ -105,7 +105,9 @@ const JobDetails = () => {
         </div>
       )}
       <Link
-        to={`/home/jobs/${shift?.shift?.id ?? shift?.id ?? ""}/attendance/${isLead ? "lead" : "worker"}`}
+        to={`/home/jobs/${shift?.shift?.id ?? shift?.id ?? ""}/attendance/${
+          isLead ? "lead" : "worker"
+        }`}
         state={{ isLead }}
         className="w-full max-w-lg"
       >
