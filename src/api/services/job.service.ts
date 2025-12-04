@@ -1,5 +1,5 @@
 // src/api/services/job.service.ts
-import axiosInstance from "@/api/client/axios.config";
+import { axiosInstance } from "@/api";
 import { API_ENDPOINTS } from "../endpoints";
 
 export const jobService = {
