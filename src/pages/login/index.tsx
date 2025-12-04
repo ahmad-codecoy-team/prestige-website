@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
@@ -13,11 +13,13 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { loginMutation } = useAuth();
+  const navigate = useNavigate();
 
   const formik = useFormik<LoginRequest>({
+    // temporaily filled with credentials, remove later
     initialValues: {
-      email: "",
-      password: "",
+      email: "codecoyteamsqa1@gmail.com",
+      password: "123456",
     },
 
     validationSchema: Yup.object({
@@ -109,7 +111,12 @@ const SignIn = () => {
           </form>
 
           <div className="flex flex-col gap-4 mt-auto pb-4">
-            <AuthButton variant="primary" onClick={() => {}}>
+            <AuthButton
+              variant="primary"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
               Create new account
             </AuthButton>
 

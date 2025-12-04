@@ -39,11 +39,6 @@ export interface AuthResponse {
     email: string;
     firstName: string;
     lastName: string;
-    // Optional role field (if backend sends it)
-    Role?: {
-      name: string;
-      [key: string]: any;
-    };
   };
 }
 
@@ -72,17 +67,32 @@ export const authService = {
   },
 
   signup: async (data: SignupRequest): Promise<AuthResponse> => {
-    const response = await axiosInstance.post<ApiResponse<AuthResponse>>(
-      API_ENDPOINTS.AUTH.SIGNUP,
-      data
-    );
+    // ✅ TEMP: Fake API success until backend is ready
+    await new Promise((res) => setTimeout(res, 800));
 
-    const authData = response.data.data;
+    const fakeResponse: AuthResponse = {
+      accessToken: "mock-signup-token",
+      refreshToken: "mock-refresh-token",
+      user: {
+        id: "mock-id",
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      },
+    };
 
-    localStorage.setItem(AUTH_TOKEN_KEY, authData.accessToken);
-    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(authData.user));
+    // Persist token & user just like real login
+    localStorage.setItem(AUTH_TOKEN_KEY, fakeResponse.accessToken);
+    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(fakeResponse.user));
 
-    return authData;
+    return fakeResponse;
+
+    // ⛔ REMOVE these lines when backend is ready:
+    // const response = await axiosInstance.post<ApiResponse<AuthResponse>>(
+    //   API_ENDPOINTS.AUTH.SIGNUP,
+    //   data
+    // );
+    // return response.data.data;
   },
 
   logout: async (): Promise<void> => {

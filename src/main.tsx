@@ -1,19 +1,3 @@
-// import { StrictMode } from "react";
-// import { createRoot } from "react-dom/client";
-// import "./index.css";
-// import App from "./App.tsx";
-// import { BrowserRouter } from "react-router-dom";
-// import { Toaster } from "react-hot-toast";
-
-// createRoot(document.getElementById("root")!).render(
-//   <StrictMode>
-//     <BrowserRouter>
-//       <Toaster />
-//       <App />
-//     </BrowserRouter>
-//   </StrictMode>
-// );
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -29,7 +13,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // Cached for 5 minutes
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       retry: 1,
     },
     mutations: {
@@ -42,7 +26,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
         <App />
       </QueryClientProvider>
     </BrowserRouter>

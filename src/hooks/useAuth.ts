@@ -4,6 +4,9 @@ import toast from "react-hot-toast";
 
 import { authService } from "@/api/services/auth.service";
 import type { LoginRequest } from "@/types";
+import type { AxiosError } from "axios";
+import type { ApiResponse } from "@/api/services/auth.service";
+import { queryKeys } from "@/lib/queryKeys";
 
 interface User {
   id: string;
@@ -11,8 +14,6 @@ interface User {
   firstName: string;
   lastName: string;
 }
-
-export const AUTH_QUERY_KEY = ["auth-user"];
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const useAuth = () => {
    * ✅ Load user from local storage (no API call required)
    */
   const { data: user, isLoading } = useQuery<User | null>({
-    queryKey: AUTH_QUERY_KEY,
+    queryKey: queryKeys.auth,
 
     queryFn: async () => authService.getCurrentUser(),
 
@@ -36,15 +37,32 @@ export const useAuth = () => {
     mutationFn: (payload: LoginRequest) => authService.login(payload),
 
     onSuccess: (auth) => {
-      queryClient.setQueryData(AUTH_QUERY_KEY, auth.user);
+      queryClient.setQueryData(queryKeys.auth, auth.user);
 
       toast.success("Logged in successfully");
       navigate("/home");
     },
 
-    onError: (error: any) => {
+    onError: (error: AxiosError<ApiResponse<unknown>>) => {
       toast.error(
         error?.response?.data?.message ?? "Invalid email or password"
+      );
+    },
+  });
+
+  const signupMutation = useMutation({
+    mutationFn: authService.signup,
+
+    onSuccess: (auth) => {
+      queryClient.setQueryData(queryKeys.auth, auth.user);
+
+      toast.success("Account created successfully");
+      navigate("/home");
+    },
+
+    onError: (error: AxiosError<ApiResponse<unknown>>) => {
+      toast.error(
+        error.response?.data?.message ?? "Signup failed. Please try again."
       );
     },
   });
@@ -56,7 +74,7 @@ export const useAuth = () => {
     mutationFn: () => authService.logout(),
 
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
+      queryClient.removeQueries({ queryKey: queryKeys.auth });
       navigate("/login");
     },
   });
@@ -69,8 +87,10 @@ export const useAuth = () => {
     // mutations
     login: loginMutation.mutate,
     logout: logoutMutation.mutate,
+    signup: signupMutation.mutate,
 
     loginMutation,
+    signupMutation,
     logoutMutation,
   };
 };
