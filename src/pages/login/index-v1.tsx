@@ -1,41 +1,65 @@
+// src/pages/login/index.tsx
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import toast from "react-hot-toast";
 
-import { useAuth } from "@/hooks/useAuth";
-import type { LoginRequest } from "@/types";
+import { handleApiCall } from "@/utils/apiHandler";
+import { authService, LoginRequest } from "@/api/services/auth.service";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { AuthButton } from "@/components/auth/AuthButton";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  const { loginMutation } = useAuth();
 
   const formik = useFormik<LoginRequest>({
     initialValues: {
       email: "",
       password: "",
     },
-
     validationSchema: Yup.object({
       email: Yup.string()
         .trim()
         .email("Invalid email address")
         .required("Email is required"),
-
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-
-    onSubmit: (values) => {
-      loginMutation.mutate({
+    onSubmit: async (values) => {
+      const trimmedValues: LoginRequest = {
         email: values.email.trim(),
         password: values.password.trim(),
-      });
+      };
+
+      setIsLoading(true);
+
+      try {
+        await handleApiCall(
+          () => authService.login(trimmedValues),
+          "Logged In Successfully",
+          (auth) => {
+            console.log("Login response:", auth);
+
+            const roleName = auth.user.Role?.name;
+
+            if (!roleName || roleName === "USER") {
+              // authService.login already saved token & user
+              navigate("/home");
+            } else {
+              toast.error(
+                "You have entered an invalid email address or password"
+              );
+            }
+          }
+        );
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -78,9 +102,14 @@ const SignIn = () => {
               rightIcon={
                 <button
                   type="button"
-                  onClick={() => setShowPassword((p) => !p)}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer"
                 >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                  {showPassword ? (
+                    <FiEyeOff className="w-5 h-5 text-gray-400" />
+                  ) : (
+                    <FiEye className="w-5 h-5 text-gray-400" />
+                  )}
                 </button>
               }
               onChange={formik.handleChange}
@@ -93,29 +122,28 @@ const SignIn = () => {
               }
             />
 
-            <AuthButton
-              type="submit"
-              className="mt-2"
-              disabled={loginMutation.isPending}
-            >
-              {loginMutation.isPending ? "Logging in..." : "Log In"}
+            <AuthButton type="submit" className="mt-2" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Log In"}
             </AuthButton>
 
             <div className="text-center mt-2">
-              <Link to="/forgot" className="text-white text-sm hover:underline">
+              <Link
+                to="/forgot"
+                className="text-white text-sm font-normal hover:underline"
+              >
                 Forgot Password?
               </Link>
             </div>
           </form>
 
           <div className="flex flex-col gap-4 mt-auto pb-4">
-            <AuthButton variant="primary" onClick={() => {}}>
+            <AuthButton variant="primary" onClick={() => navigate("/signup")}>
               Create new account
             </AuthButton>
 
             <Link
               to="/home"
-              className="text-center text-white text-sm hover:underline flex justify-center gap-2"
+              className="text-center text-white text-sm font-normal hover:underline flex items-center justify-center gap-2"
             >
               <span className="underline">Continue as Guest</span>
               <span>→</span>

@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authService } from "@/api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+
+import { authService } from "@/api/services/auth.service";
 import type { LoginRequest } from "@/types";
 
 interface User {
@@ -10,32 +12,65 @@ interface User {
   lastName: string;
 }
 
+export const AUTH_QUERY_KEY = ["auth-user"];
+
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const token = localStorage.getItem("prestige-token");
-    if (token) {
-      // TODO: Fetch user data from token or API
-      // For now, just mark as loaded
-    }
-    setLoading(false);
-  }, []);
+  /**
+   * ✅ Load user from local storage (no API call required)
+   */
+  const { data: user, isLoading } = useQuery<User | null>({
+    queryKey: AUTH_QUERY_KEY,
 
-  const login = async (credentials: LoginRequest) => {
-    const response = await authService.login(credentials);
-    localStorage.setItem("prestige-token", response.accessToken);
-    setUser(response.user);
-    navigate("/home");
+    queryFn: async () => authService.getCurrentUser(),
+
+    staleTime: Infinity,
+  });
+
+  /**
+   * ✅ Login mutation
+   */
+  const loginMutation = useMutation({
+    mutationFn: (payload: LoginRequest) => authService.login(payload),
+
+    onSuccess: (auth) => {
+      queryClient.setQueryData(AUTH_QUERY_KEY, auth.user);
+
+      toast.success("Logged in successfully");
+      navigate("/home");
+    },
+
+    onError: (error: any) => {
+      toast.error(
+        error?.response?.data?.message ?? "Invalid email or password"
+      );
+    },
+  });
+
+  /**
+   * ✅ Logout mutation
+   */
+  const logoutMutation = useMutation({
+    mutationFn: () => authService.logout(),
+
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
+      navigate("/login");
+    },
+  });
+
+  return {
+    user,
+    loading: isLoading,
+    isAuthenticated: !!user,
+
+    // mutations
+    login: loginMutation.mutate,
+    logout: logoutMutation.mutate,
+
+    loginMutation,
+    logoutMutation,
   };
-
-  const logout = async () => {
-    await authService.logout();
-    setUser(null);
-    navigate("/login");
-  };
-
-  return { user, loading, login, logout, isAuthenticated: !!user };
 };
