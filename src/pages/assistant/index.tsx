@@ -4,16 +4,14 @@ import PageLayout from "@/components/layout/PageLayout";
 
 const AssistantChat = () => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState(
-    [
-      {
-        id: "1",
-        text: "Hi! I'm your assistant. How can I help?",
-        isSender: false,
-        timestamp: "just now",
-      },
-    ] as { id: string; text: string; isSender: boolean; timestamp: string }[]
-  );
+  const [messages, setMessages] = useState([
+    {
+      id: "1",
+      text: "Hi! I'm your assistant. How can I help?",
+      isSender: false,
+      timestamp: "just now",
+    },
+  ] as { id: string; text: string; isSender: boolean; timestamp: string }[]);
 
   const handleSend = () => {
     if (!message.trim()) return;
@@ -46,7 +44,9 @@ const AssistantChat = () => {
               {messages.map((m) => (
                 <div
                   key={m.id}
-                  className={`flex ${m.isSender ? "justify-end" : "justify-start"}`}
+                  className={`flex ${
+                    m.isSender ? "justify-end" : "justify-start"
+                  }`}
                 >
                   <div
                     className={`max-w-xs lg:max-w-md rounded-2xl px-4 py-3 ${
@@ -95,5 +95,3 @@ const AssistantChat = () => {
 };
 
 export default AssistantChat;
-
-

@@ -90,29 +90,25 @@ const CompletedJobDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-     
-<div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 shadow-md lg:left-[40px]">
-  <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
-    
-    <button
-      onClick={() => navigate("/home")}
-      className="p-2 hover:bg-black/10 rounded-full transition-colors"
-    >
-      <ArrowLeft className="w-6 h-6 text-black" />
-    </button>
+      <div className="fixed top-0 left-0 right-0 bg-[#FCC40B] z-40 shadow-md lg:left-10">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <button
+            onClick={() => navigate("/home")}
+            className="p-2 hover:bg-black/10 rounded-full transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 text-black" />
+          </button>
 
-    <h1 className="text-lg md:text-xl font-bold text-black">Invoice</h1>
+          <h1 className="text-lg md:text-xl font-bold text-black">Invoice</h1>
 
-    <button
-      onClick={handleRefresh}
-      className="p-2 hover:bg-black/10 rounded-full transition-colors"
-    >
-      <RotateCw className="w-6 h-6 text-black" />
-    </button>
-
-  </div>
-</div>
-
+          <button
+            onClick={handleRefresh}
+            className="p-2 hover:bg-black/10 rounded-full transition-colors"
+          >
+            <RotateCw className="w-6 h-6 text-black" />
+          </button>
+        </div>
+      </div>
 
       {/* Content starts below fixed header */}
       <div className="pt-20 px-2 sm:px-4 md:px-6 lg:px-8 bg-gray-50">
@@ -164,7 +160,7 @@ const CompletedJobDetails = () => {
         <div className="mb-2 max-w-7xl mx-auto overflow-x-hidden">
           <div className="w-full max-w-full overflow-x-hidden">
             {/* Table Header */}
-            <div className="grid grid-cols-9 bg-[#FDE99E] border-1 border-[#E5C05B] w-full max-width-full">
+            <div className="grid grid-cols-9 bg-[#FDE99E] border border-[#E5C05B] w-full max-width-full">
               {[
                 "Clock In",
                 "Meal Break",
@@ -186,7 +182,7 @@ const CompletedJobDetails = () => {
             </div>
 
             {/* Table Row */}
-            <div className="grid grid-cols-9 bg-white border-1 border-t-0 border-[#E5C05B] w-full max-width-full">
+            <div className="grid grid-cols-9 bg-white border border-t-0 border-[#E5C05B] w-full max-width-full">
               {/* Clock In */}
               <div className="p-1 border-r border-[#E5C05B]">
                 <input
@@ -208,7 +204,7 @@ const CompletedJobDetails = () => {
                   className="w-full text-center bg-[#E8E8E8] border border-[#FCC40B] rounded px-1 py-2 flex items-center justify-center gap-1 text-xs md:text-sm disabled:opacity-50"
                 >
                   <span className="truncate">{formData.mealBreak}</span>
-                  <ChevronDown className="w-3 h-3 flex-shrink-0" />
+                  <ChevronDown className="w-3 h-3 shrink-0" />
                 </button>
               </div>
 
@@ -318,7 +314,7 @@ const CompletedJobDetails = () => {
                 By clicking this box, you agree to a 5% fee on this invoice for
                 same day payment
               </p>
-              <div className="flex items-center gap-4 flex-shrink-0">
+              <div className="flex items-center gap-4 shrink-0">
                 <span className="text-gray-600 text-sm md:text-base whitespace-nowrap">
                   Instant Pay Fee:
                 </span>
@@ -348,20 +344,12 @@ const CompletedJobDetails = () => {
           </div>
 
           {/* Next Button */}
-          {/* <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-6">
             <button
               onClick={() => setShowPaymentModal(true)}
-              className="bg-[#FCC40B] text-black font-bold text-base md:text-lg py-4 px-16 rounded-full hover:bg-[#e5b00a] transition-colors"
-            >
-              Next
-            </button>
-          </div> */}
-          <div className="flex justify-center mt-6">
-  <button
-    onClick={() => setShowPaymentModal(true)}
-    className="
-      w-full               /* Full width on small screens */
-      max-w-xs             /* Limit width on desktops (adjust as needed) */
+              className="
+      w-full               
+      max-w-xs             
       md:max-w-sm
       bg-[#FCC40B] text-black font-bold
       text-base md:text-lg
@@ -370,12 +358,10 @@ const CompletedJobDetails = () => {
       hover:bg-[#e5b00a]
       transition-colors
     "
-  >
-    Next
-  </button>
-</div>
-
-
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 

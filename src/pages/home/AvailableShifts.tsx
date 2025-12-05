@@ -1,7 +1,7 @@
 import Card from "@/components/job/JobCard";
 import Loading from "@/components/LoadingSpinner";
 
-import { useAvailableShifts } from "@/hooks/useAvailableShifts";
+import { useAvailableShifts } from "@/hooks";
 
 function AvailableShiftsPage() {
   const { data: shifts = [], isLoading } = useAvailableShifts();

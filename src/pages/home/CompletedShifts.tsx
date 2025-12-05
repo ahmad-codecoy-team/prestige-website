@@ -1,6 +1,6 @@
 import Card from "@/components/job/JobCard";
 import Loading from "@/components/LoadingSpinner";
-import { useCompletedShifts } from "@/hooks/useCompletedShifts";
+import { useCompletedShifts } from "@/hooks";
 import { useAuth } from "@/hooks/useAuth";
 
 function CompletedShifts() {

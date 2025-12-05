@@ -21,7 +21,7 @@ import ChatRoom from "@/pages/chat/ChatRoom";
 import AssistantChat from "@/pages/assistant";
 import JobDetailsPage from "@/pages/job/JobDetails";
 import Attendance from "@/pages/attendence/attendance";
-import CompletedJobDetailsPage from "@/components/job/completedDetails.page";
+import CompletedJobDetailsPage from "@/pages/invoice";
 import EditInvoice from "@/components/job/editInvoice";
 import LeadQR from "@/components/job/LeadQR";
 
@@ -56,7 +56,7 @@ const AppRoutes = () => {
         {/* Companies routes - outside MainLayout for full screen */}
         <Route path="/companies" element={<CompaniesList />} />
         <Route path="/company-application" element={<CompanyApplication />} />
-        
+
         {/* Settings Company Profile Edit - outside MainLayout for full screen */}
         <Route path="/settings/company-profile" element={<CompanyProfile />} />
 
@@ -106,7 +106,10 @@ const AppRoutes = () => {
             element={<Navigate to="/settings/profile" replace />}
           />
           <Route path="/settings/profile" element={<EditProfile />} />
-          <Route path="/settings/onboarding-documents" element={<OnboardingDocuments />} />
+          <Route
+            path="/settings/onboarding-documents"
+            element={<OnboardingDocuments />}
+          />
           <Route
             path="/settings/security/change-password"
             element={<SettingsChangePassword />}

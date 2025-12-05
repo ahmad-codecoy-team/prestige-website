@@ -10,10 +10,10 @@ import ResponsiveModal from "@/components/ui/ResponsiveModal";
 
 type TabKey = "bid" | "schedule" | "invoice";
 
-const TABS: { key: TabKey; label: string }[] = [
-  { key: "bid", label: "Bid" },
-  { key: "schedule", label: "Schedule" },
-  { key: "invoice", label: "Invoice" },
+const TABS: { key: TabKey; label: string; description: string }[] = [
+  { key: "bid", label: "Bid", description: "Available Shifts" },
+  { key: "schedule", label: "Schedule", description: "Scheduled Shifts" },
+  { key: "invoice", label: "Invoice", description: "Completed Shifts" },
 ];
 
 function Home() {
@@ -23,6 +23,7 @@ function Home() {
   const [showAccountModal, setShowAccountModal] = useState(false);
   const [showProfileReviewModal, setShowProfileReviewModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [title, setTitle] = useState("Available Shifts");
   const [currentFilters, setCurrentFilters] = useState({
     position: "",
     minRate: "",
@@ -126,7 +127,7 @@ function Home() {
               >
                 {t.label}
                 {isActive && (
-                  <span className="absolute left-0 -bottom-[-3px] h-[2px] w-full bg-white rounded-full" />
+                  <span className="absolute left-0 -bottom-[-3px] h-0.5 w-full bg-white rounded-full" />
                 )}
               </button>
             );
@@ -135,7 +136,7 @@ function Home() {
       </header>
 
       {/* ===== Desktop Header ===== */}
-      <DesktopHeader title="Available Shifts">
+      <DesktopHeader title={title}>
         {/* Filter Icon for Desktop - positioned before profile */}
         <div className="absolute right-20 top-4">
           <button
@@ -155,6 +156,7 @@ function Home() {
                 key={t.key}
                 onClick={() => {
                   setActiveTab(t.key);
+                  setTitle(t.description);
                   navigate(`/home/${t.key}`);
                 }}
                 className={`relative pb-2 text-sm font-medium tracking-wide transition-colors ${
@@ -165,7 +167,7 @@ function Home() {
               >
                 {t.label}
                 {isActive && (
-                  <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black rounded-full" />
+                  <span className="absolute left-0 bottom-0 h-0.5 w-full bg-black rounded-full" />
                 )}
               </button>
             );

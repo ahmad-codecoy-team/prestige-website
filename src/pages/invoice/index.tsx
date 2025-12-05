@@ -1,7 +1,7 @@
 // CompletedJobDetails.page.tsx (new wrapper page)
 
-import LandscapeOnly from "../ui/LandscapeOnly";
-import CompletedJobDetails from "./completedDetails";
+import LandscapeOnly from "../../components/ui/LandscapeOnly";
+import CompletedJobDetails from "../../components/job/completedDetails";
 
 export default function CompletedJobDetailsPage() {
   return (

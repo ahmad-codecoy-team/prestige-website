@@ -14,36 +14,31 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "INV-2025-1001",
     title: "Invoice received",
-    body:
-      "Please review the invoice in Completed Shifts and approve or request changes.",
+    body: "Please review the invoice in Completed Shifts and approve or request changes.",
     unread: false,
   },
   {
     id: "INV-2025-1002",
     title: "Invoice received",
-    body:
-      "Please review the invoice in Completed Shifts and approve or request changes.",
+    body: "Please review the invoice in Completed Shifts and approve or request changes.",
     unread: true,
   },
   {
     id: "JOB-AACCT-489",
     title: "Job AACCT-2025-489",
-    body:
-      "You are booked! Check details in “Scheduled Shifts”. For questions, use our Live Chat.",
+    body: "You are booked! Check details in “Scheduled Shifts”. For questions, use our Live Chat.",
     unread: false,
   },
   {
     id: "INV-2025-1003",
     title: "Invoice received",
-    body:
-      "Please review the invoice in Completed Shifts and approve or request changes.",
+    body: "Please review the invoice in Completed Shifts and approve or request changes.",
     unread: true,
   },
   {
     id: "JOB-NYC-327",
     title: "Job NYC-327",
-    body:
-      "You are booked! Check details in “Scheduled Shifts”. For questions, use our Live Chat.",
+    body: "You are booked! Check details in “Scheduled Shifts”. For questions, use our Live Chat.",
     unread: false,
   },
   {
@@ -55,8 +50,7 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "INV-2025-1005",
     title: "Invoice received",
-    body:
-      "Please review the invoice in Completed Shifts and approve or request changes.",
+    body: "Please review the invoice in Completed Shifts and approve or request changes.",
     unread: true,
   },
 ];

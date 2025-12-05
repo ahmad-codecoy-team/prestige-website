@@ -22,7 +22,11 @@ const SETTINGS_TABS = [
   { path: "/", label: "Logout" },
 ];
 
-const SettingsLayout = ({ children, title, showBackButton = true }: SettingsLayoutProps) => {
+const SettingsLayout = ({
+  children,
+  title,
+  showBackButton = true,
+}: SettingsLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);

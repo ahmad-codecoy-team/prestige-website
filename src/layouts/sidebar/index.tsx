@@ -30,7 +30,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         }`}
       >
         <span className="flex items-center gap-2 sm:gap-3 text-gray-900">
-          <span className="text-gray-800 text-sm sm:text-base">{item.icon}</span>
+          <span className="text-gray-800 text-sm sm:text-base">
+            {item.icon}
+          </span>
           <span className="font-medium text-sm sm:text-base">{item.label}</span>
         </span>
         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
@@ -82,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     <>
       {/* ===== Backdrop ===== */}
       <div
-        className={`fixed inset-0 bg-black/40 transition-opacity duration-200 z-[60] ${
+        className={`fixed inset-0 bg-black/40 transition-opacity duration-200 z-60 ${
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -92,7 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
 
       {/* ===== Drawer ===== */}
       <aside
-        className={`fixed top-0 left-0 h-full w-[86%] max-w-sm bg-[#F7F2F9] shadow-xl z-[61] transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-[86%] max-w-sm bg-[#F7F2F9] shadow-xl z-61 transition-transform duration-300 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-hidden={!open}
@@ -118,9 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         <div className="border-t border-2 border-black/10 mb-2" />
 
         {/* ===== Navigation Items ===== */}
-        <nav className="mt-2">
-          {navItems.map((item) => renderItem(item))}
-        </nav>
+        <nav className="mt-2">{navItems.map((item) => renderItem(item))}</nav>
       </aside>
 
       {/* User Settings Bottom Sheet */}

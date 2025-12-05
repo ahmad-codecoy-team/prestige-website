@@ -19,12 +19,14 @@ export const useCompletedShifts = (userId?: string | number) => {
       try {
         if (!userId) return COMPLETED_SHIFTS_MOCK;
 
-        // FOR NOW WE ARE JUST USING MOCK SHIFTS....LATER REMOVE THIS LINE ONLY
-        if (userId) return COMPLETED_SHIFTS_MOCK;
-
         const response = await jobService.getCompletedJobs(userId);
 
         const data = response?.data?.data ?? [];
+        console.log("Completed shifts data---> ", data);
+
+        // FOR NOW WE ARE JUST USING MOCK SHIFTS....LATER REMOVE THIS LINE ONLY
+        if (userId) return COMPLETED_SHIFTS_MOCK;
+
         return data.length ? data : COMPLETED_SHIFTS_MOCK;
       } catch {
         return COMPLETED_SHIFTS_MOCK;
