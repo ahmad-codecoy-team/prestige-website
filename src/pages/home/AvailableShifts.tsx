@@ -1,3 +1,5 @@
+// pages/home/AvailableShifts.tsx
+
 import Card from "@/components/job/JobCard";
 import Loading from "@/components/LoadingSpinner";
 

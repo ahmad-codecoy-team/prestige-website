@@ -1,3 +1,5 @@
+// src/types/models/shift.types.ts
+
 export interface Event {
   id: number;
   title: string;
@@ -23,8 +25,8 @@ export interface AvailableShifts {
 }
 
 export enum ShiftStatus {
-  AVAILABLE = 'available',
-  SCHEDULED = 'scheduled',
-  COMPLETED = 'completed',
-  CANCELLED = 'cancelled'
+  AVAILABLE = "available",
+  SCHEDULED = "scheduled",
+  COMPLETED = "completed",
+  CANCELLED = "cancelled",
 }

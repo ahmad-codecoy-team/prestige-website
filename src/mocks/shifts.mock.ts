@@ -1,4 +1,6 @@
-import type { AvailableShifts } from '@/types';
+// src/mocks/shifts.mock.ts
+
+import type { AvailableShifts } from "@/types";
 
 // Minimal fields the JobCard needs for the "completed" variant.
 // We include one item per status to verify pill colors and labels.
